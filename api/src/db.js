@@ -2,8 +2,6 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
-const BREED = require('./models/Breed.js')//ME TRAIGO MIS MODELS!!
-const TEMPERAMENT = require('./models/Temperament.js')
 
 const {
   DB_USER, DB_PASSWORD, DB_HOST,
@@ -15,7 +13,7 @@ const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}
 });
 const basename = path.basename(__filename);
 
-const modelDefiners = [BREED, TEMPERAMENT]; //CREO QUE LO TENGO QUE PASAR A ESTE ARRAY MIS MODELS
+const modelDefiners = []; 
 
 // Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
 fs.readdirSync(path.join(__dirname, '/models'))

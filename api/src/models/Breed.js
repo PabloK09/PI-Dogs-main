@@ -24,6 +24,9 @@ module.exports = (sequelize) => {
     },
     lifeSpan: {
       type: DataTypes.INTEGER,
-    }
+    },
+    image: {
+      type: DataTypes.STRING,
+    },
   });
 };
