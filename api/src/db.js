@@ -3,9 +3,7 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 
-const {
-  DB_USER, DB_PASSWORD, DB_HOST,
-} = process.env;
+const {DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
 //esta es mi conexion con mi base de datos!!
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/dogs`, {
@@ -30,12 +28,8 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-// En sequelize.models están todos los modelos importados como propiedades
-// Para relacionarlos hacemos un destructuring
-const { Breed, Temperament } = sequelize.models; //REVISAR ESTO
 
-// Aca vendrian las relaciones
-// Product.hasMany(Reviews);
+const { Breed, Temperament } = sequelize.models; 
 
 Breed.belongsToMany(Temperament, {through: 'Breed_Temperament', as:'temperament'});
 Temperament.belongsToMany(Breed, {through: 'Breed_Temperament', as:'temperament'});
