@@ -29,8 +29,32 @@ class BreedModel extends ModelCrud {
         });
         const apiBreeds = axios.get(SEARCH_NAME + `/?name=${name}`);
         Promise.all([myBreed, apiBreeds]).then((results) => {
-          const [myBreedResults, apiBreedsResults] = results;
-          const responde = myBreedResults.concat(apiBreedsResults.data);
+          let [myBreedResults, apiBreedsResults] = results;
+
+          myBreedResults = myBreedResults.map((breed) => {
+            return {
+              id: breed.id,
+              name: breed.name,
+              weight: breed.weight,
+              height: breed.height,
+              life_span: breed.life_span,
+              image: breed.image,
+            };
+          });
+
+          apiBreedsResults = apiBreedsResults.data.map((breed) => {
+            return {
+              id: breed.id,
+              name: breed.name,
+              weight: breed.weight,
+              height: breed.height,
+              life_span: breed.life_span,
+              temperament: breed.temperament,
+              image: breed.image,
+            };
+          });
+
+          const responde = myBreedResults.concat(apiBreedsResults);
           return responde.length
             ? res.send(responde)
             : res.send({ message: "La raza no existe" });
@@ -49,8 +73,33 @@ class BreedModel extends ModelCrud {
         Promise.all([myBreed, apiBreeds]) //Hago un promise all para que cuando ya este lista la promesa de mi db y de mi api me devuelva todo junto al mismo tiempo
           .then((results) => {
             //lo que me devuelve
-            const [myBreedResults, apiBreedsResults] = results; //van a ser 2 arreglo y por eso le hago un destructuring al results
-            const responde = myBreedResults.concat(apiBreedsResults.data); //y lo que voy a mandar como respuesta va a ser la concatenacion de el array de mi db con el array de mi api (axios lo guarda en .data)
+            let [myBreedResults, apiBreedsResults] = results; //van a ser 2 arreglo y por eso le hago un destructuring al results
+
+            myBreedResults = myBreedResults.map((breed) => {
+              return {
+                id: breed.id,
+                name: breed.name,
+                weight: breed.weight,
+                height: breed.height,
+                life_span: breed.life_span,
+                image: breed.image,
+                temperament: breed.temperament,
+              };
+            });
+
+            apiBreedsResults = apiBreedsResults.data.map((breed) => {
+              return {
+                id: breed.id,
+                name: breed.name,
+                weight: breed.weight,
+                height: breed.height,
+                life_span: breed.life_span,
+                temperament: breed.temperament,
+                image: breed.image,
+              };
+            });
+
+            const responde = myBreedResults.concat(apiBreedsResults); //y lo que voy a mandar como respuesta va a ser la concatenacion de el array de mi db con el array de mi api (axios lo guarda en .data)
             return responde
               ? res.send(responde)
               : res.send({ message: "Responde no existe" }); //por ultimo respondo al servidor
@@ -64,9 +113,9 @@ class BreedModel extends ModelCrud {
   getById = (req, res, next) => {
     const { id } = req.params;
     try {
+      // if(!id) return next({msg: "id invalido", status: 404})
       if (id.length > 10) {
-        const myBreedId = this.model.findByPk(
-          id, {
+        let myBreedId = this.model.findByPk(id, {
           include: [
             {
               model: Temperament,
@@ -74,16 +123,31 @@ class BreedModel extends ModelCrud {
               attributes: ["id", "name"],
             },
           ],
+          attributes: { exclude: ["createdAt", "updatedAt"] },
         });
         myBreedId.then((resultsId) => {
-          resultsId? res.send(resultsId) : res.sendStatus(404)
+          resultsId ? res.send(resultsId) : res.sendStatus(404);
         });
+        
       } else {
         axios.get(BASE_URL).then((resultsId) => {
-          const axiosId = resultsId.data.filter(
+          let axiosId = resultsId.data.filter(
             (apiId) => apiId.id === parseInt(id)
           );
-          return axiosId.length? res.send(axiosId) : res.sendStatus(404)
+
+          axiosId = axiosId.map((breed) => {
+            return {
+              id: breed.id,
+              name: breed.name,
+              life_span: breed.life_span,
+              weight: breed.weight,
+              height: breed.height,
+              temperament: breed.temperament,
+              image: breed.image,
+            };
+          });
+
+          return axiosId.length ? res.send(axiosId) : res.sendStatus(404);
         });
       }
     } catch (err) {

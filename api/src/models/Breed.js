@@ -19,27 +19,27 @@ module.exports = (sequelize) => {
       height: {
         type: DataTypes.FLOAT, //VER BIEN SI HAY ALGUNO QUE SEA DECIMAL O SON TODOS ENTEROS
         allowNull: false,
-        get() {
-          return this.getDataValue("height") + " cm";
-        },
+        // get() {
+        //   return this.getDataValue("height") + " cm";
+        // },
       },
       weight: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        get() {
-          return this.getDataValue("weight") + " kg";
-        },
+        // get() {
+        //   return this.getDataValue("weight") + " kg";
+        // },
       },
-      lifeSpan: {
+      life_span: {
         type: DataTypes.INTEGER,
-        get() {
-          return this.getDataValue("lifeSpan") + " years";
-        },
+        // get() {
+        //   return this.getDataValue("life_span") + " years";
+        // },
       },
       image: {
         type: DataTypes.STRING,
       },
     },
-    { timestamps: false }
+    //{ timestamps: false }
   );
 };
