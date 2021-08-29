@@ -7,6 +7,7 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST,
 } = process.env;
 
+//esta es mi conexion con mi base de datos!!
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/dogs`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
@@ -36,10 +37,10 @@ const { Breed, Temperament } = sequelize.models; //REVISAR ESTO
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
-Breed.belongsToMany(Temperament, {through: 'BreedTemperament'});
-Temperament.belongsToMany(Breed, {through: 'BreedTemperament'});
+Breed.belongsToMany(Temperament, {through: 'Breed_Temperament', as:'temperament'});
+Temperament.belongsToMany(Breed, {through: 'Breed_Temperament', as:'temperament'});
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize,     // para importar la conexión { conn } = require('./db.js');
-};
+}; //la conn: sequelize es la conexion que luego llevo a cabo en el index general de la carpeta src

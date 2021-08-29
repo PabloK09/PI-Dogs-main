@@ -18,15 +18,15 @@ class modelCrud {
       .catch((err) => next(err.toJSON));
   };
 
-  create = (req, res, next) => {
-    const breed = req.body;
-    return this.model.create({
-      ...breed,
-      id: uuidv4(),
-    })
-      .then((created) => res.send(created))
-      .catch((err) => next(err.toJSON));
-  };
+  // create = (req, res, next) => {
+  //   const modelo = req.body;
+  //   return this.model.create({
+  //     ...modelo,
+  //     id: uuidv4(),
+  //   })
+  //     .then((created) => res.send(created))
+  //     .catch((err) => next(err.toJSON));
+  // };
 
   update = (req, res, next) => {
     const { id } = req.params;

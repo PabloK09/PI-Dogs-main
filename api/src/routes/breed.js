@@ -8,7 +8,8 @@ const router = Router();
 
 router.get("/", breedController.getAllv2);
 router.get("/:id",  breedController.getById);
-router.post("/",  breedController.create);
+
+//router.post("/",  breedController.create);
 
 
 router.put("/:id",  breedController.update);
