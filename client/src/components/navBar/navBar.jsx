@@ -1,7 +1,14 @@
+import {NavLink} from "react-router-dom";
+
 export default function NavBar() {
-    return (
-        <div>
-            soy navBar
-        </div>
-    )
+  return (
+    <nav>
+      <NavLink to="/home" exact>
+        Home
+      </NavLink>
+      <NavLink to="/home/create" exact>
+        Add Breed
+      </NavLink>
+    </nav>
+  );
 }

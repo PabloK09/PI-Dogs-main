@@ -16,30 +16,38 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      height: {
-        type: DataTypes.FLOAT, //VER BIEN SI HAY ALGUNO QUE SEA DECIMAL O SON TODOS ENTEROS
-        allowNull: false,
-        // get() {
-        //   return this.getDataValue("height") + " cm";
-        // },
-      },
       weight: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        // get() {
-        //   return this.getDataValue("weight") + " kg";
-        // },
+        validate: {
+          isNumeric: true,
+          max: 160,
+          min: 1,
+        }
+        
       },
+      height: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          isNumeric: true,
+          max: 230,
+          min: 1,
+        }
+      },  
       life_span: {
         type: DataTypes.INTEGER,
-        // get() {
-        //   return this.getDataValue("life_span") + " years";
-        // },
+        validate: {
+          isNumeric: true,
+          max: 25
+        }
       },
       image: {
         type: DataTypes.STRING,
+        validate: {
+          isUrl: true,
+        }
       },
     },
-    //{ timestamps: false }
   );
 };

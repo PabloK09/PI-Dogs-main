@@ -1,4 +1,4 @@
-import {GET_BREEDS, GET_BREED_NAME, GET_BREED_ID} from '../actions/types'
+import {GET_BREEDS} from '../actions/types'
 
 const initialState = {
     breeds: []

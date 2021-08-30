@@ -1,28 +1,22 @@
 import './App.css';
 import { Route } from "react-router-dom";
-import Home from './components/home/home'
-import NavBar from './components/navBar/navBar';
-import Breeds from './components/breeds/breeds';
-import BreedDetail from './components/breedDetail/breedDetail';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import {getBreeds} from './redux/actions/index'
+import NavBar from './components/navbar/Navbar';
+import LandingPage from './views/landing-page/LandingPage';
+import Home from './views/home/Home'
+import CreateBreed from './views/create-breed/CreateBreed'
+import BreedDetail from './views/breed-detail/BreedDetail';
 
 function App() {
-  const dispatch = useDispatch()
-  useEffect(()=> {
-    dispatch(getBreeds())
-  }, [])
 
   return (
     <div className="App">
+    <Route path="/:h" component={NavBar}/>
+      
       <h1>Henry Dogs</h1>
-
-    <Route exact path="/" component={Home}/>
-    <Route path="/:dogs" component={NavBar}/>
-    {/* Aca el route para el formulario en el path= "/dog" */}
-    <Route exact path="/dogs" component={Breeds}/>
-    <Route path="/dogs/:id" component={BreedDetail}/>
+    <Route exact path="/" component={LandingPage}/>
+    <Route exact path="/home/create" component={CreateBreed}/>
+    <Route exact path="/home" component={Home}/>
+    <Route path="/home/breed/:id" component={BreedDetail}/>
 
     </div>
   );

@@ -1,16 +1,19 @@
-import {useSelector} from "react-redux"
-
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getBreeds } from "../../redux/actions/index";
 
 export default function Breeds() {
-    const breeds = useSelector(state => state.breeds)
-    return (
-        <div>
-            soy breeds
-            {
-                breeds.map((breed) =>{
-                    return <p>{breed.name}</p>
-                })
-            }
-        </div>
-    )
+  const breeds = useSelector((state) => state.breeds);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getBreeds());
+  }, []);
+
+  return (
+    <div>
+      {breeds.map((breed) => {
+        return <p>{breed.name}</p>;
+      })}
+    </div>
+  );
 }

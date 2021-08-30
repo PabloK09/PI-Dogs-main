@@ -46,11 +46,11 @@ class BreedModel extends ModelCrud {
             return {
               id: breed.id,
               name: breed.name,
-              weight: breed.weight,
-              height: breed.height,
+              weight: breed.weight.metric,
+              height: breed.height.metric,
               life_span: breed.life_span,
               temperament: breed.temperament,
-              image: breed.image,
+              image: breed.image.url,
             };
           });
 
@@ -91,11 +91,11 @@ class BreedModel extends ModelCrud {
               return {
                 id: breed.id,
                 name: breed.name,
-                weight: breed.weight,
-                height: breed.height,
+                weight: breed.weight.metric,
+                height: breed.height.metric,
                 life_span: breed.life_span,
                 temperament: breed.temperament,
-                image: breed.image,
+                image: breed.image.url,
               };
             });
 
@@ -128,7 +128,6 @@ class BreedModel extends ModelCrud {
         myBreedId.then((resultsId) => {
           resultsId ? res.send(resultsId) : res.sendStatus(404);
         });
-        
       } else {
         axios.get(BASE_URL).then((resultsId) => {
           let axiosId = resultsId.data.filter(
@@ -140,10 +139,10 @@ class BreedModel extends ModelCrud {
               id: breed.id,
               name: breed.name,
               life_span: breed.life_span,
-              weight: breed.weight,
-              height: breed.height,
+              weight: breed.weight.metric,
+              height: breed.height.metric,
               temperament: breed.temperament,
-              image: breed.image,
+              image: breed.image.url,
             };
           });
 
