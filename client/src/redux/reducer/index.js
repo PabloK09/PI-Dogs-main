@@ -1,7 +1,9 @@
-import {GET_BREEDS} from '../actions/types'
+import {GET_BREEDS, GET_BREED_ID, GET_TEMPERAMENT, GET_BREED_NAME} from '../actions/types'
 
 const initialState = {
-    breeds: []
+    breeds: [],
+    breedId: undefined,
+    temperament: []
 }
 
 function rootReducer(state= initialState, action) {
@@ -12,6 +14,24 @@ function rootReducer(state= initialState, action) {
                 breeds: action.payload
             }
         
+        case GET_BREED_ID:
+            return {
+                ...state,
+                breedId: action.payload
+            }
+
+        case GET_TEMPERAMENT:
+            return {
+                ...state,
+                temperament: action.payload
+            }
+
+        case GET_BREED_NAME:
+            return {
+                ...state,
+                breeds: action.payload,
+                
+            }
         default: return state
     }
 }

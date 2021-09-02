@@ -1,5 +1,6 @@
 import './App.css';
-import { Route } from "react-router-dom";
+import React from 'react'
+import { Route, Switch } from "react-router-dom";
 import NavBar from './components/navbar/Navbar';
 import LandingPage from './views/landing-page/LandingPage';
 import Home from './views/home/Home'
@@ -10,13 +11,15 @@ function App() {
 
   return (
     <div className="App">
-    <Route path="/:h" component={NavBar}/>
-      
-      <h1>Henry Dogs</h1>
     <Route exact path="/" component={LandingPage}/>
-    <Route exact path="/home/create" component={CreateBreed}/>
+    <Route path="/:h" component={NavBar}/>
     <Route exact path="/home" component={Home}/>
-    <Route path="/home/breed/:id" component={BreedDetail}/>
+
+    <Switch>
+    <Route exact path="/home/create" component={CreateBreed}/>
+    <Route exact path="/home/breed/:id" component={BreedDetail}/>
+    </Switch>
+
 
     </div>
   );

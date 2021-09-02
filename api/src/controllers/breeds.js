@@ -2,6 +2,7 @@ const { Breed, Temperament } = require("../db.js");
 const ModelCrud = require("./index");
 const axios = require("axios");
 const { BASE_URL, SEARCH_NAME } = require("../utils/constants");
+const {API_KEY} = process.env;
 const { Op } = require("sequelize");
 const { v4: uuidv4 } = require("uuid");
 
@@ -35,10 +36,19 @@ class BreedModel extends ModelCrud {
             return {
               id: breed.id,
               name: breed.name,
-              weight: breed.weight,
-              height: breed.height,
-              life_span: breed.life_span,
+              weight: breed.weight.map((w)=> {
+                return w.value
+              }).join(" - "),
+              height: breed.height.map((h)=> {
+                return h.value
+              }).join(" - "),
+              life_span: breed.life_span.map((ls)=> {
+                return ls.value
+              }).join(" - "),
               image: breed.image,
+              temperament: breed.temperament.map(temp => {
+                return temp.name
+              }).join(", ")
             };
           });
 
@@ -50,7 +60,7 @@ class BreedModel extends ModelCrud {
               height: breed.height.metric,
               life_span: breed.life_span,
               temperament: breed.temperament,
-              image: breed.image.url,
+              image: "https://cdn2.thedogapi.com/images/"+breed.reference_image_id+".jpg"
             };
           });
 
@@ -69,6 +79,7 @@ class BreedModel extends ModelCrud {
             },
           ],
         }); //me traigo todo lo que tenga
+        
         const apiBreeds = axios.get(BASE_URL); //aplico axios para pedirle data a mi api
         Promise.all([myBreed, apiBreeds]) //Hago un promise all para que cuando ya este lista la promesa de mi db y de mi api me devuelva todo junto al mismo tiempo
           .then((results) => {
@@ -79,11 +90,19 @@ class BreedModel extends ModelCrud {
               return {
                 id: breed.id,
                 name: breed.name,
-                weight: breed.weight,
-                height: breed.height,
-                life_span: breed.life_span,
+                weight: breed.weight.map((w)=> {
+                  return w.value
+                }).join(" - "),
+                height: breed.height.map((h)=> {
+                  return h.value
+                }).join(" - "),
+                life_span: breed.life_span.map((ls)=> {
+                  return ls.value
+                }).join(" - "),
                 image: breed.image,
-                temperament: breed.temperament,
+                temperament: breed.temperament.map(temp => {
+                  return temp.name
+                }).join(", ")
               };
             });
 
@@ -126,7 +145,31 @@ class BreedModel extends ModelCrud {
           attributes: { exclude: ["createdAt", "updatedAt"] },
         });
         myBreedId.then((resultsId) => {
-          resultsId ? res.send(resultsId) : res.sendStatus(404);
+          let arrBreed = []
+          arrBreed.push(resultsId);
+          arrBreed = arrBreed.map((breed) => {
+            
+              return {
+                id: breed.id,
+                name: breed.name,
+                weight: breed.weight.map((w)=> {
+                  return w.value
+                }).join(" - "),
+                height: breed.height.map((h)=> {
+                  return h.value
+                }).join(" - "),
+                life_span: breed.life_span.map((ls)=> {
+                  return ls.value
+                }).join(" - "),
+                image: breed.image,
+                temperament: breed.temperament.map(temp => {
+                  return temp.name
+                }).join(", ")
+              };
+            
+          })
+          
+          resultsId ? res.send(arrBreed) : res.sendStatus(404);
         });
       } else {
         axios.get(BASE_URL).then((resultsId) => {
@@ -155,14 +198,17 @@ class BreedModel extends ModelCrud {
   };
 
   created = (req, res, next) => {
+    console.log(req)
     const modelo = req.body;
     try {
-      return this.model
+      return Breed
         .create({
           ...modelo,
           id: uuidv4(),
         })
-        .then((breed) => breed.addTemperament(modelo.temperament))
+        
+        .then((breed) => {
+          breed.addTemperament(modelo.temperament)})
         .then((created) => {
           return res.send(created);
         });
