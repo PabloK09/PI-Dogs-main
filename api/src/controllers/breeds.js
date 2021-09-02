@@ -60,7 +60,7 @@ class BreedModel extends ModelCrud {
               height: breed.height.metric,
               life_span: breed.life_span,
               temperament: breed.temperament,
-              image: "https://cdn2.thedogapi.com/images/"+breed.reference_image_id+".jpg"
+              image: breed.reference_image_id ? "https://cdn2.thedogapi.com/images/"+breed.reference_image_id + ".jpg" : `https://www.seekpng.com/png/full/360-3605845_dog-holding-paper-in-mouth.png`
             };
           });
 

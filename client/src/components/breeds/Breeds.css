@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    background-size: contain;
 }
 
 .pageNumbers {
@@ -14,6 +15,12 @@
     justify-content: center;
 }
 
+.ul-containerBreed{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+}
+
 .li-pageNumber{
     padding: 1em;
     margin: 0.2em;
@@ -23,4 +30,17 @@
 
 .activePag {
     color: red;
+}
+
+.li-temp {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    list-style-type: none;
+    marker: none;
+    align-items: center;
+    justify-content: space-around;
+    justify-items: center;
+    align-content: space-around;
+    flex-direction: column;
 }

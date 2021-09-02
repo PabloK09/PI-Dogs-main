@@ -1,8 +1,18 @@
-.containerBreed {
-    height: 10em;
-    width: 10em;
+.containerBreed{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    justify-items: center;
+    align-items: stretch;
+    align-content: space-around;
 }
 
 .name-containerBreed {
-    font-size: 10em;
+    font-size: 1.5rem;
+}
+
+.img-containerBreed {
+    width: 15em;
+    height: 13em;
 }

@@ -3,6 +3,7 @@ import { BASE_URL, SEARH_ID, URL_TEMPERAMENT } from '../../utils/constants';
 import { GET_BREEDS, GET_BREED_ID, GET_TEMPERAMENT, GET_BREED_NAME} from './types';
 
 
+
 export const getBreeds = () => {
     return (dispatch) => {
         axios.get(BASE_URL)

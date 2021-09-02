@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import "./Breed.css"
+
 export default function Breed(props) {
     
     const {name, weight, temperament, img, height, life_span ,id} = props
@@ -11,10 +13,10 @@ export default function Breed(props) {
             <li>{height}</li>
             <li>{weight}</li>
             <li>{life_span}</li>
-            <li>{temperament}</li>
+            <li className="li-temp">{temperament}</li>
         </ul>
         <Link to={`/home/breed/${id}`}>
-        <img className="img-containerBreed" style={{width: "400px", height: "300px"}} src={img} alt="{name}"/>      
+        <img className="img-containerBreed" src={img} alt={name}/>      
         </Link>
             
         </div>

@@ -1,31 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getBreedsName } from "../../redux/actions";
 
-
 export default function SearchBarr() {
-  // const breedNameState = useSelector((state) => state.breedsName);
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //dispatch(getBreedsName(state));
-  // }, [dispatch]);
-
   const [state, setState] = useState({
     breedFind: "",
   });
+
 
   function handleChange(e) {
     setState((values) => ({
       ...values,
       [e.target.name]: e.target.value,
     }));
-    e.preventDefault();
+
     //dispatch(getBreedsName(state.breedFind))
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
-    dispatch(getBreedsName(state.breedFind))
+    dispatch(getBreedsName(state.breedFind));
   }
 
   return (
@@ -35,7 +30,7 @@ export default function SearchBarr() {
         <input
           type="text"
           name="breedFind"
-          onChange={(e) =>handleChange(e)}
+          onChange={(e) => handleChange(e)}
           value={state.breedFind}
         />
         <button type="submit">Search</button>

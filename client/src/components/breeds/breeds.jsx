@@ -20,7 +20,6 @@ export default function Breeds() {
 
  
   const handleClick = (e) => {
-    console.log(e.target.id)
     setCurrentPage(Number(e.target.id))
   };
 
@@ -37,7 +36,7 @@ export default function Breeds() {
 
       if(number < maxPageNumberLimit + 1 && number > minPageNumberLimit){
         return (
-          <ul className="li-pageNumber">
+          <ul className="li-pageNumber" key={number}>
         <li
         key={number}
         id={number}
@@ -92,7 +91,7 @@ export default function Breeds() {
             return (
               <Breed
                 id={breed.id}
-                key={index}
+                key={breed.id}
                 name={breed.name}
                 weight={breed.weight}
                 temperament={breed.temperament}
@@ -125,7 +124,7 @@ export default function Breeds() {
           
         </>
       ) : currentItems === null  (
-        dispatch(getBreeds())
+        <h3>No existe la raza </h3>
       )}
     </div>
   );

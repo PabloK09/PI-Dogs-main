@@ -8,12 +8,10 @@ export default function LandingPage() {
     return (
         <div className='container-lp'>
         <header>
+        Touch to enter the page
         
         </header>
-
-        <input type="image" src={animal} alt="doggg" />
             <Link to="/home">
-
                 <img src={animal} alt="dog-icon"/>
             </Link>
         </div>

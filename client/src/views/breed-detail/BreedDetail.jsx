@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { getBreedId, clearBreed } from "../../redux/actions";
 import Breed from "../../components/breed/Breed"
 
@@ -9,10 +9,11 @@ export default function BreedDetail() {
     
   const breedId = useSelector((state) => state.breedId);
   const dispatch = useDispatch()
+  const {push} = useHistory()
   const {id} = useParams()
   useEffect(() => {
       dispatch(getBreedId(id))
-      return ()=> dispatch(clearBreed()) //aca le hago un dismount
+      return ()=> dispatch(clearBreed())
   }, [id, dispatch]); 
 
   return (
@@ -43,7 +44,10 @@ export default function BreedDetail() {
       : breedId === undefined ? (
       <div> Cargando... </div>
       )
-      : <h2> Breed Not Found </h2>
+      : <h2> 
+        Breed Not Found 
+        {push(`/home`)}
+        </h2>
   }
   </div>
   
