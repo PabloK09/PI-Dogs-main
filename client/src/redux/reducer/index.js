@@ -3,7 +3,8 @@ import {GET_BREEDS, GET_BREED_ID, GET_TEMPERAMENT, GET_BREED_NAME} from '../acti
 const initialState = {
     breeds: [],
     breedId: undefined,
-    temperament: []
+    temperament: [],
+    breedsFilter: [],
 }
 
 function rootReducer(state= initialState, action) {

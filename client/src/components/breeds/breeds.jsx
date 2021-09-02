@@ -21,16 +21,17 @@ export default function Breeds() {
  
   const handleClick = (e) => {
     setCurrentPage(Number(e.target.id))
+    
   };
-
   const pages= [];
-  for (let i = 1; i<= Math.ceil(breedsState.length / itemsPerPage); i++){
-    pages.push(i)
-  }
+    for (let i = 1; i<= Math.ceil(breedsState?.length / itemsPerPage); i++){
+      pages.push(i)
+    }
+  
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = breedsState.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = breedsState?.slice(indexOfFirstItem, indexOfLastItem);
 
   const renderPageNumbers = pages.map((number) => {
 
@@ -70,24 +71,12 @@ export default function Breeds() {
     }
   };
 
-  // let pageIncrementBtn = null;
-  // if(pages.length > maxPageNumberLimit){
-  //   pageIncrementBtn = <li onClick={handleNextBtn}> &hellip; </li>;
-  // }
-
-  // let pageDecrementBtn = null;
-  // if(pages.length >= 1){
-  //   pageDecrementBtn = <li onClick={handlePrevBtn}> &hellip; </li>;
-  // }
-
-
-
   return (
     <div>
       {currentItems ? (
         <>
         <div className="containerClass">
-          {currentItems.map((breed, index) => {
+          {currentItems.map((breed) => {
             return (
               <Breed
                 id={breed.id}
