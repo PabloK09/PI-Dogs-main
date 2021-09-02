@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL, SEARH_ID, URL_TEMPERAMENT, SEARCH_NAME } from '../../utils/constants';
+import { BASE_URL, SEARH_ID, URL_TEMPERAMENT } from '../../utils/constants';
 import { GET_BREEDS, GET_BREED_ID, GET_TEMPERAMENT, GET_BREED_NAME} from './types';
 
 

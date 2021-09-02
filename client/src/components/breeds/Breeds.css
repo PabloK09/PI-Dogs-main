@@ -1,0 +1,26 @@
+.containerClass {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.pageNumbers {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    list-style-type: none;
+    marker: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.li-pageNumber{
+    padding: 1em;
+    margin: 0.2em;
+    marker: none;
+    
+}
+
+.activePag {
+    color: red;
+}

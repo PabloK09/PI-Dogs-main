@@ -1,7 +1,8 @@
 import Breed from "../breed/Breed";
+import "./Breeds.css";
 import React, { useState, useEffect } from "react";
 import { getBreeds } from "../../redux/actions/index";
-import { useSelector, useDispatch } from "react-redux";;
+import { useSelector, useDispatch } from "react-redux";
 
 export default function Breeds() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -19,6 +20,7 @@ export default function Breeds() {
 
  
   const handleClick = (e) => {
+    console.log(e.target.id)
     setCurrentPage(Number(e.target.id))
   };
 
@@ -32,16 +34,19 @@ export default function Breeds() {
   const currentItems = breedsState.slice(indexOfFirstItem, indexOfLastItem);
 
   const renderPageNumbers = pages.map((number) => {
-    if(number < maxPageNumberLimit +1 && number > minPageNumberLimit){
-      return (
+
+      if(number < maxPageNumberLimit + 1 && number > minPageNumberLimit){
+        return (
+          <ul className="li-pageNumber">
         <li
         key={number}
         id={number}
         onClick={handleClick}
-        className={currentPage === number ? "active" : null} //para mandarle css
+        className={currentPage === number ? "activePag" : null} //para mandarle css
         >
           {number}
         </li>
+      </ul>
       );
     }else {
       return null;
@@ -66,15 +71,15 @@ export default function Breeds() {
     }
   };
 
-  let pageIncrementBtn = null;
-  if(pages.length > maxPageNumberLimit){
-    pageIncrementBtn = <li onClick={handleNextBtn}> &hellip; </li>;
-  }
+  // let pageIncrementBtn = null;
+  // if(pages.length > maxPageNumberLimit){
+  //   pageIncrementBtn = <li onClick={handleNextBtn}> &hellip; </li>;
+  // }
 
-  let pageDecrementBtn = null;
-  if(pages.length >= 1){
-    pageDecrementBtn = <li onClick={handlePrevBtn}> &hellip; </li>;
-  }
+  // let pageDecrementBtn = null;
+  // if(pages.length >= 1){
+  //   pageDecrementBtn = <li onClick={handlePrevBtn}> &hellip; </li>;
+  // }
 
 
 
@@ -82,6 +87,7 @@ export default function Breeds() {
     <div>
       {currentItems ? (
         <>
+        <div className="containerClass">
           {currentItems.map((breed, index) => {
             return (
               <Breed
@@ -94,24 +100,21 @@ export default function Breeds() {
               />
             );
           })}
+          </div>
           <ul className="pageNumbers">
-            <li className="">
+            <li className="prevBtn">
               <button
               onClick={handlePrevBtn}
-              disabled={currentItems === pages[0]? true : false}
+              disabled={currentPage === pages[0]? true : false}
               >
                 Prev
               </button>
             </li>
-            
-           
-            {pageDecrementBtn}
             {renderPageNumbers}
-            {pageIncrementBtn}
-           
-
+            
             <li>
               <button
+              className="nextBtn"
               onClick={handleNextBtn}
               disabled={currentPage === pages[pages.length -1] ? true : false}
               >
@@ -119,6 +122,7 @@ export default function Breeds() {
               </button>
             </li>
           </ul>
+          
         </>
       ) : currentItems === null  (
         dispatch(getBreeds())

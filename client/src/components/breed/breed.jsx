@@ -5,16 +5,16 @@ export default function Breed(props) {
     const {name, weight, temperament, img, height, life_span ,id} = props
     
     return (
-        <div> {/*  key={id}?? REVISARR*/}
-        <h3>{name}</h3>
-        <ul>
-            {height}
+        <div className="containerBreed">
+        <h3 className="name-containerBreed">{name}</h3>
+        <ul className="ul-containerBreed">
+            <li>{height}</li>
             <li>{weight}</li>
-            {life_span}
+            <li>{life_span}</li>
             <li>{temperament}</li>
         </ul>
         <Link to={`/home/breed/${id}`}>
-        <img style={{widht: "400px", height: "300px"}} src={img} alt="{name}"/>      
+        <img className="img-containerBreed" style={{width: "400px", height: "300px"}} src={img} alt="{name}"/>      
         </Link>
             
         </div>
