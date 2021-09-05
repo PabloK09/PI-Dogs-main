@@ -148,7 +148,6 @@ class BreedModel extends ModelCrud {
           let arrBreed = []
           arrBreed.push(resultsId);
           arrBreed = arrBreed.map((breed) => {
-            
               return {
                 id: breed.id,
                 name: breed.name,
@@ -166,7 +165,6 @@ class BreedModel extends ModelCrud {
                   return temp.name
                 }).join(", ")
               };
-            
           })
           
           resultsId ? res.send(arrBreed) : res.sendStatus(404);
@@ -198,7 +196,6 @@ class BreedModel extends ModelCrud {
   };
 
   created = (req, res, next) => {
-    console.log(req)
     const modelo = req.body;
     try {
       return Breed

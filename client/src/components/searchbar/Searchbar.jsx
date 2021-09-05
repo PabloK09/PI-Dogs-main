@@ -1,60 +1,84 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getBreedsName } from "../../redux/actions";
+import { getBreedsName, getBreeds } from "../../redux/actions";
 import { useHistory } from "react-router-dom";
-import { clearBreed } from "../../redux/actions/index";
+import { Link } from "react-router-dom";
 
 export default function SearchBarr() {
   const dispatch = useDispatch();
   const { push } = useHistory();
   const breedState = useSelector((state) => state.breeds);
+  const filteredBreeds = useSelector((state) => state.breedsFilter);
 
-  const [state, setState] = useState({
+  const [search, setSearch] = useState({
     breedFind: "",
   });
 
+  useEffect(() => {
+    return () => dispatch(getBreeds());
+  }, []);
+  
   function handleChange(e) {
-    setState((values) => ({
+    setSearch((values) => ({
       ...values,
       [e.target.name]: e.target.value,
     }));
-
-    //dispatch(getBreedsName(state.breedFind))
   }
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
-    if (
-      state.breedFind === "" ||
-        breedState.map((breed) => {
-          console.log(state.breedFind);
-          breed.name
-            .toLocaleLowerCase()
-            .includes(state.breedFind.toLocaleLowerCase());
-        })
-    )
-     {
-      dispatch(getBreedsName(state.breedFind));
-      setState(() => ({
-        breedFind: "",
-      }));
-    } else {
-      push("/home");
-    }
+    dispatch(getBreedsName(search.breedFind))
+    setSearch(() => ({
+            breedFind: "",
+          }));
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <nav>
+      <form onSubmit={(e) => handleSubmit(e)}>
         <label>Breed:</label>
         <input
           type="text"
           name="breedFind"
           onChange={(e) => handleChange(e)}
-          value={state.breedFind}
+          value={search.breedFind}
         />
         <button type="submit">Search</button>
       </form>
-    </div>
+      <Link to="/home/create">
+        <button>Create</button>
+      </Link>
+    </nav>
   );
 }
+
+
+ // if (filteredBreeds.length) {
+    //   if (search.breedFind !== "") {
+    //     let nameBreedFilter = filteredBreeds?.map((breed) => {
+    //       if(breed.name.toLocaleLowerCase().includes(search.breedFind.toLocaleLowerCase())) return breed.name
+    //     });
+    //     dispatch(getBreedsName(search.breedFind));
+    //     setSearch(() => ({
+    //       breedFind: "",
+    //     }));
+    //   } else {
+    //     dispatch(getBreedsName(""));
+    //   }
+    // } else {
+    //   if (
+    //     search.breedFind !== "" ||
+    //     breedState?.map((breed) => {
+    //       breed.name
+    //         .toLocaleLowerCase()
+    //         .includes(search.breedFind.toLocaleLowerCase());
+    //     })
+    //   ) {
+    //     dispatch(getBreedsName(search.breedFind));
+    //     setSearch(() => ({
+    //       breedFind: "",
+    //     }));
+    //   } else {
+    //     dispatch(getBreedsName(""));
+    //   }
+    // }

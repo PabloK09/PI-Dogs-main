@@ -15,8 +15,9 @@ export default function Breed(props) {
             <li>{life_span}</li>
             <li className="li-temp">{temperament}</li>
         </ul>
-        <Link to={`/home/breed/${id}`}>
         <img className="img-containerBreed" src={img} alt={name}/>      
+        <Link to={`/home/breed/${id}`}>
+        <button className="btn-containerBreed">Learn More</button>
         </Link>
             
         </div>

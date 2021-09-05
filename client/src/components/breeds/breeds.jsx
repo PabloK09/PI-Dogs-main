@@ -6,38 +6,44 @@ import { useSelector, useDispatch } from "react-redux";
 
 export default function Breeds() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(8);
+  const [itemsPerPage] = useState(8);
 
-  const [pageNumberLimit, setPageNumberLimit] = useState(10);
+  const [pageNumberLimit] = useState(10);
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(10);
   const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
+
+  const filteredBreeds = useSelector((state) => state.breedsFilter)
 
   const breedsState = useSelector((state) => state.breeds);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getBreeds());
+    return () => dispatch(getBreeds());
   }, [dispatch]);
 
- 
   const handleClick = (e) => {
     setCurrentPage(Number(e.target.id))
-    
   };
+
   const pages= [];
-    for (let i = 1; i<= Math.ceil(breedsState?.length / itemsPerPage); i++){
+  if(filteredBreeds.length) {
+    for (let i = 1; i<= Math.ceil(filteredBreeds.length / itemsPerPage); i++){
       pages.push(i)
     }
-  
-
+  }else {
+    for (let i = 1; i<= Math.ceil(breedsState.length / itemsPerPage); i++){
+      pages.push(i)
+    }
+  }
+    
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = breedsState?.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems =  filteredBreeds.length ? filteredBreeds?.slice(indexOfFirstItem, indexOfLastItem) : breedsState?.slice(indexOfFirstItem, indexOfLastItem);
 
   const renderPageNumbers = pages.map((number) => {
 
       if(number < maxPageNumberLimit + 1 && number > minPageNumberLimit){
         return (
-          <ul className="li-pageNumber" key={number}>
         <li
         key={number}
         id={number}
@@ -46,7 +52,6 @@ export default function Breeds() {
         >
           {number}
         </li>
-      </ul>
       );
     }else {
       return null;
@@ -55,17 +60,15 @@ export default function Breeds() {
 
   const handleNextBtn = () => {
     setCurrentPage(currentPage + 1)
-
-    if(currentPage +1 > maxPageNumberLimit){
+    if(currentPage + 1 > maxPageNumberLimit){
       setMaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
       setMinPageNumberLimit(minPageNumberLimit + pageNumberLimit);
     }
   };
 
   const handlePrevBtn = () => {
-    setCurrentPage(currentPage -1);
-
-    if(currentPage -1 % pageNumberLimit === 0) {
+    setCurrentPage(currentPage - 1);
+    if((currentPage - 1) % pageNumberLimit === 0) {
       setMaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
       setMinPageNumberLimit(minPageNumberLimit - pageNumberLimit);
     }
@@ -76,7 +79,7 @@ export default function Breeds() {
       {currentItems ? (
         <>
         <div className="containerClass">
-          {currentItems.map((breed) => {
+          {currentItems?.map((breed, index) => {
             return (
               <Breed
                 id={breed.id}
@@ -89,6 +92,7 @@ export default function Breeds() {
             );
           })}
           </div>
+
           <ul className="pageNumbers">
             <li className="prevBtn">
               <button
@@ -112,9 +116,10 @@ export default function Breeds() {
           </ul>
           
         </>
-      ) : currentItems === null  (
-        <h3>No existe la raza </h3>
-      )}
+      ) : currentItems === [] (
+        <h2>No encontrado</h2>
+      )
+    }
     </div>
   );
 }

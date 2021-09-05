@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { BASE_URL, SEARH_ID, URL_TEMPERAMENT } from '../../utils/constants';
-import { GET_BREEDS, GET_BREED_ID, GET_TEMPERAMENT, GET_BREED_NAME} from './types';
-
-
+import { GET_BREEDS, GET_BREED_ID, GET_TEMPERAMENT, GET_BREED_NAME, FILTER_TEMPERAMENTS, FILTER_ORDER_NAME, FILTER_ORDER_WEIGHT} from './types';
 
 export const getBreeds = () => {
     return (dispatch) => {
@@ -27,6 +25,12 @@ export const getBreedsName = (name) => {
             })
         })
         .catch((error)=>{
+            if(error.message === "La raza no existe"){
+                dispatch({
+                    type: GET_BREED_NAME,
+                        payload: null
+                })
+            }
             if(error.response?.status){
                 if(error.response.status === 404){
                     dispatch({
@@ -36,6 +40,7 @@ export const getBreedsName = (name) => {
                 }
             }
             alert("Breaakk 🦴")
+            
         })
     }
 }
@@ -77,4 +82,16 @@ export const getBreedId =  (idBreed) => {
 
 export const clearBreed =  () => {
     return {type: GET_BREED_ID, payload: undefined}
+}
+
+export const filterTemperaments = (payload) => {
+    return {type: FILTER_TEMPERAMENTS, payload,}
+}
+
+export const orderByBreedName = (payload) => {
+    return {type: FILTER_ORDER_NAME, payload,}
+}
+
+export const orderByBreedWeight = (payload) => {
+    return {type: FILTER_ORDER_WEIGHT, payload,}
 }
