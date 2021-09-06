@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { getBreedId, clearBreed } from "../../redux/actions";
 
 export default function BreedDetail() {
+  const loading = useSelector((state) => state.isLoading)
   const breedId = useSelector((state) => state.breedId);
   const dispatch = useDispatch();
   const { push } = useHistory();
@@ -19,36 +20,43 @@ export default function BreedDetail() {
 
   return (
     <div>
-      {breedId ? (
+      {
+        loading ?
         <>
-          {breedId.map((breed) => {
-            return (
-              <div key={breed.id}>
-                <Link to="/home">
-                  <button>Home</button>
-                </Link>
-                <Breed
-                  id={breed.id}
-                  key={breed.id}
-                  name={breed.name}
-                  weight={breed.weight}
-                  height={breed.height}
-                  life_span={breed.life_span}
-                  temperament={breed.temperament}
-                  img={breed.image}
-                />
-              </div>
-            );
-          })}
+        <img src="https://static.wixstatic.com/media/72fac8_14ede31619e44b0498c84845f0befbdb~mv2.gif" alt="Dog is Loading" style={{width: "350px", height: "350px"}}/>
         </>
-      ) : breedId === undefined ? (
-        <div> Cargando... </div>
-      ) : (
-        <h2>
-          Breed Not Found
-          {push(`/home`)}
-        </h2>
-      )}
+        :
+      breedId ? (
+        <>
+        {breedId.map((breed) => {
+          return (
+            <div key={breed.id}>
+            <Link to="/home">
+            <button>Home</button>
+            </Link>
+                <Breed
+                id={breed.id}
+                key={breed.id}
+                name={breed.name}
+                weight={breed.weight}
+                height={breed.height}
+                life_span={breed.life_span}
+                temperament={breed.temperament}
+                img={breed.image}
+                />
+                </div>
+                );
+              })}
+        </>
+        ) : breedId === undefined ? (
+          <div> Cargando... </div>
+          ) : (
+            <h2>
+            Breed Not Found
+            {push(`/home`)}
+            </h2>
+            )
+          }
     </div>
   );
 }

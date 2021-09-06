@@ -6,6 +6,8 @@ import {
   FILTER_TEMPERAMENTS,
   FILTER_ORDER_NAME,
   FILTER_ORDER_WEIGHT,
+  SET_LOADING,
+  COPY_STATE,
 } from "../actions/types";
 
 const initialState = {
@@ -13,6 +15,8 @@ const initialState = {
   breedId: undefined,
   temperament: [],
   breedsFilter: [],
+  breedsFind: [],
+  isLoading: false,
 };
 
 function rootReducer(state = initialState, action) {
@@ -21,6 +25,13 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         breeds: action.payload,
+        breedsFilter: action.payload,
+      };
+
+    case SET_LOADING:
+      return {
+        ...state,
+        isLoading: action.payload,
       };
 
     case GET_BREED_ID:
@@ -49,14 +60,23 @@ function rootReducer(state = initialState, action) {
       }
 
     case FILTER_TEMPERAMENTS:
-      return {
-        ...state,
-        breedsFilter: action.payload,
-      };
+      let copy = [...state.breedsFilter];
+      console.log("REDUCER:", action.payload)
+      if(action.payload === "All"){
+        return {
+          ...state,
+          breedsFilter: [...state.breeds]
+        }
+      }else {
+        copy = copy.filter((temp) => { return temp.temperament?.includes(action.payload)})
+        return {
+          ...state,
+          breedsFilter: [...copy],
+        };
+      }
 
     case FILTER_ORDER_NAME:
-      if (state.breedsFilter?.length) {
-        let sortedBreeds =
+        let sortedBreedsN =
           action.payload === "AZ"
             ? state.breedsFilter?.sort(function (a, b) {
                 if (a.name > b.name) return 1;
@@ -70,63 +90,26 @@ function rootReducer(state = initialState, action) {
               });
         return {
           ...state,
-          breedsFilter: sortedBreeds,
+          breedsFilter: sortedBreedsN,
         };
-      } else {
-        let sortedBreeds =
-          action.payload === "AZ"
-            ? state.breeds.sort(function (a, b) {
-                if (a.name > b.name) return 1;
-                if (b.name > a.name) return -1;
-                return 0;
-              })
-            : state.breeds.sort(function (a, b) {
-                if (a.name > b.name) return -1;
-                if (b.name > a.name) return 1;
-                return 0;
-              });
-        return {
-          ...state,
-          breeds: sortedBreeds,
-        };
-      }
 
     case FILTER_ORDER_WEIGHT:
-      if (state.breedsFilter?.length) {
-        let sortedBreeds =
+        let sortedBreedsW =
           action.payload === "WH"
             ? state.breedsFilter
-                ?.filter((breed) => !breed.weight.includes(NaN))
+                .filter((breed) => !breed.weight.includes(false) && breed.weight.split(" - ").length > 1)
                 .sort(function (a, b) {
                   return b.weight?.split(" - ")[1] - a.weight?.split(" - ")[1];
                 })
             : state.breedsFilter
-                ?.filter((breed) => !breed.weight.includes(NaN))
+                .filter((breed) => !breed.weight.includes(false) && breed.weight.split(" - ").length > 1)
                 .sort(function (a, b) {
                   return a.weight?.split(" - ")[0] - b.weight?.split(" - ")[0];
                 });
         return {
           ...state,
-          breedsFilter: sortedBreeds,
+          breedsFilter: sortedBreedsW,
         };
-      } else {
-        let sortedBreeds =
-          action.payload === "WH"
-            ? state.breeds
-                .filter((breed) => !breed.weight.includes(NaN))
-                .sort(function (a, b) {
-                  return b.weight?.split(" - ")[1] - a.weight?.split(" - ")[1];
-                })
-            : state.breeds
-                .filter((breed) => !breed.weight.includes(NaN))
-                .sort(function (a, b) {
-                  return a.weight?.split(" - ")[0] - b.weight?.split(" - ")[0];
-                });
-        return {
-          ...state,
-          breeds: sortedBreeds,
-        };
-      }
     default:
       return state;
   }

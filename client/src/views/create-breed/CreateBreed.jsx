@@ -115,8 +115,6 @@ export default function CreateBreed() {
         alert("The breed cants created");
       });
   }
-//"{"name":"Pablo","weightMin":[12],"weightMax":[15],"heightMin":[12],"heightMax":[15],"life_spanMin":[12],"life_spanMax":[15],"image":"https://lh3.googleusercontent.com/uhThhc_1pNpV9eyiy7Kpnf9F7dS-NfkK7vkRqo2r_tW-D78uWCEgnq2Q5JzCoxPUUrQ-GsICd6RgEvu6GAEC588WNYnU-AN5znP6XtUWzb0z7N2qcFBfsEUvqWyGdj_0pv28fLes","temperament":["0455e942-022b-49bd-bd90-90f649efd7fa","6b125306-4391-469b-89c4-04289c6d0f91","18c81a78-3752-411d-9b5c-d75797c87d78"],"temperamentPrev":"18c81a78-3752-411d-9b5c-d75797c87d78","weight":[12,15],"height":[12,15],"life_span":[12,15]}"
-
 
   return (
     <div>

@@ -19,18 +19,21 @@ export default function Home() {
 
   const filteredBreeds = useSelector((state) => state.breedsFilter)
 
+  const loading = useSelector((state) => state.isLoading)
   const breedsState = useSelector((state) => state.breeds);
+
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getBreeds());
     return () => dispatch(getBreeds());
-  }, [dispatch]);
+  }, []);
 
   const handleClick = (e) => {
     setCurrentPage(Number(e.target.id))
   };
 
-  if(breedsState.message){
+  if(breedsState?.message){
     throw new Error("Raza no encontrada")
   }
 
@@ -40,7 +43,7 @@ export default function Home() {
       pages.push(i)
     }
   }else {
-      for (let i = 1; i<= Math.ceil(breedsState.length / itemsPerPage); i++){
+      for (let i = 1; i<= Math.ceil(breedsState?.length / itemsPerPage); i++){
         pages.push(i)
       }
   }
@@ -88,56 +91,57 @@ export default function Home() {
          <SearchBarr/>
          <FilterSort setOrden={setOrden} setCurrentPage={(n)=>setCurrentPage(n)}/>
         
-      {currentItems ? (
-        <>
-        <div className="containerClass">
-          {currentItems?.map((breed, index) => {
-            return (
-              <Breed
-                id={breed.id}
-                key={breed.id}
-                name={breed.name}
-                weight={breed.weight}
-                temperament={breed.temperament}
-                img={breed.image}
-              />
-            );
-          })}
-          </div>
-
-          <ul className="pageNumbers">
-            <li className="prevBtn">
-              <button
-              onClick={handlePrevBtn}
-              disabled={currentPage === pages[0]? true : false}
-              >
-                Prev
-              </button>
-            </li>
-            {renderPageNumbers}
+    {
+      loading ?
+      <>
+      <img src="https://static.wixstatic.com/media/72fac8_14ede31619e44b0498c84845f0befbdb~mv2.gif" alt="Dog is Loading" style={{width: "350px", height: "350px"}}/>
+      </>
+      : (
+        currentItems ? (
+          <>
+          <div className="containerClass">
+            {currentItems?.map((breed, index) => {
+              return (
+                <Breed
+                  id={breed.id}
+                  key={breed.id}
+                  name={breed.name}
+                  weight={breed.weight}
+                  temperament={breed.temperament}
+                  img={breed.image}
+                />
+              );
+            })}
+            </div>
+  
+            <ul className="pageNumbers">
+              <li className="prevBtn">
+                <button
+                onClick={handlePrevBtn}
+                disabled={currentPage === pages[0]? true : false}
+                >
+                  Prev
+                </button>
+              </li>
+              {renderPageNumbers}
+              
+              <li>
+                <button
+                className="nextBtn"
+                onClick={handleNextBtn}
+                disabled={currentPage === pages[pages.length -1] ? true : false}
+                >
+                  Next
+                </button>
+              </li>
+            </ul>
             
-            <li>
-              <button
-              className="nextBtn"
-              onClick={handleNextBtn}
-              disabled={currentPage === pages[pages.length -1] ? true : false}
-              >
-                Next
-              </button>
-            </li>
-          </ul>
-          
-        </>
-      ) : currentItems === [] (
-        <h2>No encontrado</h2>
+          </>
+        ) : (
+          <h2> <img src="https://static.wixstatic.com/media/72fac8_14ede31619e44b0498c84845f0befbdb~mv2.gif" alt="Dog is Loading" style={{width: "350px", height: "350px"}}/></h2>
+        )
       )
     }
     </div>
   );
 }
-
-
-
-
-        
-           

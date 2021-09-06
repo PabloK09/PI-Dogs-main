@@ -13,13 +13,14 @@ export default function Breeds() {
   const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
 
   const filteredBreeds = useSelector((state) => state.breedsFilter)
-
+  const loading = useSelector((state) => state.isLoading)
   const breedsState = useSelector((state) => state.breeds);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getBreeds());
     return () => dispatch(getBreeds());
-  }, [dispatch]);
+  }, []);
 
   const handleClick = (e) => {
     setCurrentPage(Number(e.target.id))
@@ -59,6 +60,7 @@ export default function Breeds() {
   });
 
   const handleNextBtn = () => {
+    console.log(loading);
     setCurrentPage(currentPage + 1)
     if(currentPage + 1 > maxPageNumberLimit){
       setMaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
@@ -76,50 +78,53 @@ export default function Breeds() {
 
   return (
     <div>
-      {currentItems ? (
+      {loading ?
+      <>
+      <img src="http://northerntechmap.com/assets/img/loading-dog.gif" alt="Dog is Loading"/>
+      <h3> Loading...</h3>
+      </>
+      :  
+      currentItems ? (
         <>
         <div className="containerClass">
-          {currentItems?.map((breed, index) => {
-            return (
+        {currentItems?.map((breed, index) => {
+          return (
               <Breed
-                id={breed.id}
-                key={breed.id}
-                name={breed.name}
-                weight={breed.weight}
-                temperament={breed.temperament}
-                img={breed.image}
+              id={breed.id}
+              key={breed.id}
+              name={breed.name}
+              weight={breed.weight}
+              temperament={breed.temperament}
+              img={breed.image}
               />
-            );
-          })}
-          </div>
-
-          <ul className="pageNumbers">
+              );
+            })}
+            </div>
+            
+            <ul className="pageNumbers">
             <li className="prevBtn">
-              <button
-              onClick={handlePrevBtn}
-              disabled={currentPage === pages[0]? true : false}
-              >
-                Prev
-              </button>
+            <button
+            onClick={handlePrevBtn}
+            disabled={currentPage === pages[0]? true : false}
+            >
+            Prev
+            </button>
             </li>
             {renderPageNumbers}
             
             <li>
-              <button
-              className="nextBtn"
-              onClick={handleNextBtn}
-              disabled={currentPage === pages[pages.length -1] ? true : false}
-              >
-                Next
-              </button>
+            <button
+            className="nextBtn"
+            onClick={handleNextBtn}
+            disabled={currentPage === pages[pages.length -1] ? true : false}
+            >
+            Next
+            </button>
             </li>
-          </ul>
-          
-        </>
-      ) : currentItems === [] (
-        <h2>No encontrado</h2>
-      )
-    }
+            </ul>
+            </>
+            ) : <h2>No encontrado</h2>
+          }
     </div>
   );
 }
