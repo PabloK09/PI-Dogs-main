@@ -47,7 +47,7 @@ function rootReducer(state = initialState, action) {
           breeds: action.payload,
         };
       }
-      
+
     case FILTER_TEMPERAMENTS:
       return {
         ...state,
@@ -95,17 +95,16 @@ function rootReducer(state = initialState, action) {
       if (state.breedsFilter?.length) {
         let sortedBreeds =
           action.payload === "WH"
-            ? state.breedsFilter?.sort(function (a, b) {
-              
-                if (parseInt(a.weight[0]) > parseInt(b.weight[0])) return 1;
-                if (parseInt(b.weight[0]) > parseInt(a.weight[0])) return -1;
-                return 0;
-              })
-            : state.breedsFilter?.sort(function (a, b) {
-                if (parseInt(a.weight[0]) > parseInt(b.weight[0])) return -1;
-                if (parseInt(b.weight[0]) > parseInt(a.weight[0])) return 1;
-                return 0;
-              });
+            ? state.breedsFilter
+                ?.filter((breed) => !breed.weight.includes(NaN))
+                .sort(function (a, b) {
+                  return b.weight?.split(" - ")[1] - a.weight?.split(" - ")[1];
+                })
+            : state.breedsFilter
+                ?.filter((breed) => !breed.weight.includes(NaN))
+                .sort(function (a, b) {
+                  return a.weight?.split(" - ")[0] - b.weight?.split(" - ")[0];
+                });
         return {
           ...state,
           breedsFilter: sortedBreeds,
@@ -113,12 +112,16 @@ function rootReducer(state = initialState, action) {
       } else {
         let sortedBreeds =
           action.payload === "WH"
-            ? state.breeds.sort((a,b)=> b.weight[0] - a.weight[0])
-            : state.breeds.sort(function (a, b) {
-                if (parseInt(a.weight.split(" - ")[0]) - parseInt(b.weight.split(" - ")[0]) ) return -1;
-                if (parseInt(b.weight.split(" - ")[0]) - parseInt(a.weight.split(" - ")[0])) return 1;
-                return 0;
-              });
+            ? state.breeds
+                .filter((breed) => !breed.weight.includes(NaN))
+                .sort(function (a, b) {
+                  return b.weight?.split(" - ")[1] - a.weight?.split(" - ")[1];
+                })
+            : state.breeds
+                .filter((breed) => !breed.weight.includes(NaN))
+                .sort(function (a, b) {
+                  return a.weight?.split(" - ")[0] - b.weight?.split(" - ")[0];
+                });
         return {
           ...state,
           breeds: sortedBreeds,
