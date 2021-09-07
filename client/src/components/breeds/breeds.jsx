@@ -60,7 +60,6 @@ export default function Breeds() {
   });
 
   const handleNextBtn = () => {
-    console.log(loading);
     setCurrentPage(currentPage + 1)
     if(currentPage + 1 > maxPageNumberLimit){
       setMaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);

@@ -1,0 +1,65 @@
+*{
+    font-family: var(--font-family-Text);
+}
+
+h3, h2, h1, h4, h5, h6, strong {
+    font-family: var(--font-family-Title);
+}
+
+.divFather {
+    z-index: -1;
+    backdrop-filter: blur(16px);
+    background-image: url("../../assets/wallpapers/Pattern-Pet-Pablo.png");
+    display: grid;
+    align-items: start;
+    align-content: stretch;
+    justify-content: space-around;
+    justify-items: center;
+    grid-gap: 2em;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+}
+
+.containerMasPicante{
+    z-index: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+}
+
+.containerClass {
+    z-index: 2;
+    background-color: white;
+    display: grid;
+    width: 80%;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1.5rem;
+    padding: 0.8em;
+}
+
+.pageNumbers {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.ul-containerBreed{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+}
+
+.li-pageNumber{
+    padding: 1em;
+    margin: 0.2em;
+}
+
+.activePag {
+    color: red;
+}

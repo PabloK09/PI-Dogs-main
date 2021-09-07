@@ -22,6 +22,7 @@ export default function CreateBreed() {
     temperament: [],
     temperamentPrev: [],
   });
+
   const breedState = useSelector((state) => state.breeds)
   const temperamentState = useSelector((state) => state.temperament);
   useEffect(() => {
@@ -90,7 +91,7 @@ export default function CreateBreed() {
         ...prevData,
         [e.target.name]: e.target.value,
       };
-      if (state.temperamentPrev.length) {
+      if (state.temperamentPrev) {
         if (!state.temperament.includes(state.temperamentPrev)) {
           state.temperament?.push(state.temperamentPrev);
         }
@@ -204,8 +205,6 @@ export default function CreateBreed() {
           name="temperamentPrev"
           value={[breeds.temperamentPrev]}
           onChange={(e) => handleChangeTemp(e)}
-          multiple
-          size="20"
         >
           {temperamentState?.map((temp) => (
             <option value={temp.id} key={temp.id}>

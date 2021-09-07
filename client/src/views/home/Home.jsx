@@ -3,7 +3,7 @@ import SearchBarr from "../../components/searchbar/SearchBar"
 import FilterSort from "../../components/filter-sort/Filtersort"
 
 import Breed from "../../components/breed/Breed"
-import "../../components/breeds/Breeds.css";
+import styles from "../../components/breeds/Home.module.css";
 import React, { useState, useEffect } from "react";
 import { getBreeds } from "../../redux/actions/index";
 import { useSelector, useDispatch } from "react-redux";
@@ -18,7 +18,6 @@ export default function Home() {
   const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
 
   const filteredBreeds = useSelector((state) => state.breedsFilter)
-
   const loading = useSelector((state) => state.isLoading)
   const breedsState = useSelector((state) => state.breeds);
 
@@ -50,17 +49,16 @@ export default function Home() {
     
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems =  filteredBreeds?.length ? filteredBreeds?.slice(indexOfFirstItem, indexOfLastItem) : breedsState?.slice(indexOfFirstItem, indexOfLastItem);
-
+  const currentItems =  filteredBreeds?.slice(indexOfFirstItem, indexOfLastItem)
+ 
   const renderPageNumbers = pages.map((number) => {
-
       if(number < maxPageNumberLimit + 1 && number > minPageNumberLimit){
         return (
         <li
         key={number}
         id={number}
         onClick={handleClick}
-        className={currentPage === number ? "activePag" : null} //para mandarle css
+        className={currentPage === number ? styles.activePag : null}
         >
           {number}
         </li>
@@ -87,8 +85,10 @@ export default function Home() {
   };
 
   return (
-    <div>
+
+    <div className={styles.divFather}>
          <SearchBarr/>
+         <div className={styles.containerMasPicante}>
          <FilterSort setOrden={setOrden} setCurrentPage={(n)=>setCurrentPage(n)}/>
         
     {
@@ -97,9 +97,10 @@ export default function Home() {
       <img src="https://static.wixstatic.com/media/72fac8_14ede31619e44b0498c84845f0befbdb~mv2.gif" alt="Dog is Loading" style={{width: "350px", height: "350px"}}/>
       </>
       : (
-        currentItems ? (
+        console.log(currentItems),
+        currentItems.length ? (
           <>
-          <div className="containerClass">
+          <div className={styles.containerClass}>
             {currentItems?.map((breed, index) => {
               return (
                 <Breed
@@ -113,35 +114,35 @@ export default function Home() {
               );
             })}
             </div>
-  
-            <ul className="pageNumbers">
-              <li className="prevBtn">
+            <ul className={styles.pageNumbers}>
+              <li className={styles.prevBtn}>
                 <button
                 onClick={handlePrevBtn}
                 disabled={currentPage === pages[0]? true : false}
                 >
-                  Prev
+                  ◀Prev
                 </button>
               </li>
               {renderPageNumbers}
               
               <li>
                 <button
-                className="nextBtn"
+                className={styles.nextBtn}
                 onClick={handleNextBtn}
                 disabled={currentPage === pages[pages.length -1] ? true : false}
                 >
-                  Next
+                  Next▶
                 </button>
               </li>
             </ul>
             
           </>
         ) : (
-          <h2> <img src="https://static.wixstatic.com/media/72fac8_14ede31619e44b0498c84845f0befbdb~mv2.gif" alt="Dog is Loading" style={{width: "350px", height: "350px"}}/></h2>
-        )
-      )
-    }
+          <h3>No se encuentra</h3>
+          )
+          )
+        }
+        </div>
     </div>
   );
 }

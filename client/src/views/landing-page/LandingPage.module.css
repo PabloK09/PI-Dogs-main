@@ -1,0 +1,94 @@
+
+.landingPage {
+    background-image: url("../../assets/wallpapers/output-onlinepngtools.png");
+    background-size:cover;
+    background-position:center;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    padding:0 20px;
+}
+.containerLP{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 3em;
+}
+
+.h1 {
+    color: var(--black-color);
+    font-family: var(--font-family-Title);
+    font-size: 5.3rem;
+    margin-bottom: 200px;
+    text-align: -webkit-auto;
+    
+}
+
+.h3{
+    color: var(--black-color);
+    font-family: var(--font-family-Text);
+    font-size: 2.5rem;
+    text-align: -webkit-auto;
+    margin-bottom: 0.5em;
+}
+
+.p{
+    color: var(--dark-grey-color);
+    font-family: var(--font-family-Text);
+    font-size: 1.5rem;
+    width: 25em;
+    align-self: initial;
+    text-align: -webkit-auto;
+    margin-top: 0.5em;
+}
+
+.btnLP{
+  width: 130px;
+  height: 40px;
+  padding: 10px 25px;
+  border: 2px solid var(--black-color);
+  font-family: var(--font-family-Text);
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  background: var(--black-color);
+  color: #fff;
+  line-height: 42px;
+  padding: 0;
+  border: none;
+}
+
+.btnLP:hover {
+    background: transparent;
+    color: var(--black-color);
+     box-shadow:
+     7px 7px 20px 0px var(--black-color),
+     4px 4px 5px 0px var(--black-color);
+  }
+  .btnLP:before,
+  .btnLP:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: var(--black-color);
+    transition:400ms ease all;
+  }
+  .btnLP:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+  }
+  .btnLP:hover:before,
+  .btnLP:hover:after{
+    width:100%;
+    transition:800ms ease all;
+  }
+  

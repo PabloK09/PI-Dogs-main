@@ -69,10 +69,18 @@ function rootReducer(state = initialState, action) {
         }
       }else {
         copy = copy.filter((temp) => { return temp.temperament?.includes(action.payload)})
-        return {
-          ...state,
-          breedsFilter: [...copy],
-        };
+        if(!copy.length) {
+          console.log("VOLVI PARA ATRAS")
+          return {
+            ...state,
+            breedsFilter: []
+          }
+        }else {
+          return {
+            ...state,
+            breedsFilter: [...copy],
+          };
+        }
       }
 
     case FILTER_ORDER_NAME:

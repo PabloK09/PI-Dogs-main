@@ -1,25 +1,50 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import "./Breed.css"
+import React from "react";
+import { Link } from "react-router-dom";
+import styles from "./Breed.module.css";
 
 export default function Breed(props) {
-    
-    const {name, weight, temperament, img, height, life_span ,id} = props
-    
-    return (
-        <div className="containerBreed">
-        <h3 className="name-containerBreed">{name}</h3>
-        <ul className="ul-containerBreed">
-            <li>{height}</li>
-            <li>{weight}</li>
-            <li>{life_span}</li>
-            <li className="li-temp">{temperament}</li>
+  const { name, weight, temperament, img, height, life_span, id } = props;
+
+  return (
+    <div className={styles.containerBreed}>
+      <div className={styles.containerListado}>
+        <h3 className={styles.name_containerBreed}>{name}</h3>
+        <ul className={styles.ul}>
+          {height ? (
+            <li className={styles.li_height}>
+              <strong>Height: </strong>
+              {height} cm
+            </li>
+          ) : (
+            false
+          )}
+          <li className={styles.li_weight}>
+            <strong>Weight:</strong> {weight} kg
+          </li>
+          {life_span ? (
+            <li className={styles.li_life_span}>
+              <strong>Life Span:</strong> {life_span}
+            </li>
+          ) : (
+            false
+          )}
+          <li className={styles.li_temp}>
+            <strong>Temperaments:</strong> {temperament}
+          </li>
         </ul>
-        <img className="img-containerBreed" src={img} alt={name}/>      
-        <Link to={`/home/breed/${id}`}>
-        <button className="btn-containerBreed">Learn More</button>
-        </Link>
-            
-        </div>
-    )
+        {height ? (
+          false
+        ) : (
+            <div className={styles.divBtn}>
+          <Link to={`/home/breed/${id}`}>
+            <button className={styles.btn_bottom}>Learn More</button>
+          </Link>
+            </div>
+        )}
+      </div>
+      <div className={styles.divImg}>
+        <img className={styles.img_containerBreed} src={img} alt={name} />
+      </div>
+    </div>
+  );
 }
