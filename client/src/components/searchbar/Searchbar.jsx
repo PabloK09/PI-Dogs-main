@@ -3,6 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { getBreedsName, getBreeds } from "../../redux/actions";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
+import styles from "./SearchBar.module.css"
+import {SiDatadog } from 'react-icons/si'
+import {AiOutlineSearch} from 'react-icons/ai'
+
+
 
 export default function SearchBarr() {
   const dispatch = useDispatch();
@@ -34,19 +39,27 @@ export default function SearchBarr() {
   }
 
   return (
-    <nav>
+    <nav className={styles.nav}>
+       <h3 className={styles.h1}><SiDatadog className={styles.logo}/> BFF Gallery</h3>
+
       <form onSubmit={(e) => handleSubmit(e)}>
-        <label>Breed:</label>
+        <div className={styles.inputDiv}>
+
         <input
           type="text"
           name="breedFind"
           onChange={(e) => handleChange(e)}
           value={search.breedFind}
-        />
-        <button type="submit">Search</button>
+          className={styles.inputSearch}
+          placeholder="Search breeds..."
+          />
+        <div className={styles.divSearch}>
+        <button type="submit" className={styles.btnSearch}><AiOutlineSearch/></button>
+        </div>
+        </div>
       </form>
       <Link to="/home/create">
-        <button>Create</button>
+        <button className={styles.btnCreate}>Create</button>
       </Link>
     </nav>
   );

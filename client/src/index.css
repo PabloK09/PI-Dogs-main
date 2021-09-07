@@ -4,7 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   overflow: hidden;
 }
 
@@ -21,11 +21,14 @@ label {
   --yellow-color: #F9C845;
   --dark-grey-color: #423F3E;
   --grey-color: #F3F7FB;
+  --palette-brown1:#000000;
+  --palette-brown2:#455974;
+  --palette-brown3:#6f4218;
+  --palette-brown4:#ce8e68;
+  --palette-brown5: #ebd0bb;
+  --palette-brown6: #e4ddd5;
   --font-family-Title: "Gilroy-Bold", sans-serif;
   --font-family-Text: 'Gilroy-Regular', sans-serif;
-  --select-border: #777;
-  --select-focus: blue;
-  --select-arrow: var(--select-border)
 }
 
 body {

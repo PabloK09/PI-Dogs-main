@@ -56,34 +56,98 @@ select {
     display: none; 
   }
 
-  .select_icon {
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    width: 30px;
-    height: 36px;
-    pointer-events: none;
-    border: 2px solid #962d22;
-    padding-left: 5px;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-  }
-  .select_icon svg.icon {
-    transition: fill 0.3s ease;
-    fill: white;
-  }
-
   select:hover,
   select:focus {
-    color: #c0392b;
-    background-color: white;
+    color: #16aa8a;
+    background-color: rgb(112, 211, 19);
     border-bottom-color: #DCDCDC;
   }
-  select:hover ~ .select_icon,
-  select:focus ~ .select_icon {
+  select:hover,
+  select:focus{
     background-color: white;
     border-color: #DCDCDC;
   }
-  select:hover ~ .select_icon svg.icon,
-  select:focus ~ .select_icon svg.icon {
+  select:hover,
+  select:focus {
     fill: #c0392b;
+  }
+
+  .temps{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+  }
+
+  .noselect {
+    -webkit-touch-callout: none;
+      -webkit-user-select: none;
+       -khtml-user-select: none;
+         -moz-user-select: none;
+          -ms-user-select: none;
+              user-select: none;
+      -webkit-tap-highlight-color: transparent;
+  }
+  
+
+
+
+
+
+
+  
+  .temp {
+    width: 150px;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background: red;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+    background: #e62222;
+  }
+  
+  .temp, .temp span {
+    transition: 200ms;
+  }
+  
+  .temp .text {
+    transform: translateX(35px);
+    color: white;
+    font-weight: bold;
+  }
+  
+  .temp .icon {
+    position: absolute;
+    border-left: 1px solid #c41b1b;
+    transform: translateX(110px);
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .temp svg {
+    width: 15px;
+    fill: #eee;
+  }
+  
+  .temp:hover {
+    background: #ff3636;
+  }
+  
+  .temp:hover .text {
+    color: transparent;
+  }
+  
+  .temp:hover .icon {
+    width: 150px;
+    border-left: none;
+    transform: translateX(0);
+  }
+  
+  .temp:focus {
+    outline: none;
   }

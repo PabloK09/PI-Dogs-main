@@ -7,7 +7,6 @@ import {
   FILTER_ORDER_NAME,
   FILTER_ORDER_WEIGHT,
   SET_LOADING,
-  COPY_STATE,
 } from "../actions/types";
 
 const initialState = {

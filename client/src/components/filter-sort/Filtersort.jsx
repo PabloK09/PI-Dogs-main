@@ -75,24 +75,24 @@ export default function FilterSort({ setCurrentPage, setOrden }) {
       <div className={styles.divFilterContainer}>
         <div className={styles.filterTemp}>
           <label>Filter Temperament</label>
-          <select onChange={(e) => handleFilterTemp(e)} defaultValue={"All"}  className={styles.tempSelected}>
+          <select
+            onChange={(e) => handleFilterTemp(e)}
+            defaultValue={"All"}
+            className={styles.tempSelected}
+          >
             <option value="All" key="All">
               All Temperaments
             </option>
             {temperamentState?.map((temp) => (
               <option value={temp.name} key={temp.id} id={temp.name}>
-                {temp.name}             
+                {temp.name}
               </option>
             ))}
           </select>
-          <div className={styles.select_icon}>
-        <svg focusable="false" viewBox="0 0 104 128" width="25" height="35" class="icon">
-          <path d="m2e1 95a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm0-3e1a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm0-3e1a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm14 55h68v1e1h-68zm0-3e1h68v1e1h-68zm0-3e1h68v1e1h-68z"></path>
-        </svg>
-      </div>
         </div>
 
         <div className={styles.orders}>
+          Order By
           <button name="AZ" value="AZ" onClick={handleSortName}>
             AZ
           </button>
@@ -107,27 +107,34 @@ export default function FilterSort({ setCurrentPage, setOrden }) {
           </button>
         </div>
       </div>
-      <div >
+      <div className={styles.temps}>
         {listaTemp
           ? listaTemp.map((temp) => (
               <>
                 {temp !== "All" ? (
                   <>
-                    <li key={temp}>
-                      {temp}
-                      <button
-                        key={temp}
-                        id={temp}
-                        value={temp}
-                        onClick={() =>
-                          handleOnClose(
-                            document.getElementById(`${temp}`).value
-                          )
-                        }
-                      >
-                        X
-                      </button>
-                    </li>
+                    <button
+                      key={temp}
+                      className={styles.noselect, styles.temp}
+                      key={temp}
+                      id={temp}
+                      value={temp}
+                      onClick={() =>
+                      handleOnClose(document.getElementById(`${temp}`).value)
+                      }
+                    >
+                      <span className={styles.text}>{temp}</span>
+                      <span className={styles.icon}>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" />
+                        </svg>
+                      </span>
+                    </button>
                   </>
                 ) : (
                   false

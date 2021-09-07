@@ -14,13 +14,14 @@
     flex-direction: column;
     align-items: flex-start;
     margin-left: 3em;
+    margin-top: 3em;
 }
 
 .h1 {
     color: var(--black-color);
     font-family: var(--font-family-Title);
     font-size: 5.3rem;
-    margin-bottom: 200px;
+    margin-bottom: 2.5em;
     text-align: -webkit-auto;
     
 }
@@ -44,6 +45,7 @@
 }
 
 .btnLP{
+  margin-top: 0.7em;
   width: 130px;
   height: 40px;
   padding: 10px 25px;
@@ -66,7 +68,7 @@
     background: transparent;
     color: var(--black-color);
      box-shadow:
-     7px 7px 20px 0px var(--black-color),
+     7px 7px 10px 0px var(--black-color),
      4px 4px 5px 0px var(--black-color);
   }
   .btnLP:before,
