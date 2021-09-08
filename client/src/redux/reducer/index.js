@@ -83,6 +83,7 @@ function rootReducer(state = initialState, action) {
       }
 
     case FILTER_ORDER_NAME:
+      console.log(action.payload)
         let sortedBreedsN =
           action.payload === "AZ"
             ? state.breedsFilter?.sort(function (a, b) {
@@ -101,6 +102,7 @@ function rootReducer(state = initialState, action) {
         };
 
     case FILTER_ORDER_WEIGHT:
+      console.log(action.payload)
         let sortedBreedsW =
           action.payload === "WH"
             ? state.breedsFilter

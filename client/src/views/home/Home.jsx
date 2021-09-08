@@ -7,6 +7,7 @@ import styles from "../../components/breeds/Home.module.css";
 import React, { useState, useEffect } from "react";
 import { getBreeds } from "../../redux/actions/index";
 import { useSelector, useDispatch } from "react-redux";
+import imageDog from "../../assets/wallpapers/404-oops.jpg"
 
 export default function Home() {
   const [orden, setOrden] = useState("")
@@ -89,7 +90,10 @@ export default function Home() {
     <div className={styles.divFather}>
          <SearchBarr/>
          <div className={styles.containerMasPicante}>
+         <div className={styles.containerMenosPicante}>
          <FilterSort setOrden={setOrden} setCurrentPage={(n)=>setCurrentPage(n)}/>
+
+         
         
     {
       loading ?
@@ -97,7 +101,6 @@ export default function Home() {
       <img src="https://static.wixstatic.com/media/72fac8_14ede31619e44b0498c84845f0befbdb~mv2.gif" alt="Dog is Loading" style={{width: "350px", height: "350px"}}/>
       </>
       : (
-        console.log(currentItems),
         currentItems.length ? (
           <>
           <div className={styles.containerClass}>
@@ -113,6 +116,8 @@ export default function Home() {
                 />
               );
             })}
+
+            
             </div>
             <ul className={styles.pageNumbers}>
               <li className={styles.prevBtn}>
@@ -120,7 +125,7 @@ export default function Home() {
                 onClick={handlePrevBtn}
                 disabled={currentPage === pages[0]? true : false}
                 >
-                  ◀Prev
+                  Prev
                 </button>
               </li>
               {renderPageNumbers}
@@ -131,17 +136,21 @@ export default function Home() {
                 onClick={handleNextBtn}
                 disabled={currentPage === pages[pages.length -1] ? true : false}
                 >
-                  Next▶
+                  Next
                 </button>
               </li>
             </ul>
             
           </>
         ) : (
-          <h3>No se encuentra</h3>
+          <div style={{backgroundImage: `url(${imageDog})`, backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'}} 
+          className={styles.containerClass} >
+            </div>
           )
           )
         }
+        </div>
         </div>
     </div>
   );

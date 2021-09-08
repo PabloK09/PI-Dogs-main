@@ -54,7 +54,7 @@ export default function SearchBarr() {
           value={search.breedFind}
           className={styles.inputSearch}
           placeholder="Search breeds..."
-          autocomplete="off"
+          autoComplete="off"
           />
         <div className={styles.divSearch}>
         <button type="submit" className={styles.btnSearch}><AiOutlineSearch className={styles.iconSearch}/></button>

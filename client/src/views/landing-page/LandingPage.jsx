@@ -9,7 +9,7 @@ export default function LandingPage() {
         <div className={styles.containerLP}>
       <h1 className={styles.h1}><SiDatadog/>BFF Gallery</h1>
       <h3 className={styles.h3}>Find your best friend</h3>
-      <p className={styles.p}>Come and discover all the possible breeds of the most beautiful animal in the world. You will also be able to create your own breed!</p>
+      <p className={styles.p}>Come and discover all the possible breeds of the most beautiful animal in the world. You will also be able to create your own fantasy breed!</p>
       <Link to="/home">
         <button className={styles.btnLP}>View More</button>
       </Link>

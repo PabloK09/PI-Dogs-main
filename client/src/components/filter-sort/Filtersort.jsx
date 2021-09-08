@@ -7,7 +7,8 @@ import {
   orderByBreedWeight,
 } from "../../redux/actions/index";
 import styles from "./Filtersort.module.css";
-import { HiChevronDown } from "react-icons/hi";
+import  {FaSortAlphaDown, FaSortAlphaUpAlt, FaWeightHanging, FaFeather} from 'react-icons/fa';
+
 
 export default function FilterSort({ setCurrentPage, setOrden }) {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ export default function FilterSort({ setCurrentPage, setOrden }) {
 
   function handleSortName(e) {
     e.preventDefault();
-    dispatch(orderByBreedName(e.target.value));
+    dispatch(orderByBreedName(e.target.name));
     setCurrentPage(1);
     setOrden(`Ordenado ${e.target.value}`);
   }
@@ -74,7 +75,6 @@ export default function FilterSort({ setCurrentPage, setOrden }) {
     <div className={styles.container}>
       <div className={styles.divFilterContainer}>
         <div className={styles.filterTemp}>
-          <label>Filter Temperament</label>
           <select
             onChange={(e) => handleFilterTemp(e)}
             defaultValue={"All"}
@@ -91,36 +91,56 @@ export default function FilterSort({ setCurrentPage, setOrden }) {
           </select>
         </div>
 
-        <div className={styles.orders}>
-          Order By
-          <button name="AZ" value="AZ" onClick={handleSortName}>
-            AZ
+          <div className={styles.divBtn}>
+          <button
+            name="AZ"
+            value="AZ" 
+            onClick={handleSortName}
+            className={styles.orderBtn}
+            >
+           <FaSortAlphaDown className={styles.orderIcon} />
           </button>
-          <button name="ZA" value="ZA" onClick={handleSortName}>
-            ZA
+          <button
+            name="ZA"
+            value="ZA"
+            onClick={handleSortName}
+            className={styles.orderBtn}
+            >
+           <FaSortAlphaUpAlt className={styles.orderIcon}/>
           </button>
-          <button name="WL" value="WL" onClick={handleSortWeight}>
-            WL
+          <button
+            name="WL"
+            value="WL"
+            onClick={handleSortWeight}
+            className={styles.orderBtn}
+            >
+            <FaFeather className={styles.orderIcon}/>
           </button>
-          <button name="WH" value="WH" onClick={handleSortWeight}>
-            WH
+          <button
+            name="WH"
+            value="WH"
+            onClick={handleSortWeight}
+            className={styles.orderBtn}
+            >
+            <FaWeightHanging className={styles.orderIcon}/>
           </button>
         </div>
+       
       </div>
       <div className={styles.temps}>
         {listaTemp
           ? listaTemp.map((temp) => (
-              <>
+            <>
                 {temp !== "All" ? (
                   <>
                     <button
                       key={temp}
-                      className={styles.noselect, styles.temp}
+                      className={(styles.noselect, styles.temp)}
                       key={temp}
                       id={temp}
                       value={temp}
                       onClick={() =>
-                      handleOnClose(document.getElementById(`${temp}`).value)
+                        handleOnClose(document.getElementById(`${temp}`).value)
                       }
                     >
                       <span className={styles.text}>{temp}</span>

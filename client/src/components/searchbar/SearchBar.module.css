@@ -53,7 +53,7 @@
 
 .divSearch {
   height: 2em;
-  width: 1.8em;
+  width: 2.4em;
   background-color: white;
   border-left: 0.08em solid var(--black-color);
   display: flex;
@@ -91,7 +91,6 @@
   font-weight: 300;
   cursor: pointer;
   position: relative;
-  display: inline-block;
   border-radius: 2em;
   color: #fff;
   padding: 0;
@@ -102,6 +101,9 @@
   line-height: 42px;
   margin-left: 1.2em;
   border: none;
+  display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btnCreate:hover {
