@@ -28,7 +28,7 @@ h3, h2, h1, h4, h5, h6, strong {
 .containerMenosPicante {
     position: relative;
     width: 70vw;
-    height: 80vh;
+    height: 88vh;
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -47,14 +47,7 @@ h3, h2, h1, h4, h5, h6, strong {
     grid-gap: 1.5rem;
     justify-items: center;
     padding: 1.5em 0em 1.5em 0em;
-}
-
-.pageNumbers {
-    display: flex;
-    flex-direction: row;
-    list-style: none;
-    align-items: center;
-    justify-content: center;
+    transition: 1s;
 }
 
 .ul-containerBreed{
@@ -63,12 +56,78 @@ h3, h2, h1, h4, h5, h6, strong {
     list-style: none;
 }
 
-.li-pageNumber{
-    padding: 1em;
-    margin: 0.2em;
+.divPagination{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 0.3em;
+    width: 100%;
+}
+
+.comunLi{
+    padding: 0.5em;
+    margin: 0.1em;
+    height: 100%;
+    width: 100%;
+    color: var(--black-color);
+    font-family: var(--font-family-Title);
+    text-align: center;
+}
+
+.comunLi:hover{
+    font-family: var(--font-family-Title);
+    color: white;
+    background-color: var(--palette-brown6);
+    height: 100%;
+    width: 100%;
+    padding: 0.5em;
+    margin: 0.1em;
+    border-radius: 5px;
+}
+
+.pageNumbers {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5em;
+    cursor: pointer;
+    width: 32em;
+    text-align: center;
 }
 
 .activePag {
-    color: red;
+    font-family: var(--font-family-Title);
+    color: white;
+    background-color: var(--palette-brown5);
+    height: 100%;
+    width: 100%;
+    padding: 0.5em;
+    margin: 0.1em;
+    border-radius: 5px;
 }
 
+.navIcon{
+    width: 1.8em;
+  height: 1.8em;
+  pointer-events: none;
+}
+
+.navBtn{
+    cursor: pointer;
+    background-color: transparent;
+    border: transparent;
+    vertical-align: -webkit-baseline-middle;
+}
+
+.navBtn:hover{
+    font-family: var(--font-family-Title);
+    color: white;
+    background-color: var(--palette-brown4);
+    border-radius: 9999px;
+}

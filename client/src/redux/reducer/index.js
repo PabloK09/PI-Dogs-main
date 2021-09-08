@@ -60,7 +60,7 @@ function rootReducer(state = initialState, action) {
 
     case FILTER_TEMPERAMENTS:
       let copy = [...state.breedsFilter];
-      console.log("REDUCER:", action.payload)
+
       if(action.payload === "All"){
         return {
           ...state,

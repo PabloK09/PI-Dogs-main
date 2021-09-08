@@ -228,7 +228,6 @@ export default function CreateBreed() {
                         document.getElementById(`${temp.name}`).value
                       )
                     }
-                    // onClick={handleOnClose}
                   >
                     X
                   </button>

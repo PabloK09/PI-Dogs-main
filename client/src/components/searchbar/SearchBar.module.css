@@ -55,7 +55,7 @@
   height: 2em;
   width: 2.4em;
   background-color: white;
-  border-left: 0.08em solid var(--black-color);
+  border-left: 0.04em solid var(--palette-brown6);
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
@@ -69,11 +69,14 @@
 .btnSearch {
   background-color: transparent;
   border-color: transparent;
+  color: var(--black-color);
 }
 
 .iconSearch {
   width: 1.4em;
   height: 1.2em;
+  color: var(--black-color);
+
 }
 
 .divBotones {

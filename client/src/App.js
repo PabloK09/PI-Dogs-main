@@ -8,11 +8,8 @@ import CreateBreed from './views/create-breed/CreateBreed'
 import BreedDetail from './views/breed-detail/BreedDetail';
 
 function App() {
-
   return (
     <div className="App">
-    {/* <Route path="/:h" component={NavBar}/> */}
-
     <Route exact path="/" component={LandingPage}/>
     <Switch>
     <Route exact path="/home" component={Home}/>
