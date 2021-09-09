@@ -5,10 +5,16 @@ import {
   filterTemperaments,
   orderByBreedName,
   orderByBreedWeight,
+  orderByBreedData,
 } from "../../redux/actions/index";
 import styles from "./Filtersort.module.css";
-import  {FaSortAlphaDown, FaSortAlphaUpAlt, FaWeightHanging, FaFeather} from 'react-icons/fa';
-
+import {
+  FaSortAlphaDown,
+  FaSortAlphaUpAlt,
+  FaWeightHanging,
+  FaFeather,
+  FaTrash
+} from "react-icons/fa";
 
 export default function FilterSort({ setCurrentPage, setOrden }) {
   const dispatch = useDispatch();
@@ -32,6 +38,18 @@ export default function FilterSort({ setCurrentPage, setOrden }) {
     dispatch(orderByBreedWeight(e.target.value));
     setCurrentPage(1);
     setOrden(`Ordenado ${e.target.value}`);
+  }
+
+  function handleSortDataBreed(e) {
+    e.preventDefault();
+    dispatch(orderByBreedData(e.target.value));
+    setCurrentPage(1);
+    setOrden(`Ordenado ${e.target.value}`);
+    if(e.target.value === "CLEAR"){
+      setListaTemp([]);
+      setCurrentPage(1);
+      setOrden(`Filtrado`);
+    }
   }
 
   function handleFilterTemp(e) {
@@ -76,65 +94,91 @@ export default function FilterSort({ setCurrentPage, setOrden }) {
       <div className={styles.divFilterContainer}>
         <div className={styles.filterTemp}>
           <select
+            id={"select_filter"}
             onChange={(e) => handleFilterTemp(e)}
             defaultValue={"All"}
+            data-default="All"
             className={styles.tempSelected}
+            key={"selectTemps"}
           >
             <option value="All" key="All">
               All Temperaments
             </option>
             {temperamentState?.map((temp) => (
-              <option value={temp.name} key={temp.id} id={temp.name}>
+              <option value={temp.name} key={temp.id}>
+                {/* mandar un on click para reiniciar el select */}
                 {temp.name}
               </option>
             ))}
           </select>
         </div>
 
-          <div className={styles.divBtn}>
+        <div className={styles.divBtn}>
+          <button
+            className={styles.orderBtn}
+            name="API"
+            value="API"
+            onClick={handleSortDataBreed}
+          >
+            API
+          </button>
+          <button
+            className={styles.orderBtn}
+            name="DB"
+            value="DB"
+            onClick={handleSortDataBreed}
+          >
+            DB
+          </button>
           <button
             name="AZ"
-            value="AZ" 
+            value="AZ"
             onClick={handleSortName}
             className={styles.orderBtn}
-            >
-           <FaSortAlphaDown className={styles.orderIcon} />
+          >
+            <FaSortAlphaDown className={styles.orderIcon} />
           </button>
           <button
             name="ZA"
             value="ZA"
             onClick={handleSortName}
             className={styles.orderBtn}
-            >
-           <FaSortAlphaUpAlt className={styles.orderIcon}/>
+          >
+            <FaSortAlphaUpAlt className={styles.orderIcon} />
           </button>
           <button
             name="WL"
             value="WL"
             onClick={handleSortWeight}
             className={styles.orderBtn}
-            >
-            <FaFeather className={styles.orderIcon}/>
+          >
+            <FaFeather className={styles.orderIcon} />
           </button>
           <button
             name="WH"
             value="WH"
             onClick={handleSortWeight}
             className={styles.orderBtn}
-            >
-            <FaWeightHanging className={styles.orderIcon}/>
+          >
+            <FaWeightHanging className={styles.orderIcon} />
+          </button>
+          <button
+          name="CLEAR"
+          value="CLEAR"
+          onClick={handleSortDataBreed}
+          className={styles.orderBtn}
+          >
+            <FaTrash className={styles.orderIcon} />
           </button>
         </div>
-       
       </div>
       <div className={styles.temps}>
         {listaTemp
           ? listaTemp.map((temp) => (
-            <>
+              <>
                 {temp !== "All" ? (
                   <>
                     <button
-                      key={temp}
                       className={(styles.noselect, styles.temp)}
                       key={temp}
                       id={temp}

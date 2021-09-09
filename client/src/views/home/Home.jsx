@@ -36,9 +36,7 @@ export default function Home() {
     setCurrentPage(Number(e.target.id));
   };
 
-  if (breedsState?.message) {
-    throw new Error("Raza no encontrada");
-  }
+
 
   const pages = [];
   if (filteredBreeds?.length) {
@@ -101,7 +99,7 @@ export default function Home() {
             setOrden={setOrden}
             setCurrentPage={(n) => setCurrentPage(n)}
           />
-          {loading ? (
+          {loading === true ? (
             <>
               <div
               style={{
@@ -112,10 +110,10 @@ export default function Home() {
               className={styles.containerClass}
             ></div>
             </>
-          ) : !breedsState.length ? (
+          ) : currentItems.length === 0 ? (
             <div
               style={{
-                backgroundImage: `url(${gifDog})`,
+                backgroundImage: `url(${imageDog})`,
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
               }}
@@ -149,7 +147,7 @@ export default function Home() {
                   </button>
                 </li>
                 {renderPageNumbers}
-                <li className={styles.comunLi}>
+                <li className={styles.comunLi} > 
                   <button
                   className={styles.navBtn}
                     onClick={handleNextBtn}

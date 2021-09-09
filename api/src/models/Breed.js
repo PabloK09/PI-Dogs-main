@@ -19,19 +19,27 @@ module.exports = (sequelize) => {
       weight: {
         type: DataTypes.RANGE(DataTypes.DECIMAL),
         allowNull: false,
-        
+        validate: {
+          min: 1,
+          max: 110,
+        }
       },
       height: {
         type: DataTypes.RANGE(DataTypes.DECIMAL),
         allowNull: false,
+        validate: {
+          min: 9,
+          max: 130,
+        }
         
       },  
       life_span: {
         type: DataTypes.RANGE(DataTypes.DECIMAL),
-        
+        validate: {
+          min: 1,
+          max: 30,
+        }
       },
-      //DataTypes.ARRAY(TEXT) ["ps2","ps3"]
-
       image: {
         type: DataTypes.STRING,
         validate: {

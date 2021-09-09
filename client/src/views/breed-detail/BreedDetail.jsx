@@ -4,7 +4,9 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { getBreedId, clearBreed } from "../../redux/actions";
+import { getBreedId, clearBreed, getBreeds } from "../../redux/actions";
+import SearchBarr from "../../components/searchbar/SearchBar";
+import styles from "./BreedDetail.module.css"
 
 export default function BreedDetail() {
   const loading = useSelector((state) => state.isLoading)
@@ -14,12 +16,14 @@ export default function BreedDetail() {
   const { id } = useParams();
   
   useEffect(() => {
+    dispatch(getBreeds())
     dispatch(getBreedId(id));
     return () => dispatch(clearBreed());
   }, [id, dispatch]);
 
   return (
     <div>
+      <SearchBarr/>
       {
         loading ?
         <>
@@ -30,10 +34,7 @@ export default function BreedDetail() {
         <>
         {breedId.map((breed) => {
           return (
-            <div key={breed.id}>
-            <Link to="/home">
-            <button>Home</button>
-            </Link>
+            <div key={breed.id} className={styles.BreedDetail}>
                 <Breed
                 id={breed.id}
                 key={breed.id}

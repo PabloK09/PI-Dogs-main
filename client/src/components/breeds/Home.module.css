@@ -1,133 +1,138 @@
-*{
-    font-family: var(--font-family-Text);
+* {
+  font-family: var(--font-family-Text);
 }
 
-h3, h2, h1, h4, h5, h6, strong {
-    font-family: var(--font-family-Title);
+h3,
+h2,
+h1,
+h4,
+h5,
+h6,
+strong {
+  font-family: var(--font-family-Title);
 }
 
 .divFather {
-    z-index: -1;
-    backdrop-filter: blur(16px);
-    background-image: url("../../assets/wallpapers/Pattern-Pet-Pablo.png");
-    display: grid;
-    align-items: start;
-    align-content: stretch;
-    grid-gap: 2em;
-    width: 100%;
-    height: 100vh;
-    position: absolute;
+  z-index: -1;
+  backdrop-filter: blur(16px);
+  background-image: url("../../assets/wallpapers/Pattern-Pet-Pablo.png");
+  display: grid;
+  align-items: start;
+  align-content: stretch;
+  grid-gap: 2em;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
 }
 
-.containerMasPicante{
-    z-index: 1;
-    display: grid;
-    justify-items: center;
+.containerMasPicante {
+  z-index: 1;
+  display: grid;
+  justify-items: center;
 }
 
 .containerMenosPicante {
-    position: relative;
-    width: 70vw;
-    height: 88vh;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
+  position: relative;
+  width: 70vw;
+  height: 88vh;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
 }
-
 
 .containerClass {
-    z-index: 2;
-    background-color: white;
-    display: grid;
-    width: 100%;
-    height: 100%;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 1.5rem;
-    justify-items: center;
-    padding: 1.5em 0em 1.5em 0em;
-    transition: 1s;
+  z-index: 2;
+  background-color: white;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1.5rem;
+  justify-items: center;
+  padding: 1.5em 0em 1.5em 0em;
+  transition: 1s;
 }
 
-.ul-containerBreed{
-    display: flex;
-    flex-direction: column;
-    list-style: none;
+.ul-containerBreed {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
 }
 
-.divPagination{
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    border-radius: 0.3em;
-    width: 100%;
+.divPagination {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 0.3em;
+  width: 100%;
 }
 
-.comunLi{
-    padding: 0.5em;
-    margin: 0.1em;
-    height: 100%;
-    width: 100%;
-    color: var(--black-color);
-    font-family: var(--font-family-Title);
-    text-align: center;
+.comunLi {
+  padding: 0.5em;
+  margin: 0.1em;
+  height: 100%;
+  width: 100%;
+  color: var(--black-color);
+  font-family: var(--font-family-Title);
+  text-align: center;
 }
 
-.comunLi:hover{
-    font-family: var(--font-family-Title);
-    color: white;
-    background-color: var(--palette-brown6);
-    height: 100%;
-    width: 100%;
-    padding: 0.5em;
-    margin: 0.1em;
-    border-radius: 5px;
+.comunLi:hover {
+  font-family: var(--font-family-Title);
+  color: white;
+  background-color: var(--palette-brown6);
+  height: 100%;
+  width: 100%;
+  padding: 0.5em;
+  margin: 0.1em;
+  border-radius: 5px;
 }
 
 .pageNumbers {
-    display: flex;
-    flex-direction: row;
-    list-style: none;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5em;
-    cursor: pointer;
-    width: 32em;
-    text-align: center;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em;
+  cursor: pointer;
+  width: 32em;
+  text-align: center;
 }
 
 .activePag {
-    font-family: var(--font-family-Title);
-    color: white;
-    background-color: var(--palette-brown5);
-    height: 100%;
-    width: 100%;
-    padding: 0.5em;
-    margin: 0.1em;
-    border-radius: 5px;
+  font-family: var(--font-family-Title);
+  color: white;
+  background-color: var(--palette-brown5);
+  height: 100%;
+  width: 100%;
+  padding: 0.5em;
+  margin: 0.1em;
+  border-radius: 5px;
 }
 
-.navIcon{
-    width: 1.8em;
+.navIcon {
+  width: 1.8em;
   height: 1.8em;
   pointer-events: none;
 }
 
-.navBtn{
-    cursor: pointer;
-    background-color: transparent;
-    border: transparent;
-    vertical-align: -webkit-baseline-middle;
+.navBtn {
+  cursor: pointer;
+  background-color: transparent;
+  border: transparent;
+  vertical-align: -webkit-baseline-middle;
 }
 
-.navBtn:hover{
-    font-family: var(--font-family-Title);
-    color: white;
-    background-color: var(--palette-brown4);
-    border-radius: 9999px;
+.navBtn:hover {
+  font-family: var(--font-family-Title);
+  color: white;
+  background-color: var(--palette-brown4);
+  border-radius: 9999px;
 }

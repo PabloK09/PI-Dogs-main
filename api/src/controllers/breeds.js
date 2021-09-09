@@ -42,7 +42,7 @@ class BreedModel extends ModelCrud {
               height: breed.height.map((h)=> {
                 return h.value
               }).join(" - "),
-              life_span: breed.life_span.map((ls)=> {
+              life_span: breed.life_span?.map((ls)=> {
                 return ls.value
               }).join(" - "),
               image: breed.image,
@@ -96,7 +96,7 @@ class BreedModel extends ModelCrud {
                 height: breed.height.map((h)=> {
                   return h.value
                 }).join(" - "),
-                life_span: breed.life_span.map((ls)=> {
+                life_span: breed.life_span?.map((ls)=> {
                   return ls.value
                 }).join(" - "),
                 image: breed.image,
@@ -157,7 +157,7 @@ class BreedModel extends ModelCrud {
                 height: breed.height.map((h)=> {
                   return h.value
                 }).join(" - "),
-                life_span: breed.life_span.map((ls)=> {
+                life_span: breed.life_span?.map((ls)=> {
                   return ls.value
                 }).join(" - "),
                 image: breed.image,

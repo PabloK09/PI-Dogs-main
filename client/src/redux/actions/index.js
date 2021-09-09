@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { BASE_URL, SEARH_ID, URL_TEMPERAMENT } from '../../utils/constants';
-import { GET_BREEDS, GET_BREED_ID, GET_TEMPERAMENT, GET_BREED_NAME, FILTER_TEMPERAMENTS, FILTER_ORDER_NAME, FILTER_ORDER_WEIGHT, SET_LOADING, COPY_STATE} from './types';
+import { GET_BREEDS, GET_BREED_ID, GET_TEMPERAMENT, GET_BREED_NAME, FILTER_TEMPERAMENTS, FILTER_ORDER_NAME, FILTER_ORDER_WEIGHT, SET_LOADING, FILTER_NAME, FILTER_DATA} from './types';
 
 export const getBreeds = () => {
     return (dispatch) => {
@@ -126,4 +126,12 @@ export const orderByBreedName = (payload) => {
 
 export const orderByBreedWeight = (payload) => {
     return {type: FILTER_ORDER_WEIGHT, payload}
+}
+
+export const searchBreedName = (payload) => {
+    return {type: FILTER_NAME, payload}
+}
+
+export const orderByBreedData = (payload) => {
+    return {type: FILTER_DATA, payload}
 }

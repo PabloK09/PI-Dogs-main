@@ -198,6 +198,9 @@
   color: var(--palette-brown3);
   /* color: var(--palette-brown3); */
   border-radius: 9999px;
+  font-family: var(--font-family-Title);
+  font-size: 0.9rem;
+
 }
 
 .orderBtn:hover {
