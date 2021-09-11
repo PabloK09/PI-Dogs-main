@@ -29,6 +29,8 @@ label {
   --palette-brown6: #e4ddd5;
   --font-family-Title: "Gilroy-Bold", sans-serif;
   --font-family-Text: 'Gilroy-Regular', sans-serif;
+  --size: 40px;
+  --frames: 62;
 }
 
 body {

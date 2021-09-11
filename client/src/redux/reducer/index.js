@@ -9,6 +9,8 @@ import {
   SET_LOADING,
   FILTER_NAME,
   FILTER_DATA,
+  ADD_BREED_FAVORITE,
+  REMOVE_BREED_FAVORITE
 } from "../actions/types";
 
 const initialState = {
@@ -16,7 +18,7 @@ const initialState = {
   breedId: undefined,
   temperament: [],
   breedsFilter: [],
-  breedsFind: [],
+  breedsFavourites: [],
   isLoading: false,
 };
 
@@ -111,8 +113,7 @@ function rootReducer(state = initialState, action) {
     case FILTER_DATA:
       if (action.payload === "API") {
         let copyData = [];
-        state.breedsFilter.map((breed) => {
-          console.log("API", typeof breed.id === "string")
+        state.breedsFilter.map((breed) => {         
           return typeof breed.id === "string"
             ? (copyData = [...state.breeds])
             : (copyData = [...state.breedsFilter]);
@@ -128,7 +129,6 @@ function rootReducer(state = initialState, action) {
       if (action.payload === "DB") {
         let copyDataDB = [];
         state.breedsFilter.map((breed) => {
-          console.log("DB", typeof breed.id === "string")
           return typeof breed.id === "string"
             ? (copyDataDB = [...state.breeds]) 
             : (copyDataDB = [...state.breedsFilter])
@@ -192,6 +192,18 @@ function rootReducer(state = initialState, action) {
         ...state,
         breedsFilter: sortedBreedsW,
       };
+    
+    case ADD_BREED_FAVORITE:
+      return {
+        ...state,
+        breedsFavourites: [...state.breedsFavourites, action.payload]
+      }
+    
+    case REMOVE_BREED_FAVORITE:
+      return {
+        ...state,
+        breedsFavourites: state.breedsFavourites.filter(el => el.id !== action.payload)
+      }
     default:
       return state;
   }

@@ -88,12 +88,14 @@ export default function CreateBreed() {
         errors.life_spanMin = "Maximo 21 años";
       }
     }
-    if (
-      !/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm.test(
-        breeds.image
-      )
-    ) {
-      errors.image = "Url invalida";
+    if (breeds.image) {
+      if (
+        !/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm.test(
+          breeds.image
+        )
+      ) {
+        errors.image = "Url invalida";
+      }
     }
     if (breeds.temperament.length > 5) {
       errors.temperament = "Maximo 5 temperaments";
@@ -368,50 +370,54 @@ export default function CreateBreed() {
           ) : (
             false
           )}
-          
-          <input type="submit" disabled={Object.keys(errors).length > 0 ? true : false}/>
+
+          <input
+            type="submit"
+            disabled={Object.keys(errors).length > 0 ? true : false}
+          />
         </form>
         <div className={styles.containerPreview}>
-          {breeds.name ? 
-          <h3>{breeds.name}</h3>
-          : false
-          }
-          {
-            breeds.image ? 
+          {breeds.name ? <h3>{breeds.name}</h3> : false}
+          {breeds.image ? (
             <div className={styles.divImgStatus}>
-            <img src={breeds.image} alt={breeds.name} className={styles.imgStatus}/>
-          </div>
-          : false
-        }
+              <img
+                src={breeds.image}
+                alt={breeds.name}
+                className={styles.imgStatus}
+              />
+            </div>
+          ) : (
+            false
+          )}
 
           <div className={styles.containerStatus}>
-            {breeds.weight ? 
-            <li>
-              <span>{breeds.weightMin}kg</span>
-              <span> - {breeds.weightMax}kg</span>
-            </li>
-            : false
-            }
-            {
-              breeds.heigh ?
+            {breeds.weight ? (
               <li>
-              <span>{breeds.heightMin}cm</span>
-              <span> - {breeds.heightMax}cm</span>
-            </li>
-            : false
-            }
-            {breeds.life_span ?
+                <span>{breeds.weightMin}kg</span>
+                <span> - {breeds.weightMax}kg</span>
+              </li>
+            ) : (
+              false
+            )}
+            {breeds.heigh ? (
               <li>
-              <span>{breeds.life_spanMin}years</span>
-              <span> - {breeds.life_spanMax}years</span>
-            </li>
-            : false
-            }
-            {breeds.temperament ?
-            array.map((temp)=>
-            <li>{temp.name}</li>)  
-            : false
-          }
+                <span>{breeds.heightMin}cm</span>
+                <span> - {breeds.heightMax}cm</span>
+              </li>
+            ) : (
+              false
+            )}
+            {breeds.life_span ? (
+              <li>
+                <span>{breeds.life_spanMin}years</span>
+                <span> - {breeds.life_spanMax}years</span>
+              </li>
+            ) : (
+              false
+            )}
+            {breeds.temperament
+              ? array.map((temp) => <li>{temp.name}</li>)
+              : false}
           </div>
         </div>
       </div>

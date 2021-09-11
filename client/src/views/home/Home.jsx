@@ -13,7 +13,7 @@ import {MdNavigateNext, MdNavigateBefore} from 'react-icons/md'
 
 
 export default function Home() {
-  const [orden, setOrden] = useState("");
+  const [, setOrden] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(8);
 
@@ -35,8 +35,6 @@ export default function Home() {
   const handleClick = (e) => {
     setCurrentPage(Number(e.target.id));
   };
-
-
 
   const pages = [];
   if (filteredBreeds?.length) {
@@ -89,17 +87,19 @@ export default function Home() {
       setMinPageNumberLimit(minPageNumberLimit - pageNumberLimit);
     }
   };
+  
 
   return (
     <div className={styles.divFather}>
-      <SearchBarr />
+      <SearchBarr key="SearchBar"/>
       <div className={styles.containerMasPicante}>
         <div className={styles.containerMenosPicante}>
           <FilterSort
+            key="FilterSort"
             setOrden={setOrden}
             setCurrentPage={(n) => setCurrentPage(n)}
           />
-          {loading === true ? (
+          { !breedsState.length ? (
             <>
               <div
               style={{

@@ -5,15 +5,13 @@ import { useLocation, useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import styles from "./SearchBar.module.css"
 import {SiDatadog } from 'react-icons/si'
-import {AiOutlineSearch} from 'react-icons/ai'
-import {MdFavorite, MdPets, MdQuestionAnswer, MdHome} from 'react-icons/md'
+import {MdFavorite, MdPets, MdQuestionAnswer, MdHome, MdSearch} from 'react-icons/md'
 
 
 export default function SearchBarr() {
   const location = useLocation();
   const dispatch = useDispatch();
   const {id} = useParams()
-  const breedId = useSelector((state) => state.breedId);
 
   const [search, setSearch] = useState({
     breedFind: "",
@@ -65,7 +63,7 @@ export default function SearchBarr() {
           autoComplete="off"
           />
         <div className={styles.divSearch}>
-        <button type="submit" className={styles.btnSearch}><AiOutlineSearch className={styles.iconSearch}/></button>
+        <button type="submit" className={styles.btnSearch}><MdSearch className={styles.iconSearch}/></button>
         </div>
         </div>
       </form>
@@ -81,34 +79,34 @@ export default function SearchBarr() {
       </div>
       : location.pathname == `/home/breed/${id}` ? 
       <div>
-        <h2>{breedId && breedId[0].name}</h2>
+        <h2>The Breed Detailed</h2>
       </div>
       :
       <div>
         <h2>About Me</h2>
       </div>
-}
-
+      }
+      
       <div className={styles.divBotones}>
       <NavLink to="/home">
       <button className={styles.btnCreate}>
-          Home <MdHome className={styles.iconSearchB}/>
+          <MdHome className={styles.iconSearchB}/> Home 
           </button>
       </NavLink>
       <NavLink to="/home/create">
         <button className={styles.btnCreate}>
-          Create <MdPets className={styles.iconSearchB}/>
+          <MdPets className={styles.iconSearchB}/> Create 
           </button>
       </NavLink>
       <NavLink to="/home/favourites">
       <button className={styles.btnCreate}>
-       Favourites <MdFavorite className={styles.iconSearchB}/>
+      <MdFavorite className={styles.iconSearchB}/>  My BFF's 
       </button>
       </NavLink>
 
       <NavLink to="/home/about">
       <button className={styles.btnCreate}>
-        About <MdQuestionAnswer className={styles.iconSearchB}/>
+         <MdQuestionAnswer className={styles.iconSearchB}/> About
       </button>
       </NavLink>
       </div>

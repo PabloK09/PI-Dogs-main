@@ -145,6 +145,7 @@ class BreedModel extends ModelCrud {
           attributes: { exclude: ["createdAt", "updatedAt"] },
         });
         myBreedId.then((resultsId) => {
+          console.log(resultsId);
           let arrBreed = []
           arrBreed.push(resultsId);
           arrBreed = arrBreed.map((breed) => {
@@ -184,6 +185,9 @@ class BreedModel extends ModelCrud {
               height: breed.height.metric,
               temperament: breed.temperament,
               image: breed.image.url,
+              bred_for: breed.bred_for,
+              breed_group: breed.breed_group,
+              origin: breed.origin
             };
           });
 

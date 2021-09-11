@@ -1,6 +1,6 @@
 .containerBreed {
-  height: 138px;
-  width: 82%;
+  height: 155px;
+  width: 85%;
   display: flex;
   flex-direction: row-reverse;
   flex-wrap: nowrap;
@@ -13,19 +13,32 @@
 }
 
 .containerListado {
+  display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: max-content;
+    grid-template-columns: auto;
+    flex-shrink: 20;
+    /* height: 100vh; */
+    flex-wrap: wrap;
+    width: 100%;
+    /* flex-direction: column; */
+    padding-left: 1.4em;
+    /* padding-right: 4.5em; */
+    align-items: flex-start;
+    justify-items: start;
+    align-content: space-between;
+    justify-content: start;
+}
+
+.containName{
   display: flex;
-  flex-shrink: 3;
-  height: 100%;
-  width: 100%;
-  flex-direction: column;
-  justify-content: space-between;
-  padding-left: 1.4em;
-  padding-right: 4.5em;
+  align-items: center;
 }
 
 .name_containerBreed {
   display: flex;
   font-size: 1.5rem;
+  padding-right: 5px;
 }
 
 .ul {
@@ -51,8 +64,12 @@
 
 
 .divBtn {
-    display: flex;
-    justify-content: flex-start;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-content: center;
+  flex-direction: row;
+  width: 100%;
 }
 
 .btn_bottom {
@@ -66,7 +83,7 @@
     transition: all 0.3s ease;
     position: relative;
     /* background: var(--black-color); */
-    background: var(--palette-brown4);
+    background: var(--palette-brown5);
     color: #fff;
     line-height: 42px;
     padding: 0;
@@ -103,3 +120,51 @@
    border: none;
  }
  
+
+ .like {
+  display: flex;
+  width: var(--size);
+  height: var(--size);
+  cursor: pointer;
+  border-radius: 999px;
+  overflow: visible;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+  align-items: self-start;
+}
+
+.hearth {
+  background-image: url("https://assets.codepen.io/23500/Hashflag-AppleEvent.svg");
+  background-size: calc(var(--size) * var(--frames)) var(--size);
+  background-repeat: no-repeat;
+  background-position-x: calc(var(--size) * (var(--frames) * -1 + 2));
+  background-position-y: calc(var(--size) * 0.02);
+  width: var(--size);
+  height: var(--size);
+}
+
+.inputHearth {
+  display: none;
+}
+
+.inputHearth:checked + .hearth {
+  animation: like 1s steps(calc(var(--frames) - 3));
+  animation-fill-mode: forwards;
+}
+
+@keyframes like {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: calc(var(--size) * (var(--frames) * -1 + 3));
+  }
+}
+@media (hover: hover) {
+  .like:hover {
+    background-color: #e1255e15;
+  }
+  .like:hover .hearth {
+    background-position-x: calc(var(--size) * (var(--frames) * -1 + 1));
+  }
+}

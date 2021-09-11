@@ -21,6 +21,7 @@ export default function FilterSort({ setCurrentPage, setOrden }) {
   const temperamentState = useSelector((state) => state.temperament);
 
   const [listaTemp, setListaTemp] = useState([]);
+  const [select, setSelect] = useState("")
 
   useEffect(() => {
     dispatch(getTemperament());
@@ -61,6 +62,7 @@ export default function FilterSort({ setCurrentPage, setOrden }) {
       setOrden(`Filtrado`);
     } else {
       setListaTemp([...listaTemp, e.target.value]);
+      setSelect(false)
       setCurrentPage(1);
       setOrden(`Filtrado`);
     }
@@ -89,20 +91,24 @@ export default function FilterSort({ setCurrentPage, setOrden }) {
     }
   }
 
+  function handleSelectReset(e) {
+    e.preventDefault();
+    setSelect(true)
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.divFilterContainer}>
         <div className={styles.filterTemp}>
           <select
-            id={"select_filter"}
             onChange={(e) => handleFilterTemp(e)}
-            defaultValue={"All"}
-            data-default="All"
+            onClick={handleSelectReset}
             className={styles.tempSelected}
-            key={"selectTemps"}
+            key="selectTemps"
+           
           >
-            <option value="All" key="All">
-              All Temperaments
+            <option value="All" key="All" selected={select}>
+              Filter Temperaments
             </option>
             {temperamentState?.map((temp) => (
               <option value={temp.name} key={temp.id}>
@@ -172,21 +178,21 @@ export default function FilterSort({ setCurrentPage, setOrden }) {
           </button>
         </div>
       </div>
-      <div className={styles.temps}>
+      <div className={styles.temps} key="temps_select">
         {listaTemp
           ? listaTemp.map((temp) => (
               <>
                 {temp !== "All" ? (
                   <>
+                  <div key={temp}>
                     <button
                       className={(styles.noselect, styles.temp)}
-                      key={temp}
                       id={temp}
                       value={temp}
                       onClick={() =>
-                        handleOnClose(document.getElementById(`${temp}`).value)
+                      handleOnClose(document.getElementById(`${temp}`).value)
                       }
-                    >
+                      >
                       <span className={styles.text}>{temp}</span>
                       <span className={styles.icon}>
                         <svg
@@ -194,11 +200,12 @@ export default function FilterSort({ setCurrentPage, setOrden }) {
                           width="24"
                           height="24"
                           viewBox="0 0 24 24"
-                        >
+                          >
                           <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" />
                         </svg>
                       </span>
                     </button>
+                        </div>
                   </>
                 ) : (
                   false

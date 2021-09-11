@@ -2,13 +2,22 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./Breed.module.css";
 
+
+
 export default function Breed(props) {
-  const { name, weight, temperament, img, height, life_span, id } = props;
+  const { name, weight, temperament, img, height, life_span, id, addFav } =
+    props;
 
   return (
     <div className={styles.containerBreed}>
       <div className={styles.containerListado}>
+        <div className={styles.containName}>
         <h3 className={styles.name_containerBreed}>{name}</h3>
+        <label className={styles.like}>
+              <input className={styles.inputHearth} type="checkbox" />
+              <div className={styles.hearth} />
+            </label>
+        </div>
         <ul className={styles.ul}>
           {height ? (
             <li className={styles.li_height}>
@@ -35,11 +44,18 @@ export default function Breed(props) {
         {height ? (
           false
         ) : (
+          
             <div className={styles.divBtn}>
-          <Link to={`/home/breed/${id}`}>
-            <button className={styles.btn_bottom}>Learn More</button>
-          </Link>
+              <Link to={`/home/breed/${id}`}>
+                <button className={styles.btn_bottom}>Learn More</button>
+              </Link>
+            
+            {/* <label className={styles.like}>
+              <input className={styles.inputHearth}type="checkbox" />
+              <div className={styles.hearth} />
+            </label> */}
             </div>
+          
         )}
       </div>
       <div className={styles.divImg}>

@@ -1,0 +1,93 @@
+* {
+    font-family: var(--font-family-Text);
+}
+
+
+h4 {
+    font-family: var(--font-family-Title);
+    margin-top: 10px;
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+}
+
+.divFather {
+  z-index: -1;
+  background-image: url("../../assets/wallpapers/Pattern-Pet-Pablo.png");
+  display: grid;
+  align-items: start;
+  align-content: stretch;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  align-items: center;
+  justify-items: center;
+}
+
+.divContainerBreed{
+    z-index: 2;
+    display: grid;
+    width: 70vw;
+    height: 88vh;
+    padding: 1.5em 0em 1.5em 0em;
+    background-color: white;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    align-content: space-around;
+    position: absolute;
+    border-top-left-radius: 2em;
+    border-top-right-radius: 2em;
+}
+
+.divBreedDates{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 1em;
+    width: 40%;
+}
+
+.BreedDetail{
+    display: flex;
+    flex-direction: row-reverse;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    align-items: flex-start;
+    align-content: center;
+    width: 60vw;
+    height: 60vh;
+}
+
+.h2AboutBreed {
+    font-family: var(--font-family-Title);
+    font-size: 2.2rem;
+    text-align: -webkit-auto;
+}
+
+.liContainer{
+    display: flex;
+    padding-top: 45px;
+    text-align: -webkit-left;
+}
+
+.liItemDetail{
+    padding-bottom: 20px;
+}
+
+.spanContainer{
+    display: flex;
+    color : var(--black-color);
+    font-family: var(--font-family-Text);
+}
+
+.imgContainer{
+    display: flex;
+    width: 450px;
+    height: 550px;
+    border-radius: 30px;
+}
+
+.imgBreedDetail{
+    object-fit: cover;
+}
