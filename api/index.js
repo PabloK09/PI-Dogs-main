@@ -8,15 +8,15 @@ const { BASE_URL } = require("./src/utils/constants");
 // Syncing all the models at once.
 conn.sync({ force: true }).then(async () => {
   if (!Temperament.length) {
-    let temp = new Set();
+    let temps = new Set();
     const apiBreedTemperamentRes = await axios.get(BASE_URL);
 
     apiBreedTemperamentRes.data?.forEach((breed) => {
       let temperaments = breed.temperament?.split(", ");
-      temperaments?.forEach((t) => temp.add(t));
+      temperaments?.forEach((temperament) => temps.add(temperament));
     });
 
-    Temperament.bulkCreate([...temp].map((t) => ({ name: t })));
+    Temperament.bulkCreate([...temps].map((temperament) => ({ name: temperament })));
   }
 
   console.log("Base de datos de temperamentos creada");

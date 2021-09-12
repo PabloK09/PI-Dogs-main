@@ -7,16 +7,15 @@ import styles from "./Breed.module.css";
 export default function Breed(props) {
   const { name, weight, temperament, img, height, life_span, id, addFav } =
     props;
-
   return (
     <div className={styles.containerBreed}>
       <div className={styles.containerListado}>
         <div className={styles.containName}>
         <h3 className={styles.name_containerBreed}>{name}</h3>
         <label className={styles.like}>
-              <input className={styles.inputHearth} type="checkbox" />
+              <input className={styles.inputHearth} type="checkbox" onClick={addFav}/>
               <div className={styles.hearth} />
-            </label>
+        </label>
         </div>
         <ul className={styles.ul}>
           {height ? (

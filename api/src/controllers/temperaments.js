@@ -5,7 +5,7 @@ class TemperamentModel extends ModelCrud {
     constructor(model) {
         super (model);
     }
-    //me tengo que traer todos los temperamentos posibles que tenga la api y guardarlos en mi base de datos
+    
     getAll = (req, res, next) => {
         try{
            const myTemperament = this.model.findAll({

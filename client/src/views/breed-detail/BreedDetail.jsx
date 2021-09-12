@@ -1,5 +1,5 @@
+/* eslint-disable */
 import React from "react";
-import Breed from "../../components/breed/Breed";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
@@ -75,14 +75,16 @@ export default function BreedDetail() {
           </div>
         </div>
       ) : breedId === undefined ? (
+        <div className={styles.divFather}>
         <div
-          className={styles.divContainerDetail}
+          className={styles.divContainerBreed}
           style={{
             backgroundImage: `url(${gifDog})`,
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
           }}
         ></div>
+        </div>
       ) : (
         <h2>
           Breed Not Found

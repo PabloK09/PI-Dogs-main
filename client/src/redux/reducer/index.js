@@ -130,8 +130,8 @@ function rootReducer(state = initialState, action) {
         let copyDataDB = [];
         state.breedsFilter.map((breed) => {
           return typeof breed.id === "string"
-            ? (copyDataDB = [...state.breeds]) 
-            : (copyDataDB = [...state.breedsFilter])
+            ? (copyDataDB = [...state.breedsFilter])
+            : (copyDataDB = [...state.breeds]) 
             
         });
         copyDataDB = copyDataDB.filter((breed) => {
@@ -194,15 +194,17 @@ function rootReducer(state = initialState, action) {
       };
     
     case ADD_BREED_FAVORITE:
+      console.log("ADD", action.payload)
       return {
         ...state,
         breedsFavourites: [...state.breedsFavourites, action.payload]
       }
     
     case REMOVE_BREED_FAVORITE:
+      console.log("REMOVE", action.payload);
       return {
         ...state,
-        breedsFavourites: state.breedsFavourites.filter(el => el.id !== action.payload)
+        breedsFavourites: state.breedsFavourites.filter(el => el.id !== action.payload.id)
       }
     default:
       return state;

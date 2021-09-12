@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getBreedsName, getBreeds, searchBreedName } from "../../redux/actions";
@@ -23,16 +24,15 @@ export default function SearchBarr() {
   }, [dispatch]);
   
   function handleChange(e) {
-    setSearch((prevData) => {
-      const state = {
-        ...prevData,
-        [e.target.name]: e.target.value,
-      };
-      if (state.breedFind) {
-        state.breedFind = state.breedFind[0].toUpperCase() + state.breedFind.substring(1);
-      }
-      return state;
-  })}
+    setSearch({...search,[e.target.name]: e.target.value })
+
+  }
+  //       [e.target.name]: e.target.value,
+  //     };
+  //     // if (state.breedFind) {
+  //     //   state.breedFind = state.breedFind[0].toUpperCase() + state.breedFind.substring(1);
+  //     // }
+  // })}
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -69,21 +69,21 @@ export default function SearchBarr() {
       </form>
 
       : location.pathname === "/home/create" || location.pathname === "/home/create/" ?
-      <div>
-        <h2>Create your fantasy best friend</h2>
+      <div className={styles.divSearchBarCenter}>
+        <h2 className={styles.h2SearchBar}>Create a Fantasy Best Friend</h2>
       </div>
 
       : location.pathname === "/home/favourites" || location.pathname === "/home/favourites/" ?
-      <div>
-        <h2>Your favorites best friends</h2>
+      <div className={styles.divSearchBarCenter}>
+        <h2 className={styles.h2SearchBar}>Your favorites best friends</h2>
       </div>
       : location.pathname == `/home/breed/${id}` ? 
-      <div>
-        <h2>The Breed Detailed</h2>
+      <div className={styles.divSearchBarCenter}>
+        <h2 className={styles.h2SearchBar}>Breed Details</h2>
       </div>
       :
-      <div>
-        <h2>About Me</h2>
+      <div className={styles.divSearchBarCenter}>
+        <h2 className={styles.h2SearchBar}>About Me</h2>
       </div>
       }
       

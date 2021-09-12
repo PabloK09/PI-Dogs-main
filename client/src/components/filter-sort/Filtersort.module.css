@@ -1,22 +1,9 @@
-.tempSelected {
-  appearance: none;
-  background-color: transparent;
-  border: none;
-  padding: 0 1em 0 0;
-  margin: 0;
-  width: 100%;
-  font-family: inherit;
-  font-size: inherit;
-  cursor: inherit;
-  line-height: inherit;
-  outline: none;
-}
 
 .container {
   z-index: 2;
   background-color: white;
-  border-top-left-radius: 1em;
-  border-top-right-radius: 1em;
+  border-top-left-radius: 2em;
+  border-top-right-radius: 2em;
   width: 100%;
   padding: 1em;
   display: flex;
@@ -53,7 +40,9 @@
   border-bottom: 2px solid var(--palette-brown4);
   color: white;
   appearance: none;
+  outline: none;
   padding: 10px;
+  line-height: inherit;
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -68,14 +57,12 @@
   display: none;
 }
 
-.tempSelected:hover,
-.tempSelected:focus {
+.tempSelected:hover {
   color: var(--palette-brown4);
   background-color: var(--palette-brown4);
   border-bottom-color: #dcdcdc;
 }
-.tempSelected:hover,
-.tempSelected:focus {
+.tempSelected:hover {
   background-color: white;
   border-color: #dcdcdc;
 }

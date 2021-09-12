@@ -29,9 +29,9 @@ class BreedModel extends ModelCrud {
           },
         });
         const apiBreeds = axios.get(SEARCH_NAME + `/?name=${name}`);
+        
         Promise.all([myBreed, apiBreeds]).then((results) => {
           let [myBreedResults, apiBreedsResults] = results;
-
           myBreedResults = myBreedResults.map((breed) => {
             return {
               id: breed.id,
@@ -78,13 +78,12 @@ class BreedModel extends ModelCrud {
               attributes: ["id", "name"],
             },
           ],
-        }); //me traigo todo lo que tenga
+        });
         
-        const apiBreeds = axios.get(BASE_URL); //aplico axios para pedirle data a mi api
-        Promise.all([myBreed, apiBreeds]) //Hago un promise all para que cuando ya este lista la promesa de mi db y de mi api me devuelva todo junto al mismo tiempo
+        const apiBreeds = axios.get(BASE_URL); 
+        Promise.all([myBreed, apiBreeds]) 
           .then((results) => {
-            //lo que me devuelve
-            let [myBreedResults, apiBreedsResults] = results; //van a ser 2 arreglo y por eso le hago un destructuring al results
+            let [myBreedResults, apiBreedsResults] = results;
 
             myBreedResults = myBreedResults.map((breed) => {
               return {
@@ -117,11 +116,11 @@ class BreedModel extends ModelCrud {
                 image: breed.image.url,
               };
             });
+            const responde = myBreedResults.concat(apiBreedsResults);
 
-            const responde = myBreedResults.concat(apiBreedsResults); //y lo que voy a mandar como respuesta va a ser la concatenacion de el array de mi db con el array de mi api (axios lo guarda en .data)
             return responde
               ? res.send(responde)
-              : res.send({ message: "Responde no existe" }); //por ultimo respondo al servidor
+              : res.send({ message: "Responde no existe" });
           });
       }
     } catch (err) {
@@ -132,7 +131,6 @@ class BreedModel extends ModelCrud {
   getById = (req, res, next) => {
     const { id } = req.params;
     try {
-      // if(!id) return next({msg: "id invalido", status: 404})
       if (id.length > 10) {
         let myBreedId = this.model.findByPk(id, {
           include: [
@@ -175,7 +173,6 @@ class BreedModel extends ModelCrud {
           let axiosId = resultsId.data.filter(
             (apiId) => apiId.id === parseInt(id)
           );
-
           axiosId = axiosId.map((breed) => {
             return {
               id: breed.id,
@@ -190,7 +187,6 @@ class BreedModel extends ModelCrud {
               origin: breed.origin
             };
           });
-
           return axiosId.length ? res.send(axiosId) : res.sendStatus(404);
         });
       }

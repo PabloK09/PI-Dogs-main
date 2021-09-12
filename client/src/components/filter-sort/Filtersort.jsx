@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -55,17 +56,18 @@ export default function FilterSort({ setCurrentPage, setOrden }) {
 
   function handleFilterTemp(e) {
     e.preventDefault();
-    dispatch(filterTemperaments(e.target.value));
-    if (e.target.value === "All") {
-      setListaTemp([]);
-      setCurrentPage(1);
-      setOrden(`Filtrado`);
-    } else {
+    if(!listaTemp.includes(e.target.value)){
+      dispatch(filterTemperaments(e.target.value));
       setListaTemp([...listaTemp, e.target.value]);
       setSelect(false)
       setCurrentPage(1);
       setOrden(`Filtrado`);
     }
+    if (e.target.value === "All") {
+      setListaTemp([]);
+      setCurrentPage(1);
+      setOrden(`Filtrado`);
+    } 
   }
 
   function handleOnClose(e) {
@@ -99,15 +101,14 @@ export default function FilterSort({ setCurrentPage, setOrden }) {
   return (
     <div className={styles.container}>
       <div className={styles.divFilterContainer}>
-        <div className={styles.filterTemp}>
+        <div className={styles.filterTemp} key="rompeHuevos">
           <select
             onChange={(e) => handleFilterTemp(e)}
             onClick={handleSelectReset}
             className={styles.tempSelected}
-            key="selectTemps"
-           
+            defaultValue={"Filter Temperaments"}
           >
-            <option value="All" key="All" selected={select}>
+            <option value="Filter Temperaments" selected={select} disabled>
               Filter Temperaments
             </option>
             {temperamentState?.map((temp) => (
@@ -181,10 +182,10 @@ export default function FilterSort({ setCurrentPage, setOrden }) {
       <div className={styles.temps} key="temps_select">
         {listaTemp
           ? listaTemp.map((temp) => (
-              <>
+              <div key={temp}>
                 {temp !== "All" ? (
-                  <>
-                  <div key={temp}>
+                  
+                  <div>
                     <button
                       className={(styles.noselect, styles.temp)}
                       id={temp}
@@ -193,9 +194,10 @@ export default function FilterSort({ setCurrentPage, setOrden }) {
                       handleOnClose(document.getElementById(`${temp}`).value)
                       }
                       >
-                      <span className={styles.text}>{temp}</span>
-                      <span className={styles.icon}>
+                      <span className={styles.text} key="A">{temp}</span>
+                      <span className={styles.icon} key="B">
                         <svg
+                        key="C"
                           xmlns="http://www.w3.org/2000/svg"
                           width="24"
                           height="24"
@@ -206,11 +208,11 @@ export default function FilterSort({ setCurrentPage, setOrden }) {
                       </span>
                     </button>
                         </div>
-                  </>
+                  
                 ) : (
                   false
                 )}
-              </>
+              </div>
             ))
           : false}
       </div>

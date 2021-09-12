@@ -1,7 +1,5 @@
-//import Breeds from "../../components/breeds/Breeds"
 import SearchBarr from "../../components/searchbar/SearchBar";
 import FilterSort from "../../components/filter-sort/Filtersort";
-
 import Breed from "../../components/breed/Breed";
 import styles from "../../components/breeds/Home.module.css";
 import React, { useState, useEffect } from "react";
@@ -10,9 +8,10 @@ import { useSelector, useDispatch } from "react-redux";
 import imageDog from "../../assets/wallpapers/404-oops.jpg";
 import gifDog from "../../assets/wallpapers/ezgif.com-video-to-gif__2_.gif";
 import {MdNavigateNext, MdNavigateBefore} from 'react-icons/md'
+import {addBreedFavourites, removeBreedFavorite} from "../../redux/actions/index"
 
 
-export default function Home() {
+export function Home() {
   const [, setOrden] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(8);
@@ -22,7 +21,6 @@ export default function Home() {
   const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
 
   const filteredBreeds = useSelector((state) => state.breedsFilter);
-  const loading = useSelector((state) => state.isLoading);
   const breedsState = useSelector((state) => state.breeds);
 
   const dispatch = useDispatch();
@@ -30,7 +28,7 @@ export default function Home() {
   useEffect(() => {
     dispatch(getBreeds());
     return () => dispatch(getBreeds());
-  }, []);
+  }, [dispatch]);
 
   const handleClick = (e) => {
     setCurrentPage(Number(e.target.id));
@@ -87,6 +85,15 @@ export default function Home() {
       setMinPageNumberLimit(minPageNumberLimit - pageNumberLimit);
     }
   };
+
+  const breedsFav = useSelector((state) => state.breedsFavourites)
+  function addFav(id) {
+    if(!breedsFav.includes(id)){
+      dispatch(addBreedFavourites(id))
+    }else{
+      dispatch(removeBreedFavorite(id))
+    }
+  }
   
 
   return (
@@ -99,7 +106,7 @@ export default function Home() {
             setOrden={setOrden}
             setCurrentPage={(n) => setCurrentPage(n)}
           />
-          { !breedsState.length ? (
+          { !breedsState?.length ? (
             <>
               <div
               style={{
@@ -128,6 +135,7 @@ export default function Home() {
                       id={breed.id}
                       key={breed.id}
                       name={breed.name}
+                      addFav={() => addFav(breed)}
                       weight={breed.weight}
                       temperament={breed.temperament}
                       img={breed.image}
@@ -178,3 +186,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;
