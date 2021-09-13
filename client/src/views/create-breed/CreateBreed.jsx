@@ -437,7 +437,7 @@ export default function CreateBreed() {
                   </select>
                   <div className={styles.temps} key="containerTempKey">
                     {breeds.temperament ? (
-                      <div>
+                     <>
                         {array.map((temp) => (
                           <div className={styles.tempsChild} key={temp.name}>
                             <button
@@ -465,7 +465,7 @@ export default function CreateBreed() {
                             </button>
                           </div>
                         ))}
-                      </div>
+                      </>
                     ) : (
                       false
                     )}

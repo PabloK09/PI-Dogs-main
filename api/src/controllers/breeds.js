@@ -63,11 +63,11 @@ class BreedModel extends ModelCrud {
               image: breed.reference_image_id ? "https://cdn2.thedogapi.com/images/"+breed.reference_image_id + ".jpg" : `https://www.seekpng.com/png/full/360-3605845_dog-holding-paper-in-mouth.png`
             };
           });
-
+          
           const responde = myBreedResults.concat(apiBreedsResults);
           return responde.length
             ? res.send(responde)
-            : res.send({ message: "La raza no existe" });
+            : res.send({ message: "The breed not exist" })
         });
       } else {
         const myBreed = this.model.findAll({
