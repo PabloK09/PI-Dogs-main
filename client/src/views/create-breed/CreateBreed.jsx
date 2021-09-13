@@ -30,7 +30,7 @@ export default function CreateBreed() {
   });
 
   const temperamentState = useSelector((state) => state.temperament);
-  const [select, setSelect] = useState("")
+  const [select, setSelect] = useState(true)
   useEffect(() => {
     dispatch(getTemperament());
   }, [dispatch]);
@@ -180,20 +180,20 @@ export default function CreateBreed() {
   }
 
   function handleChangeTemp(e) {
-    setSelect(true)
+    e.preventDefault();
+    setSelect(false)
     setBreeds((prevData) => {
       let state = {
         ...prevData,
         [e.target.name]: e.target.value,
       };
-      
       setErrors(
         validate({
           ...breeds,
           [e.target.name]: e.target.value,
         })
-      );
-      if (state.temperamentPrev) {
+        );
+        if (state.temperamentPrev) {
         if (!state.temperament.includes(state.temperamentPrev)) {
           state.temperament?.push(state.temperamentPrev);
           
@@ -225,14 +225,11 @@ export default function CreateBreed() {
   }
 
   return (
-    <div>
+    <div key="CreateDiv">
       <SearchBarr />
       <div className={styles.divFather}>
         <div
           className={styles.containFormFather}
-          style={{
-            backgroundImage: `url(${breeds.image})`
-          }}
         >
           <form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.divContaineresForm}>
@@ -419,17 +416,17 @@ export default function CreateBreed() {
                 </div>
               </div>
               <div className={styles.containerSel}>
-                {/* <label htmlFor="temperament-select">Choose Temperament: </label> */}
                 <div className={styles.containerIndvSel}>
                   <select
                     name="temperamentPrev"
                     value={[breeds.temperamentPrev]}
                     onClick={handleSelectReset}
-                    onChange={(e) => handleChangeTemp(e)}
+                    onChange={handleChangeTemp}
                     className={styles.tempSelected}
                     key="selectTempsCreate"
+                    
                   >
-                    <option value="All" key="All" selected={select}>
+                    <option disabled key="ChooseTemperament"  disabled>
                       Choose Temperament
                     </option>
                     {temperamentState?.map((temp) => (
@@ -438,11 +435,11 @@ export default function CreateBreed() {
                       </option>
                     ))}
                   </select>
-                  <div className={styles.temps}>
+                  <div className={styles.temps} key="containerTempKey">
                     {breeds.temperament ? (
-                      <>
+                      <div>
                         {array.map((temp) => (
-                          <div className={styles.tempsChild}>
+                          <div className={styles.tempsChild} key={temp.name}>
                             <button
                               className={(styles.noselect, styles.temp)}
                               key={temp.name}
@@ -468,7 +465,7 @@ export default function CreateBreed() {
                             </button>
                           </div>
                         ))}
-                      </>
+                      </div>
                     ) : (
                       false
                     )}
@@ -529,7 +526,7 @@ export default function CreateBreed() {
                 )}
                 <div className={styles.divUlPreview}>
                   {breeds.weight ? (
-                    <li className={styles.liWHL}>
+                    <li className={styles.liWHL} >
                       <span>
                         <strong>Weight: </strong>
                         {breeds.weightMin + " - "}
@@ -571,7 +568,7 @@ export default function CreateBreed() {
                   <div className={styles.divTempPreview}>
                     {breeds.temperament.length ? (
                       array.map((temp) => (
-                        <li className={styles.liTempPreview}>{temp.name}</li>
+                        <li className={styles.liTempPreview} key={temp.name}>{temp.name}</li>
                       ))
                     ) : (
                       <div className={styles.divTempPreview}>

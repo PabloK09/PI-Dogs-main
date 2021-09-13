@@ -1,4 +1,4 @@
-/* eslint-disable */
+/*eslint-disable-next-line*/
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -106,14 +106,13 @@ export default function FilterSort({ setCurrentPage, setOrden }) {
             onChange={(e) => handleFilterTemp(e)}
             onClick={handleSelectReset}
             className={styles.tempSelected}
-            defaultValue={"Filter Temperaments"}
+            defaultValue={"selectedFilter"}
           >
-            <option value="Filter Temperaments" selected={select} disabled>
+            <option value="selectedFilter" disabled key="selectedFilter" selected={select}>
               Filter Temperaments
             </option>
             {temperamentState?.map((temp) => (
               <option value={temp.name} key={temp.id}>
-                {/* mandar un on click para reiniciar el select */}
                 {temp.name}
               </option>
             ))}

@@ -143,7 +143,6 @@ class BreedModel extends ModelCrud {
           attributes: { exclude: ["createdAt", "updatedAt"] },
         });
         myBreedId.then((resultsId) => {
-          console.log(resultsId);
           let arrBreed = []
           arrBreed.push(resultsId);
           arrBreed = arrBreed.map((breed) => {

@@ -50,7 +50,7 @@
     border-bottom-color 0.3s ease;
   display: grid;
   padding-left: 1em;
-  border-radius: 5em;
+  border-radius: 0.8em;
 }
 
 .tempSelected::-ms-expand {
@@ -66,10 +66,7 @@
   background-color: white;
   border-color: #dcdcdc;
 }
-.tempSelected:hover,
-.tempSelected:focus {
-  fill: var(--palette-brown5);
-}
+
 
 .tempSelected:after {
   content: "";
