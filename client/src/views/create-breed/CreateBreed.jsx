@@ -11,6 +11,7 @@ import { SiDatadog } from "react-icons/si";
 import { FaBone, FaWeightHanging } from "react-icons/fa";
 import { GiBodyHeight, GiLifeBar } from "react-icons/gi";
 import { RiImageAddFill } from "react-icons/ri";
+import validate from "../../utils/validate"
 
 export default function CreateBreed() {
   const dispatch = useDispatch();
@@ -30,84 +31,10 @@ export default function CreateBreed() {
   });
 
   const temperamentState = useSelector((state) => state.temperament);
-  const [select, setSelect] = useState(true)
+  const [select, setSelect] = useState(true);
   useEffect(() => {
     dispatch(getTemperament());
   }, [dispatch]);
-
-  function validate(breeds) {
-    let errors = {};
-    if (!breeds.name) {
-      errors.name = "Se requiere un nombre";
-    } else if (!/^[A-Za-z\s]+$/.test(breeds.name)) {
-      errors.name = "Se requiere un nombre";
-    } else if (breeds.name.length < 3) {
-      errors.name = "Minimo 3 Caracteres";
-    } else if (breeds.name.length > 30) {
-      errors.name = "Maximo 30 Caracteres";
-    }
-    if (!breeds.weightMin) {
-      errors.weightMin = "Se requiere un peso minimo";
-    } else if (!/^\d+$/.test(breeds.weightMin)) {
-      errors.weightMin = "Se requiere un peso minimo";
-    } else if (breeds.weightMin < 0) {
-      errors.weightMin = "Muy liviano min 1kg";
-    }
-    if (!breeds.weightMax) {
-      errors.weightMax = "Se requiere un peso maximo";
-    } else if (breeds.weightMin[0] >= breeds.weightMax[0]) {
-      errors.weightMax = "Se requiere un peso maximo";
-    } else if (!/^\d+$/.test(breeds.weightMax)) {
-      errors.weightMax = "Se requiere un peso maximo";
-    } else if (breeds.weightMax > 110) {
-      errors.weightMax = "Demasiado pesado max 110kg";
-    }
-    if (!breeds.heightMin) {
-      errors.heightMin = "Se requiere una altura minima";
-    } else if (!/^\d+$/.test(breeds.heightMin)) {
-      errors.heightMin = "Se requiere una altura minima";
-    } else if (breeds.heightMin < 9) {
-      errors.heightMin = "Demasiado bajo min 9cm";
-    }
-    if (!breeds.heightMax) {
-      errors.heightMax = "Se requiere una altura maxima";
-    } else if (breeds.heightMin[0] >= breeds.heightMax[0]) {
-      errors.heightMax = "Se requiere una altura maxima";
-    } else if (!/^\d+$/.test(breeds.heightMax)) {
-      errors.heightMax = "Se requiere una altura maxima";
-    } else if (breeds.heightMax > 130) {
-      errors.heightMax = "Demasiado alto max 130cm";
-    }
-    if (breeds.life_spanMin.length) {
-      if (!/^\d+$/.test(breeds.life_spanMin)) {
-        errors.life_spanMin = "Se requiere life_spanMin";
-      } else if (breeds.life_spanMin < 0) {
-        errors.life_spanMin = "Minimo 1 año";
-      }
-    }
-    if (breeds.life_spanMax.length) {
-      if (breeds.life_spanMin[0] >= breeds.life_spanMax[0]) {
-        errors.life_spanMax = "Se requiere life_spanMax";
-      } else if (!/^\d+$/.test(breeds.life_spanMax)) {
-        errors.life_spanMax = "Se requiere life_spanMax";
-      } else if (breeds.life_spanMax > 21) {
-        errors.life_spanMin = "Maximo 21 años";
-      }
-    }
-    if (breeds.image) {
-      if (
-        !/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm.test(
-          breeds.image
-        )
-      ) {
-        errors.image = "Url invalida";
-      }
-    }
-    if (breeds.temperament.length > 5) {
-      errors.temperament = "Maximo 5 temperaments";
-    }
-    return errors;
-  }
 
   let filtro = [];
   let array = [];
@@ -181,7 +108,6 @@ export default function CreateBreed() {
 
   function handleChangeTemp(e) {
     e.preventDefault();
-    setSelect(false)
     setBreeds((prevData) => {
       let state = {
         ...prevData,
@@ -192,35 +118,33 @@ export default function CreateBreed() {
           ...breeds,
           [e.target.name]: e.target.value,
         })
-        );
-        if (state.temperamentPrev) {
+      );
+      if (state.temperamentPrev) {
         if (!state.temperament.includes(state.temperamentPrev)) {
           state.temperament?.push(state.temperamentPrev);
-          
         }
       }
       return state;
     });
+    setSelect(false);
   }
 
   function handleSelectReset(e) {
     e.preventDefault();
-    setSelect(true)
+    setSelect(true);
   }
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
-    dispatch(getBreeds()); //creo que no hace falta
-    await axios
+    axios
       .post(POST_URL, breeds)
-      .then((response) => {
+      .then(() => {
         alert("The breed was added successfully🐶");
-        dispatch(getBreeds()); //no se si hace falta
-        // push(`/home/breed/${response.data[0].breedId}`)
         push(`/home/`);
       })
       .catch((err) => {
         alert("The breed cants created😰");
+        console.log(err)
       });
   }
 
@@ -228,15 +152,12 @@ export default function CreateBreed() {
     <div key="CreateDiv">
       <SearchBarr />
       <div className={styles.divFather}>
-        <div
-          className={styles.containFormFather}
-        >
+        <div className={styles.containFormFather}>
           <form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.divContaineresForm}>
               <h3 className={styles.h3Create}>My BFF</h3>
               <div className={styles.containerForm2}>
                 <div className={styles.containerIndv}>
-                  {/* <label htmlFor="name">Name</label> */}
                   <div className={styles.iconInput}>
                     <FaBone className={styles.iconSize} />
                   </div>
@@ -259,7 +180,6 @@ export default function CreateBreed() {
               </div>
               <div className={styles.containerForm2}>
                 <div className={styles.containerIndv}>
-                  {/* <label htmlFor="weightMin">WeightMin</label> */}
                   <div className={styles.iconInput2}>
                     <FaWeightHanging className={styles.iconSize} />
                   </div>
@@ -282,7 +202,6 @@ export default function CreateBreed() {
                   </div>
                 </div>
                 <div className={styles.containerIndv}>
-                  {/* <label htmlFor="weightMax">weightMax</label> */}
                   <div className={styles.iconInput2}></div>
                   <div className={styles.inputAndError}>
                     <input
@@ -305,7 +224,6 @@ export default function CreateBreed() {
               </div>
               <div className={styles.containerForm2}>
                 <div className={styles.containerIndv}>
-                  {/* <label htmlFor="heightMin">heightMin</label> */}
                   <div className={styles.iconInput2}>
                     <GiBodyHeight className={styles.iconSize} />
                   </div>
@@ -354,7 +272,6 @@ export default function CreateBreed() {
                   <div className={styles.iconInput2}>
                     <GiLifeBar className={styles.iconSize} />
                   </div>
-                  {/* <label htmlFor="life_spanMin">life_spanMin</label> */}
                   <div className={styles.inputAndError}>
                     <input
                       type="number"
@@ -373,7 +290,6 @@ export default function CreateBreed() {
                   </div>
                 </div>
                 <div className={styles.containerIndv}>
-                  {/* <label htmlFor="life_spanMax">life_spanMaxn</label> */}
                   <div className={styles.iconInput2}></div>
                   <div className={styles.inputAndError}>
                     <input
@@ -398,7 +314,6 @@ export default function CreateBreed() {
                   <div className={styles.iconInput}>
                     <RiImageAddFill className={styles.iconSize} />
                   </div>
-                  {/* <label htmlFor="image">image</label> */}
                   <div className={styles.inputAndError}>
                     <input
                       type="url"
@@ -419,14 +334,17 @@ export default function CreateBreed() {
                 <div className={styles.containerIndvSel}>
                   <select
                     name="temperamentPrev"
-                    value={[breeds.temperamentPrev]}
+                    defaultValue="ChooseTemperament"
                     onClick={handleSelectReset}
                     onChange={handleChangeTemp}
                     className={styles.tempSelected}
                     key="selectTempsCreate"
-                    
                   >
-                    <option disabled key="ChooseTemperament"  disabled>
+                    <option
+                      disabled
+                      value="ChooseTemperament"
+                      selected={select}
+                    >
                       Choose Temperament
                     </option>
                     {temperamentState?.map((temp) => (
@@ -437,7 +355,7 @@ export default function CreateBreed() {
                   </select>
                   <div className={styles.temps} key="containerTempKey">
                     {breeds.temperament ? (
-                     <>
+                      <>
                         {array.map((temp) => (
                           <div className={styles.tempsChild} key={temp.name}>
                             <button
@@ -516,17 +434,12 @@ export default function CreateBreed() {
                   </div>
                 ) : (
                   <div className={styles.divImgStatus}>
-                    {/* <img
-                    src={imageUpload}
-                    alt="Upload a imageDog"
-                    className={styles.imgStatus}
-                  /> */}
                     <SiDatadog className={styles.iconPreview} />
                   </div>
                 )}
                 <div className={styles.divUlPreview}>
                   {breeds.weight ? (
-                    <li className={styles.liWHL} >
+                    <li className={styles.liWHL}>
                       <span>
                         <strong>Weight: </strong>
                         {breeds.weightMin + " - "}
@@ -568,7 +481,9 @@ export default function CreateBreed() {
                   <div className={styles.divTempPreview}>
                     {breeds.temperament.length ? (
                       array.map((temp) => (
-                        <li className={styles.liTempPreview} key={temp.name}>{temp.name}</li>
+                        <li className={styles.liTempPreview} key={temp.name}>
+                          {temp.name}
+                        </li>
                       ))
                     ) : (
                       <div className={styles.divTempPreview}>

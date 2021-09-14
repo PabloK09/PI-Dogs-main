@@ -2,7 +2,6 @@ const { Breed, Temperament } = require("../db.js");
 const ModelCrud = require("./index");
 const axios = require("axios");
 const { BASE_URL, SEARCH_NAME } = require("../utils/constants");
-const {API_KEY} = process.env;
 const { Op } = require("sequelize");
 const { v4: uuidv4 } = require("uuid");
 
@@ -29,26 +28,34 @@ class BreedModel extends ModelCrud {
           },
         });
         const apiBreeds = axios.get(SEARCH_NAME + `/?name=${name}`);
-        
+
         Promise.all([myBreed, apiBreeds]).then((results) => {
           let [myBreedResults, apiBreedsResults] = results;
           myBreedResults = myBreedResults.map((breed) => {
             return {
               id: breed.id,
               name: breed.name,
-              weight: breed.weight.map((w)=> {
-                return w.value
-              }).join(" - "),
-              height: breed.height.map((h)=> {
-                return h.value
-              }).join(" - "),
-              life_span: breed.life_span?.map((ls)=> {
-                return ls.value
-              }).join(" - "),
+              weight: breed.weight
+                .map((w) => {
+                  return w.value;
+                })
+                .join(" - "),
+              height: breed.height
+                .map((h) => {
+                  return h.value;
+                })
+                .join(" - "),
+              life_span: breed.life_span
+                ?.map((ls) => {
+                  return ls.value;
+                })
+                .join(" - "),
               image: breed.image,
-              temperament: breed.temperament.map(temp => {
-                return temp.name
-              }).join(", ")
+              temperament: breed.temperament
+                .map((temp) => {
+                  return temp.name;
+                })
+                .join(", "),
             };
           });
 
@@ -60,14 +67,18 @@ class BreedModel extends ModelCrud {
               height: breed.height.metric,
               life_span: breed.life_span,
               temperament: breed.temperament,
-              image: breed.reference_image_id ? "https://cdn2.thedogapi.com/images/"+breed.reference_image_id + ".jpg" : `https://www.seekpng.com/png/full/360-3605845_dog-holding-paper-in-mouth.png`
+              image: breed.reference_image_id
+                ? "https://cdn2.thedogapi.com/images/" +
+                  breed.reference_image_id +
+                  ".jpg"
+                : `https://www.seekpng.com/png/full/360-3605845_dog-holding-paper-in-mouth.png`,
             };
           });
-          
+
           const responde = myBreedResults.concat(apiBreedsResults);
           return responde.length
             ? res.send(responde)
-            : res.send({ message: "The breed not exist" })
+            : res.send({ message: "The breed not exist" });
         });
       } else {
         const myBreed = this.model.findAll({
@@ -79,49 +90,56 @@ class BreedModel extends ModelCrud {
             },
           ],
         });
-        
-        const apiBreeds = axios.get(BASE_URL); 
-        Promise.all([myBreed, apiBreeds]) 
-          .then((results) => {
-            let [myBreedResults, apiBreedsResults] = results;
 
-            myBreedResults = myBreedResults.map((breed) => {
-              return {
-                id: breed.id,
-                name: breed.name,
-                weight: breed.weight.map((w)=> {
-                  return w.value
-                }).join(" - "),
-                height: breed.height.map((h)=> {
-                  return h.value
-                }).join(" - "),
-                life_span: breed.life_span?.map((ls)=> {
-                  return ls.value
-                }).join(" - "),
-                image: breed.image,
-                temperament: breed.temperament.map(temp => {
-                  return temp.name
-                }).join(", ")
-              };
-            });
+        const apiBreeds = axios.get(BASE_URL);
+        Promise.all([myBreed, apiBreeds]).then((results) => {
+          let [myBreedResults, apiBreedsResults] = results;
 
-            apiBreedsResults = apiBreedsResults.data.map((breed) => {
-              return {
-                id: breed.id,
-                name: breed.name,
-                weight: breed.weight.metric,
-                height: breed.height.metric,
-                life_span: breed.life_span,
-                temperament: breed.temperament,
-                image: breed.image.url,
-              };
-            });
-            const responde = myBreedResults.concat(apiBreedsResults);
-
-            return responde
-              ? res.send(responde)
-              : res.send({ message: "Responde no existe" });
+          myBreedResults = myBreedResults.map((breed) => {
+            return {
+              id: breed.id,
+              name: breed.name,
+              weight: breed.weight
+                .map((w) => {
+                  return w.value;
+                })
+                .join(" - "),
+              height: breed.height
+                .map((h) => {
+                  return h.value;
+                })
+                .join(" - "),
+              life_span: breed.life_span
+                ?.map((ls) => {
+                  return ls.value;
+                })
+                .join(" - "),
+              image: breed.image,
+              temperament: breed.temperament
+                .map((temp) => {
+                  return temp.name;
+                })
+                .join(", "),
+            };
           });
+
+          apiBreedsResults = apiBreedsResults.data.map((breed) => {
+            return {
+              id: breed.id,
+              name: breed.name,
+              weight: breed.weight.metric,
+              height: breed.height.metric,
+              life_span: breed.life_span,
+              temperament: breed.temperament,
+              image: breed.image.url,
+            };
+          });
+          const responde = myBreedResults.concat(apiBreedsResults);
+
+          return responde
+            ? res.send(responde)
+            : res.send({ message: "Responde no existe" });
+        });
       }
     } catch (err) {
       next(err);
@@ -143,28 +161,36 @@ class BreedModel extends ModelCrud {
           attributes: { exclude: ["createdAt", "updatedAt"] },
         });
         myBreedId.then((resultsId) => {
-          let arrBreed = []
+          let arrBreed = [];
           arrBreed.push(resultsId);
           arrBreed = arrBreed.map((breed) => {
-              return {
-                id: breed.id,
-                name: breed.name,
-                weight: breed.weight.map((w)=> {
-                  return w.value
-                }).join(" - "),
-                height: breed.height.map((h)=> {
-                  return h.value
-                }).join(" - "),
-                life_span: breed.life_span?.map((ls)=> {
-                  return ls.value
-                }).join(" - "),
-                image: breed.image,
-                temperament: breed.temperament.map(temp => {
-                  return temp.name
-                }).join(", ")
-              };
-          })
-          
+            return {
+              id: breed.id,
+              name: breed.name,
+              weight: breed.weight
+                .map((w) => {
+                  return w.value;
+                })
+                .join(" - "),
+              height: breed.height
+                .map((h) => {
+                  return h.value;
+                })
+                .join(" - "),
+              life_span: breed.life_span
+                ?.map((ls) => {
+                  return ls.value;
+                })
+                .join(" - "),
+              image: breed.image,
+              temperament: breed.temperament
+                .map((temp) => {
+                  return temp.name;
+                })
+                .join(", "),
+            };
+          });
+
           resultsId ? res.send(arrBreed) : res.sendStatus(404);
         });
       } else {
@@ -183,33 +209,33 @@ class BreedModel extends ModelCrud {
               image: breed.image.url,
               bred_for: breed.bred_for,
               breed_group: breed.breed_group,
-              origin: breed.origin
+              origin: breed.origin,
             };
           });
           return axiosId.length ? res.send(axiosId) : res.sendStatus(404);
         });
       }
     } catch (err) {
-      next(err.toJSON);
+      next(err);
     }
   };
 
   created = (req, res, next) => {
     const modelo = req.body;
     try {
-      return Breed
-        .create({
-          ...modelo,
-          id: uuidv4(),
-        })
-        
+      return Breed.create({
+        ...modelo,
+        id: uuidv4(),
+      })
+
         .then((breed) => {
-          breed.addTemperament(modelo.temperament)})
+          breed.addTemperament(modelo.temperament);
+        })
         .then((created) => {
           return res.send(created);
         });
     } catch (err) {
-      next(err.toJSON);
+      next(err);
     }
   };
 }

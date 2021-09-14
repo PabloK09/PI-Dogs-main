@@ -5,6 +5,7 @@ const router = Router();
 
 router.get("/", temperamentController.getAll);
 
+
 router.get("/:id",  temperamentController.getById);
 router.post("/",  temperamentController.create);
 router.put("/:id",  temperamentController.update);

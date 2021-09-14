@@ -1,7 +1,7 @@
 import SearchBarr from "../../components/searchbar/SearchBar";
 import FilterSort from "../../components/filter-sort/Filtersort";
 import Breed from "../../components/breed/Breed";
-import styles from "../../components/breeds/Home.module.css";
+import styles from "../home/Home.module.css";
 import React, { useState, useEffect } from "react";
 import { getBreeds } from "../../redux/actions/index";
 import { useSelector, useDispatch } from "react-redux";
@@ -99,8 +99,8 @@ export function Home() {
   return (
     <div className={styles.divFather}>
       <SearchBarr key="SearchBar"/>
-      <div className={styles.containerMasPicante}>
-        <div className={styles.containerMenosPicante}>
+      <div className={styles.containerChildH}>
+        <div className={styles.containerChildL}>
           <FilterSort
             key="FilterSort"
             setOrden={setOrden}

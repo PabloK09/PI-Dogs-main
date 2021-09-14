@@ -93,8 +93,13 @@
   font-family: var(--font-family-Title);
   color: var(--black-color);
   font-family: 'Gilroy-Heavy';
-  font-size: 33px;
+  font-size: 40px;
+  /* color: #fff; */
+  text-transform: uppercase;
 }
+
+
+
 
 .divBotones {
   display: flex;

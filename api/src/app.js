@@ -21,7 +21,7 @@ server.use((req, res, next) => {
   next();
 });
 
-//en todas mis rutas esta puesto el next en el catch(err) asi puede pasar al middlewar de abajo que es el que maneja errores
+
 server.use('/', routes);
 
 // Error catching endware. Sirve para manipular errores

@@ -5,7 +5,6 @@ const { Temperament } = require("./src/db.js");
 const { PORT } = process.env;
 const { BASE_URL } = require("./src/utils/constants");
 
-// Syncing all the models at once.
 conn.sync({ force: true }).then(async () => {
   if (!Temperament.length) {
     let temps = new Set();

@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SearchBarr from "../../components/searchbar/SearchBar";
 import Breed from "../../components/breed/Breed";
-import styles from "../../components/breeds/Home.module.css";
+import styles from "../home/Home.module.css";
 import gifDog from "../../assets/wallpapers/ezgif.com-video-to-gif__2_.gif";
 import imageDog from "../../assets/wallpapers/404-oops.jpg";
 import {
@@ -24,31 +24,21 @@ export default function Favourites() {
   return (
     <div className={styles.divFather}>
       <SearchBarr key="SearchBar" />
-      <div className={styles.containerMasPicante}>
-        <div className={styles.containerMenosPicante}>
+      <div className={styles.containerChildH}>
+        <div className={styles.containerChildL}>
           {!breedsFav.length ? (
-            <>
-              <div
-                style={{
-                  backgroundImage: `url(${gifDog})`,
-                  backgroundPosition: "center",
-                  backgroundRepeat: "no-repeat",
-                }}
-                className={styles.containerClass}
-              ></div>
-            </>
-          ) : breedsFav.length === 0 ? (
-            <div
-              style={{
-                backgroundImage: `url(${imageDog})`,
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-              }}
-              className={styles.containerClass}
-            ></div>
+             <div
+             style={{
+               backgroundImage: `url(${imageDog})`,
+               backgroundPosition: "center",
+               backgroundRepeat: "no-repeat",
+             }}
+             className={styles.containerClassAF}
+           ></div>
+            
           ) : breedsFav.length ? (
             <>
-              <div className={styles.containerClass}>
+              <div className={styles.containerClassAF}>
                 {breedsFav?.map((breed, index) => {
                   return (
                     <Breed
@@ -65,7 +55,14 @@ export default function Favourites() {
               </div>
             </>
           ) : (
-            false
+            <div
+            style={{
+              backgroundImage: `url(${gifDog})`,
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+            className={styles.containerClassAF}
+          ></div>
           )}
         </div>
       </div>

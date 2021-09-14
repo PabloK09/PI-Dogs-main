@@ -5,7 +5,6 @@ class TemperamentModel extends ModelCrud {
     constructor(model) {
         super (model);
     }
-    
     getAll = (req, res, next) => {
         try{
            const myTemperament = this.model.findAll({

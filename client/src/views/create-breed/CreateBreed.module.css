@@ -158,7 +158,7 @@
   display: grid;
   z-index: 2;
   flex-direction: column;
-  width: 100%;
+  width: 77%;
   height: 75vh;
   background-color: transparent;
   align-content: space-evenly;
@@ -238,7 +238,7 @@
 }
 
 .tempSelected {
-  width: 180px;
+  width: 200px;
   font-size: 1rem;
   font-family: var(--font-family-Title);
   cursor: pointer;
@@ -450,7 +450,7 @@
   display: flex;
   flex-wrap: wrap;
   list-style-type: none;
-  padding-left: 25px;
+  padding-left: 55px;
   padding-top: 10px;
 }
 

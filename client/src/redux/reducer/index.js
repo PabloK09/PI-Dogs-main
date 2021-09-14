@@ -173,8 +173,8 @@ function rootReducer(state = initialState, action) {
           ? state.breedsFilter
               .filter(
                 (breed) =>
-                  !breed.weight.includes(false) &&
-                  breed.weight.split(" - ").length > 1
+                  !breed.weight.includes(false) && !breed.weight.includes("NaN") 
+                  && breed.weight.split(" - ").length > 1
               )
               .sort(function (a, b) {
                 return b.weight?.split(" - ")[1] - a.weight?.split(" - ")[1];
@@ -182,8 +182,8 @@ function rootReducer(state = initialState, action) {
           : state.breedsFilter
               .filter(
                 (breed) =>
-                  !breed.weight.includes(false) &&
-                  breed.weight.split(" - ").length > 1
+                  !breed.weight.includes(false) && !breed.weight.includes("NaN") 
+                  && breed.weight.split(" - ").length > 1
               )
               .sort(function (a, b) {
                 return a.weight?.split(" - ")[0] - b.weight?.split(" - ")[0];
@@ -194,14 +194,12 @@ function rootReducer(state = initialState, action) {
       };
     
     case ADD_BREED_FAVORITE:
-      console.log("ADD", action.payload)
       return {
         ...state,
         breedsFavourites: [...state.breedsFavourites, action.payload]
       }
     
     case REMOVE_BREED_FAVORITE:
-      console.log("REMOVE", action.payload);
       return {
         ...state,
         breedsFavourites: state.breedsFavourites.filter(el => el.id !== action.payload.id)

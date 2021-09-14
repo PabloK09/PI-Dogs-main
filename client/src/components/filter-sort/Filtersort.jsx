@@ -112,13 +112,12 @@ export default function FilterSort({ setCurrentPage, setOrden }) {
               Filter Temperaments
             </option>
             {temperamentState?.map((temp) => (
-              <option value={temp.name} key={temp.id}>
+              <option  key={temp.id}>
                 {temp.name}
               </option>
             ))}
           </select>
         </div>
-
         <div className={styles.divBtn}>
           <button
             className={styles.orderBtn}

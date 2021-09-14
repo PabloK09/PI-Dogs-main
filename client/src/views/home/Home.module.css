@@ -1,0 +1,343 @@
+* {
+  font-family: var(--font-family-Text);
+}
+
+h3,
+h2,
+h1,
+h4,
+h5,
+h6,
+strong {
+  font-family: var(--font-family-Title);
+}
+
+.divFather {
+  z-index: -1;
+  backdrop-filter: blur(16px);
+  background-image: url("../../assets/wallpapers/Pattern-Pet-Pablo.png");
+  display: grid;
+  align-items: start;
+  align-content: stretch;
+  grid-gap: 2em;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+}
+
+.containerChildH {
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+}
+
+.containerChildL {
+  position: relative;
+  width: 70vw;
+  height: 88vh;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.containerClassAF {
+  z-index: 2;
+  background-color: white;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1.5rem;
+  justify-items: center;
+  padding: 1.5em 0em 1.5em 0em;
+  align-content: space-evenly;
+  border-top-left-radius: 2em;
+  border-top-right-radius: 2em;
+}
+
+.containerClass {
+  z-index: 2;
+  background-color: white;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1.5rem;
+  justify-items: center;
+  padding: 1.5em 0em 1.5em 0em;
+  transition: 1s;
+  align-content: space-evenly;
+}
+
+.ul-containerBreed {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.divPagination {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 0.3em;
+  width: 100%;
+}
+
+.comunLi {
+  padding: 0.5em;
+  margin: 0.1em;
+  height: 100%;
+  width: 100%;
+  color: var(--black-color);
+  font-family: var(--font-family-Title);
+  text-align: center;
+}
+
+.comunLi:hover {
+  font-family: var(--font-family-Title);
+  color: white;
+  background-color: var(--palette-brown6);
+  height: 100%;
+  width: 100%;
+  padding: 0.5em;
+  margin: 0.1em;
+  border-radius: 5px;
+}
+
+.pageNumbers {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em;
+  cursor: pointer;
+  width: 32em;
+  text-align: center;
+}
+
+.activePag {
+  font-family: var(--font-family-Title);
+  color: white;
+  background-color: var(--palette-brown5);
+  height: 100%;
+  width: 100%;
+  padding: 0.5em;
+  margin: 0.1em;
+  border-radius: 5px;
+}
+
+.navIcon {
+  width: 1.8em;
+  height: 1.8em;
+  pointer-events: none;
+}
+
+.navBtn {
+  cursor: pointer;
+  background-color: transparent;
+  border: transparent;
+  vertical-align: -webkit-baseline-middle;
+}
+
+.navBtn:hover {
+  font-family: var(--font-family-Title);
+  color: white;
+  background-color: var(--palette-brown4);
+  border-radius: 9999px;
+}
+
+.containerClassAbout {
+  z-index: 2;
+  background-color: white;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 2em;
+  border-top-right-radius: 2em;
+}
+
+.infoAbout {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  flex-wrap: nowrap;
+  z-index: 2;
+}
+
+.bkgAbout {
+  width: 60em;
+  height: 30em;
+  z-index: -1;
+  position: absolute;
+}
+
+.container {
+  display: grid;
+  /* flex-direction: column; */
+  width: 90%;
+  height: 100%;
+  align-content: space-around;
+  /* grid-template-columns: repeat(2, 1fr); */
+  /* grid-gap: 1.5rem; */
+  grid-auto-flow: column;
+  align-items: center;
+}
+
+.divAbout {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  padding-left: 330px;
+  padding-right: 200px;
+  text-align: center;
+}
+
+.h2About {
+  font-family: var(--font-family-Title);
+  font-size: 1.8rem;
+}
+
+.h3About {
+  font-family: var(--font-family-Title);
+  font-size: 1.4rem;
+}
+
+.pAbout {
+  font-family: var(--font-family-Text);
+  font-size: 1.2rem;
+}
+
+.liContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+}
+
+.liAbout {
+  list-style-type: none;
+}
+
+.liIcon {
+  width: 2.5em;
+  height: 2.5em;
+  margin-top: 0.5em;
+}
+
+.containerImg {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  align-content: center;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 30em;
+}
+
+.listTools {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  padding-top: 30px;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.logoExpress {
+  width: 5em;
+  height: 5em;
+}
+
+.iconExpress {
+  height: 100%;
+  width: 100%;
+}
+
+.socialButtons {
+  display: flex;
+}
+
+.effect {
+  background-color: #212121;
+  background-color: #fff;
+  color: #fff;
+}
+
+.aLink {
+  color: #fff;
+  background-color: transparent;
+  border-color: transparent;
+  cursor: pointer;
+}
+
+.iconA{
+  pointer-events: none;
+}
+
+.effect .buttons {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+.effect .aLink {
+  text-decoration: none;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-right: 20px;
+  font-size: 25px;
+  overflow: hidden;
+  position: relative;
+  color: #212121;
+}
+.effect .aLink .iconA {
+  position: relative;
+  z-index: 3;
+}
+.effect .aLink:last-child {
+  margin-right: 0px;
+}
+.effect .aLink:before {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+.effect .aLink .iconA {
+  display: inline-block;
+  vertical-align: middle;
+}
+.effect .aLink {
+  transition: all 0.2s linear 0.2s;
+}
+.effect .aLink .iconA {
+  transition: all 0.2s linear 0s;
+}
+.effect .aLink:hover {
+  transition: all 0.2s linear 0s;
+  border-color: rgba(33, 33, 33, 0);
+}
+.effect .aLink:hover .iconA {
+  transform: scale(1.15);
+  text-shadow: 4px 0px 3px rgba(33, 33, 33, 0.3);
+  transition: all 0.2s linear 0.2s;
+}
