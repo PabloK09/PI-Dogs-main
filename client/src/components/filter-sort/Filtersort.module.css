@@ -57,12 +57,12 @@
   display: none;
 }
 
-.tempSelected:hover {
+.tempSelected:hover, .tempSelected:focus {
   color: var(--palette-brown4);
   background-color: var(--palette-brown4);
   border-bottom-color: #dcdcdc;
 }
-.tempSelected:hover {
+.tempSelected:hover, .tempSelected:focus {
   background-color: white;
   border-color: #dcdcdc;
 }

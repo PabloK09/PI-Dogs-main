@@ -46,6 +46,11 @@ module.exports = (sequelize) => {
           isUrl: true,
         }
       },
+      created: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true,
+      }
     },
   );
 };

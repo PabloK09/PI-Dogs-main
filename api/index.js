@@ -5,8 +5,9 @@ const { Temperament } = require("./src/db.js");
 const { PORT } = process.env;
 const { BASE_URL } = require("./src/utils/constants");
 
-conn.sync({ force: true }).then(async () => {
-  if (!Temperament.length) {
+conn.sync().then(async () => {
+  const temperDB = await Temperament.findAll()
+  if (temperDB.length === 0) {
     let temps = new Set();
     const apiBreedTemperamentRes = await axios.get(BASE_URL);
 
@@ -16,9 +17,9 @@ conn.sync({ force: true }).then(async () => {
     });
 
     Temperament.bulkCreate([...temps].map((temperament) => ({ name: temperament })));
+    console.log("Base de datos de temperamentos creada");
   }
 
-  console.log("Base de datos de temperamentos creada");
   server.listen(PORT, () => {
     console.log("%s listening at 3001");
   });

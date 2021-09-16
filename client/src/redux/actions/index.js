@@ -1,43 +1,30 @@
 import axios from 'axios';
 import { BASE_URL, SEARH_ID, URL_TEMPERAMENT } from '../../utils/constants';
-import { GET_BREEDS, GET_BREED_ID, GET_TEMPERAMENT, GET_BREED_NAME, FILTER_TEMPERAMENTS, FILTER_ORDER_NAME, FILTER_ORDER_WEIGHT, SET_LOADING, FILTER_NAME, FILTER_DATA, ADD_BREED_FAVORITE, REMOVE_BREED_FAVORITE} from './types';
+import { GET_BREEDS, GET_BREED_ID, GET_TEMPERAMENT, GET_BREED_NAME, FILTER_TEMPERAMENTS, FILTER_ORDER_NAME, FILTER_ORDER_WEIGHT, FILTER_NAME, FILTER_DATA, ADD_BREED_FAVORITE, REMOVE_BREED_FAVORITE, ADD_CHECKED_FAV, REMOVE_CHECKED_FAV} from './types';
 
 export const getBreeds = () => {
     return (dispatch) => {
-        dispatch({
-            type: SET_LOADING,
-            payload: true
-        })
         axios.get(BASE_URL)
         .then((breeds)=> {
             dispatch({
                 type: GET_BREEDS,
                 payload: breeds.data
             })
-            dispatch({
-                type: SET_LOADING,
-                payload: false
-            })
+        })
+        .catch((error)=> {
+            console.log(error);
         })
     }
 }
 
 export const getBreedsName = (name) => {
     return (dispatch) => {
-        dispatch({
-            type: SET_LOADING,
-            payload: true
-        })
         axios.get(BASE_URL+"?name=" + name)
         .then((response)=> response.data)
         .then((breedsName)=> {
             dispatch({
                 type: GET_BREED_NAME,
                 payload: breedsName
-            })
-            dispatch({
-                type: SET_LOADING,
-                payload: false
             })
         })
         .catch((error)=>{
@@ -63,39 +50,26 @@ export const getBreedsName = (name) => {
 
 export const getTemperament =  () => {
     return (dispatch) => {
-        dispatch({
-            type: SET_LOADING,
-            payload: true
-        })
         axios.get(URL_TEMPERAMENT)
         .then((temperament)=> {
             dispatch({
                 type: GET_TEMPERAMENT,
                 payload: temperament.data
             })
-            dispatch({
-                type: SET_LOADING,
-                payload: false
-            })
+        })
+        .catch((error)=> {
+            console.log(error);
         })
     }
 }
 
 export const getBreedId =  (idBreed) => {
     return (dispatch) => {
-        dispatch({
-            type: SET_LOADING,
-            payload: true
-        })
          axios.get(SEARH_ID + idBreed)
         .then((breedId)=>{
             dispatch({
                 type: GET_BREED_ID,
                 payload: breedId.data
-            })
-            dispatch({
-                type: SET_LOADING,
-                payload: false
             })
         })
         .catch((error)=>{
@@ -142,4 +116,12 @@ export const addBreedFavourites = (payload) => {
 
 export const removeBreedFavorite = (payload) => {
     return {type: REMOVE_BREED_FAVORITE, payload}
+}
+
+export const addBreedChecked = (payload) => {
+    return {type: ADD_CHECKED_FAV, payload}
+}
+
+export const removeBreedChecked = (payload) => {
+    return {type: REMOVE_CHECKED_FAV, payload}
 }

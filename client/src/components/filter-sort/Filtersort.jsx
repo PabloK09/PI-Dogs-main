@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  getTemperament,
   filterTemperaments,
   orderByBreedName,
   orderByBreedWeight,
@@ -17,15 +16,13 @@ import {
   FaTrash
 } from "react-icons/fa";
 
-export default function FilterSort({ setCurrentPage, setOrden }) {
+export default function FilterSort({ setCurrentPage, setOrden, listaTemp, setListaTemp }) {
   const dispatch = useDispatch();
   const temperamentState = useSelector((state) => state.temperament);
 
-  const [listaTemp, setListaTemp] = useState([]);
   const [select, setSelect] = useState("")
 
   useEffect(() => {
-    dispatch(getTemperament());
   }, [dispatch, setListaTemp]);
 
   function handleSortName(e) {
@@ -108,7 +105,8 @@ export default function FilterSort({ setCurrentPage, setOrden }) {
             className={styles.tempSelected}
             defaultValue={"selectedFilter"}
           >
-            <option value="selectedFilter" disabled key="selectedFilter" selected={select}>
+            <option value="selectedFilter" disabled key="selectedFilter" 
+            selected={select}>
               Filter Temperaments
             </option>
             {temperamentState?.map((temp) => (

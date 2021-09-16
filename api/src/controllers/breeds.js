@@ -120,6 +120,8 @@ class BreedModel extends ModelCrud {
                   return temp.name;
                 })
                 .join(", "),
+              created: breed.created,
+              fav: breed.fav = false,
             };
           });
 
@@ -132,10 +134,10 @@ class BreedModel extends ModelCrud {
               life_span: breed.life_span,
               temperament: breed.temperament,
               image: breed.image.url,
+              fav: breed.fav = false,
             };
           });
           const responde = myBreedResults.concat(apiBreedsResults);
-
           return responde
             ? res.send(responde)
             : res.send({ message: "Responde no existe" });

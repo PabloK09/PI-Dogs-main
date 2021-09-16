@@ -2,14 +2,15 @@ import SearchBarr from "../../components/searchbar/SearchBar";
 import FilterSort from "../../components/filter-sort/Filtersort";
 import Breed from "../../components/breed/Breed";
 import styles from "../home/Home.module.css";
-import React, { useState, useEffect } from "react";
-import { getBreeds } from "../../redux/actions/index";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import imageDog from "../../assets/wallpapers/404-oops.jpg";
 import gifDog from "../../assets/wallpapers/ezgif.com-video-to-gif__2_.gif";
-import {MdNavigateNext, MdNavigateBefore} from 'react-icons/md'
-import {addBreedFavourites, removeBreedFavorite} from "../../redux/actions/index"
-
+import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
+import {
+  addBreedFavourites,
+  removeBreedFavorite,
+} from "../../redux/actions/index";
 
 export function Home() {
   const [, setOrden] = useState("");
@@ -20,15 +21,12 @@ export function Home() {
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(10);
   const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
 
+  const [listaTemp, setListaTemp] = useState([]);
+
   const filteredBreeds = useSelector((state) => state.breedsFilter);
   const breedsState = useSelector((state) => state.breeds);
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getBreeds());
-    return () => dispatch(getBreeds());
-  }, [dispatch]);
 
   const handleClick = (e) => {
     setCurrentPage(Number(e.target.id));
@@ -61,7 +59,7 @@ export function Home() {
           id={number}
           onClick={handleClick}
           className={currentPage === number ? styles.activePag : styles.comunLi}
-          >
+        >
           {number}
         </li>
       );
@@ -86,36 +84,43 @@ export function Home() {
     }
   };
 
-  const breedsFav = useSelector((state) => state.breedsFavourites)
+  const breedsFav = useSelector((state) => state.breedsFavourites);
   function addFav(id) {
-    if(!breedsFav.includes(id)){
-      dispatch(addBreedFavourites(id))
-    }else{
-      dispatch(removeBreedFavorite(id))
+    if (!breedsFav.includes(id)) {
+      dispatch(addBreedFavourites(id));
+    } else {
+      dispatch(removeBreedFavorite(id));
     }
   }
-  
 
   return (
     <div className={styles.divFather}>
-      <SearchBarr key="SearchBar"/>
+      <SearchBarr
+        key="SearchBar"
+        setOrden={setOrden}
+        setCurrentPage={(n) => setCurrentPage(n)}
+        listaTemp={listaTemp}
+        setListaTemp={setListaTemp}
+      />
       <div className={styles.containerChildH}>
         <div className={styles.containerChildL}>
           <FilterSort
             key="FilterSort"
             setOrden={setOrden}
             setCurrentPage={(n) => setCurrentPage(n)}
+            listaTemp={listaTemp}
+            setListaTemp={setListaTemp}
           />
-          { !breedsState?.length ? (
+          {!breedsState?.length ? (
             <>
               <div
-              style={{
-                backgroundImage: `url(${gifDog})`,
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-              }}
-              className={styles.containerClass}
-            ></div>
+                style={{
+                  backgroundImage: `url(${gifDog})`,
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
+                }}
+                className={styles.containerClass}
+              ></div>
             </>
           ) : currentItems.length === 0 ? (
             <div
@@ -129,7 +134,7 @@ export function Home() {
           ) : currentItems.length ? (
             <>
               <div className={styles.containerClass}>
-                {currentItems?.map((breed, index) => {
+                {currentItems?.map((breed) => {
                   return (
                     <Breed
                       id={breed.id}
@@ -139,35 +144,36 @@ export function Home() {
                       weight={breed.weight}
                       temperament={breed.temperament}
                       img={breed.image}
+                      fav={breed.fav}
                     />
                   );
                 })}
               </div>
-            <div className={styles.divPagination}>
-              <ul className={styles.pageNumbers}>
-                <li className={styles.comunLi}>
-                  <button
-                    className={styles.navBtn}
-                    onClick={handlePrevBtn}
-                    disabled={currentPage === pages[0] ? true : false}
-                  >
-                    <MdNavigateBefore className={styles.navIcon}/>
-                  </button>
-                </li>
-                {renderPageNumbers}
-                <li className={styles.comunLi} > 
-                  <button
-                  className={styles.navBtn}
-                    onClick={handleNextBtn}
-                    disabled={
-                      currentPage === pages[pages.length - 1] ? true : false
-                    }
+              <div className={styles.divPagination}>
+                <ul className={styles.pageNumbers}>
+                  <li className={styles.comunLi}>
+                    <button
+                      className={styles.navBtn}
+                      onClick={handlePrevBtn}
+                      disabled={currentPage === pages[0] ? true : false}
                     >
-                    <MdNavigateNext className={styles.navIcon}/>
-                  </button>
-                </li>
-              </ul>
-                    </div>
+                      <MdNavigateBefore className={styles.navIcon} />
+                    </button>
+                  </li>
+                  {renderPageNumbers}
+                  <li className={styles.comunLi}>
+                    <button
+                      className={styles.navBtn}
+                      onClick={handleNextBtn}
+                      disabled={
+                        currentPage === pages[pages.length - 1] ? true : false
+                      }
+                    >
+                      <MdNavigateNext className={styles.navIcon} />
+                    </button>
+                  </li>
+                </ul>
+              </div>
             </>
           ) : !filteredBreeds.length ? (
             <div

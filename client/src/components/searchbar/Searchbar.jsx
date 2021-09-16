@@ -1,7 +1,7 @@
 /* eslint-disable */
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getBreedsName, getBreeds, searchBreedName } from "../../redux/actions";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { getBreedsName, searchBreedName, filterTemperaments } from "../../redux/actions";
 import { useLocation, useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import styles from "./SearchBar.module.css";
@@ -14,7 +14,7 @@ import {
   MdSearch,
 } from "react-icons/md";
 
-export default function SearchBarr() {
+export default function SearchBarr({ setCurrentPage, setOrden, listaTemp, setListaTemp }) {
   const location = useLocation();
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -22,10 +22,6 @@ export default function SearchBarr() {
   const [search, setSearch] = useState({
     breedFind: "",
   });
-
-  useEffect(() => {
-    return () => dispatch(getBreeds());
-  }, [dispatch]);
 
   function handleChange(e) {
     setSearch((prevData) => {
@@ -43,10 +39,19 @@ export default function SearchBarr() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(searchBreedName(search.breedFind));
-    setSearch(() => ({
-      breedFind: "",
-    }));
+    if(search.breedFind.length){
+      dispatch(searchBreedName(search.breedFind));
+      setSearch(() => ({
+        breedFind: "",
+      }));
+      setCurrentPage(1);
+      setOrden(`Filtrado ${e.target.value}`)
+    }else{
+      dispatch(searchBreedName(search.breedFind));
+      setListaTemp([])
+      setCurrentPage(1);
+      setOrden(`Filtrado`);
+    }
   }
 
   return (

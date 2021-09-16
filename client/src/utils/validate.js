@@ -71,8 +71,11 @@ export default function validate(breeds) {
       errors.image = "Insert a valid URL";
     }
   }
-  if (breeds.temperament.length > 5) {
-    errors.temperament = "Maximum 5 temperaments";
-  }
+  // if(breeds.temperament.length){
+
+  //   if (breeds.temperament.length > 5) {
+  //     errors.temperament = "Maximum 5 temperaments";
+  //   }
+  // }
   return errors;
 }

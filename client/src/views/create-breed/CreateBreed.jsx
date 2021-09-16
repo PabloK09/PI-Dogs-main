@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { POST_URL } from "../../utils/constants";
-import { getBreeds, getTemperament } from "../../redux/actions/index";
+import { getTemperament, getBreeds } from "../../redux/actions/index";
 import styles from "./CreateBreed.module.css";
 import SearchBarr from "../../components/searchbar/SearchBar";
 import { SiDatadog } from "react-icons/si";
@@ -33,7 +33,8 @@ export default function CreateBreed() {
   const temperamentState = useSelector((state) => state.temperament);
   const [select, setSelect] = useState(true);
   useEffect(() => {
-    dispatch(getTemperament());
+    // dispatch(getBreeds());
+    return () => dispatch(getBreeds());
   }, [dispatch]);
 
   let filtro = [];

@@ -3,7 +3,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
-import { getBreedId, clearBreed, getBreeds } from "../../redux/actions";
+import { getBreedId, clearBreed } from "../../redux/actions";
 import SearchBarr from "../../components/searchbar/SearchBar";
 import styles from "./BreedDetail.module.css";
 import gifDog from "../../assets/wallpapers/ezgif.com-video-to-gif__2_.gif";
@@ -20,7 +20,6 @@ export default function BreedDetail() {
   const { id } = useParams();
 
   useEffect(() => {
-    dispatch(getBreeds());
     dispatch(getBreedId(id));
     return () => dispatch(clearBreed());
   }, [id, dispatch]);

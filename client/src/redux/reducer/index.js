@@ -6,11 +6,10 @@ import {
   FILTER_TEMPERAMENTS,
   FILTER_ORDER_NAME,
   FILTER_ORDER_WEIGHT,
-  SET_LOADING,
   FILTER_NAME,
   FILTER_DATA,
   ADD_BREED_FAVORITE,
-  REMOVE_BREED_FAVORITE
+  REMOVE_BREED_FAVORITE,
 } from "../actions/types";
 
 const initialState = {
@@ -19,7 +18,6 @@ const initialState = {
   temperament: [],
   breedsFilter: [],
   breedsFavourites: [],
-  isLoading: false,
 };
 
 function rootReducer(state = initialState, action) {
@@ -29,12 +27,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         breeds: action.payload,
         breedsFilter: action.payload,
-      };
-
-    case SET_LOADING:
-      return {
-        ...state,
-        isLoading: action.payload,
       };
 
     case GET_BREED_ID:
@@ -81,7 +73,7 @@ function rootReducer(state = initialState, action) {
         } else {
           return {
             ...state,
-            breedsFilter: [...copyName],
+            breedsFilter: [...copyName].slice(),
           };
         }
       }
@@ -110,45 +102,6 @@ function rootReducer(state = initialState, action) {
         }
       }
 
-    case FILTER_DATA:
-      if (action.payload === "API") {
-        let copyData = [];
-        state.breedsFilter.map((breed) => {         
-          return typeof breed.id === "string"
-            ? (copyData = [...state.breeds])
-            : (copyData = [...state.breedsFilter]);
-        });
-        copyData = copyData.filter((breed) => {
-          return breed.id.toString().length < 10;
-        });
-        return {
-          ...state,
-          breedsFilter: [...copyData],
-        };
-      }
-      if (action.payload === "DB") {
-        let copyDataDB = [];
-        state.breedsFilter.map((breed) => {
-          return typeof breed.id === "string"
-            ? (copyDataDB = [...state.breedsFilter])
-            : (copyDataDB = [...state.breeds]) 
-            
-        });
-        copyDataDB = copyDataDB.filter((breed) => {
-          return breed.id.length > 10;
-        });
-        return {
-          ...state,
-          breedsFilter: [...copyDataDB],
-        };
-      }
-      if(action.payload === "CLEAR"){
-        return {
-          ...state,
-          breedsFilter: [...state.breeds],
-        };
-      }
-
     case FILTER_ORDER_NAME:
       let sortedBreedsN =
         action.payload === "AZ"
@@ -173,8 +126,9 @@ function rootReducer(state = initialState, action) {
           ? state.breedsFilter
               .filter(
                 (breed) =>
-                  !breed.weight.includes(false) && !breed.weight.includes("NaN") 
-                  && breed.weight.split(" - ").length > 1
+                  !breed.weight.includes(false) &&
+                  !breed.weight.includes("NaN") &&
+                  breed.weight.split(" - ").length > 1
               )
               .sort(function (a, b) {
                 return b.weight?.split(" - ")[1] - a.weight?.split(" - ")[1];
@@ -182,8 +136,9 @@ function rootReducer(state = initialState, action) {
           : state.breedsFilter
               .filter(
                 (breed) =>
-                  !breed.weight.includes(false) && !breed.weight.includes("NaN") 
-                  && breed.weight.split(" - ").length > 1
+                  !breed.weight.includes(false) &&
+                  !breed.weight.includes("NaN") &&
+                  breed.weight.split(" - ").length > 1
               )
               .sort(function (a, b) {
                 return a.weight?.split(" - ")[0] - b.weight?.split(" - ")[0];
@@ -192,18 +147,82 @@ function rootReducer(state = initialState, action) {
         ...state,
         breedsFilter: sortedBreedsW,
       };
-    
+
     case ADD_BREED_FAVORITE:
+      let arrFavs = [] 
+      let favorito = action.payload;
+      favorito.fav = true;
+      if(!arrFavs.includes(favorito)){
+        arrFavs.push(favorito)
+      }
       return {
         ...state,
-        breedsFavourites: [...state.breedsFavourites, action.payload]
-      }
-    
+        breedsFavourites: [...state.breedsFavourites, ...arrFavs],
+        
+      };
+
     case REMOVE_BREED_FAVORITE:
+      let favoritoR = action.payload;
+      favoritoR.fav = false;
       return {
         ...state,
-        breedsFavourites: state.breedsFavourites.filter(el => el.id !== action.payload.id)
+        breedsFavourites: state.breedsFavourites.filter(
+          (el) => el.id !== action.payload.id
+        ),
+      };
+
+    case FILTER_DATA:
+      let copyData = [];
+      if (action.payload === "API") {
+        if (state.breedsFilter.length) {
+          copyData = [...state.breedsFilter];
+          copyData = copyData.filter((breed) => {
+            return breed.created === undefined;
+          });
+          return {
+            ...state,
+            breedsFilter: [...copyData],
+          };
+        } else {
+          copyData = [...state.breeds];
+          copyData = copyData.filter((breed) => {
+            return breed.created === undefined;
+          });
+          return {
+            ...state,
+            breedsFilter: [...copyData],
+          };
+        }
       }
+      if (action.payload === "DB") {
+        if (state.breedsFilter.length) {
+          copyData = [...state.breedsFilter];
+          copyData = copyData.filter((breed) => {
+            return breed.created === true;
+          });
+          return {
+            ...state,
+            breedsFilter: [...copyData],
+          };
+        } else {
+          copyData = [...state.breeds];
+          copyData = copyData.filter((breed) => {
+            return breed.created === true;
+          });
+          return {
+            ...state,
+            breedsFilter: [...copyData],
+          };
+        }
+      }
+      if (action.payload === "CLEAR") {
+        return {
+          ...state,
+          breedsFilter: [...state.breeds],
+        };
+      }
+      break;
+
     default:
       return state;
   }

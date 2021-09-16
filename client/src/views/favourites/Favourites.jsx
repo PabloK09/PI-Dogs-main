@@ -4,7 +4,7 @@ import SearchBarr from "../../components/searchbar/SearchBar";
 import Breed from "../../components/breed/Breed";
 import styles from "../home/Home.module.css";
 import gifDog from "../../assets/wallpapers/ezgif.com-video-to-gif__2_.gif";
-import imageDog from "../../assets/wallpapers/404-oops.jpg";
+import imageDog from "../../assets/wallpapers/very+happy+dog-fav.jpg";
 import {
   addBreedFavourites,
   removeBreedFavorite,
@@ -12,6 +12,7 @@ import {
 
 export default function Favourites() {
   const dispatch = useDispatch();
+
   const breedsFav = useSelector((state) => state.breedsFavourites);
   function addFav(id) {
     if (!breedsFav.includes(id)) {
@@ -39,7 +40,7 @@ export default function Favourites() {
           ) : breedsFav.length ? (
             <>
               <div className={styles.containerClassAF}>
-                {breedsFav?.map((breed, index) => {
+                {breedsFav?.map((breed) => {
                   return (
                     <Breed
                       id={breed.id}
@@ -49,6 +50,7 @@ export default function Favourites() {
                       weight={breed.weight}
                       temperament={breed.temperament}
                       img={breed.image}
+                      fav={breed.fav}
                     />
                   );
                 })}
