@@ -44,7 +44,7 @@ describe("Breed routes", () => {
     });
     it("It has to give 404 if the path is not / dogs ", (done) => {
       done();
-      return agent.get("/doges").end(function (err, res) {
+      return agent.get("/dogsss").end(function (err, res) {
         if (err) done(err);
         expect(res.status).to.equal(404);
       });

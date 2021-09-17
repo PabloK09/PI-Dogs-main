@@ -152,25 +152,35 @@ export function Home() {
               <div className={styles.divPagination}>
                 <ul className={styles.pageNumbers}>
                   <li className={styles.comunLi}>
+                    {pages.length !== 1 ?
                     <button
-                      className={styles.navBtn}
-                      onClick={handlePrevBtn}
-                      disabled={currentPage === pages[0] ? true : false}
+                    className={styles.navBtn}
+                    onClick={handlePrevBtn}
+                    disabled={currentPage === pages[0] ? true : false}
                     >
                       <MdNavigateBefore className={styles.navIcon} />
                     </button>
+                    :false
+                    }
                   </li>
-                  {renderPageNumbers}
+
+
+                  {pages.length!== 1 ? renderPageNumbers : false}
+
+
                   <li className={styles.comunLi}>
+                    {pages.length !== 1 ?
                     <button
-                      className={styles.navBtn}
-                      onClick={handleNextBtn}
-                      disabled={
-                        currentPage === pages[pages.length - 1] ? true : false
-                      }
+                    className={styles.navBtn}
+                    onClick={handleNextBtn}
+                    disabled={
+                      currentPage === pages[pages.length - 1] ? true : false
+                    }
                     >
                       <MdNavigateNext className={styles.navIcon} />
                     </button>
+                    : false
+                    }
                   </li>
                 </ul>
               </div>

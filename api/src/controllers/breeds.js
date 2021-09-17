@@ -240,6 +240,8 @@ class BreedModel extends ModelCrud {
       next(err);
     }
   };
+
+  
 }
 
 const breedController = new BreedModel(Breed);

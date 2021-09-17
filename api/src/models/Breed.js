@@ -35,6 +35,7 @@ module.exports = (sequelize) => {
       },  
       life_span: {
         type: DataTypes.RANGE(DataTypes.DECIMAL),
+        allowNull: true,
         validate: {
           min: 1,
           max: 30,
