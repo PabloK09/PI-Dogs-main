@@ -53,17 +53,17 @@ export default function BreedDetail() {
                   {
                     breed.weight ?
                     <li className={styles.liItemDetail}><strong><GiWeight/> Weight:</strong> {breed.weight} kg</li>
-                    : false
+                    : <li className={styles.liItemDetail}><strong><GiWeight/> Weight:</strong> Unknown weight</li>
                   }
                   {
                     breed.height ?
                     <li className={styles.liItemDetail}><strong><GiBodyHeight/> Height:</strong> {breed.height} cm</li>
-                    : false
+                    : <li className={styles.liItemDetail}><strong><GiBodyHeight/> Height:</strong> Unknown height </li>
                   }
                   {
                     breed.life_span ?
                     <li className={styles.liItemDetail}><strong><GiLifeBar/> Life Span:</strong> {breed.life_span} years</li>
-                    : false
+                    : <li className={styles.liItemDetail}><strong><GiLifeBar/> Life Span:</strong> Unknown life span</li>
                   }{
                     breed.temperament ?
                     <li className={styles.liItemDetail}><strong><GiSittingDog/> Temperaments:</strong> {breed.temperament}.</li>
