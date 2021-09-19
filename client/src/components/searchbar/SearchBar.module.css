@@ -32,8 +32,8 @@
 } */
 
 .inputSearch {
-  height: 2.5em;
-    width: 34em;
+  height: 2.2em;
+    width: 32em;
   background-color: white;
   border: none;
   color: var(--black-color);
@@ -54,8 +54,8 @@
 }
 
 .divSearch {
-  height: 2.5em;
-  width: 2.8em;
+  height: 2.2em;
+  width: 2.5em;
   background-color: white;
   border-left: 0.04em solid var(--palette-brown6);
   display: flex;
@@ -110,10 +110,10 @@
 }
 
 .btnCreate {
-  width: 7em;
+  width: 6em;
   height: 2.8em;
   font-family: var(--font-family-Text);
-  font-weight: 300;
+  font-weight: 200;
   cursor: pointer;
   position: relative;
   border-radius: 2em;
