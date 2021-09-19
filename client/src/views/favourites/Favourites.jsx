@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SearchBarr from "../../components/searchbar/Searchbar";
-import Breed from "../../components/breed/Breed";
+import Breed from "../../components/breed/Breedcard";
 import styles from "../home/Home.module.css";
 import gifDog from "../../assets/wallpapers/ezgif.com-video-to-gif__2_.gif";
 import imageDog from "../../assets/wallpapers/very+happy+dog-fav.jpg";

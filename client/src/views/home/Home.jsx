@@ -1,6 +1,6 @@
 import SearchBarr from "../../components/searchbar/Searchbar";
 import FilterSort from "../../components/filter-sort/Filtersort";
-import Breed from "../../components/breed/Breed";
+import Breed from "../../components/breed/Breedcard";
 import styles from "../home/Home.module.css";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
