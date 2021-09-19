@@ -151,8 +151,8 @@ export default function CreateBreed() {
 
   return (
     <div key="CreateDiv">
-      <SearchBarr />
       <div className={styles.divFather}>
+      <SearchBarr />
         <div className={styles.containFormFather}>
           <form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.divContaineresForm}>

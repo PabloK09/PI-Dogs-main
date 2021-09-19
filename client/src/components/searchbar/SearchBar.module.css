@@ -11,6 +11,7 @@
   justify-items: center;
   align-content: center;
   grid-template-columns: repeat(3, 1fr);
+  align-self: start;
 }
 
 .logo {
