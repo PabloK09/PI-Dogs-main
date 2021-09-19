@@ -5,7 +5,7 @@ const { Temperament, Breed } = require("./src/db.js");
 const { PORT } = process.env;
 const { BASE_URL } = require("./src/utils/constants");
 
-conn.sync({ force: true}).then(async () => {
+conn.sync().then(async () => {
   const temperDB = await Temperament.findAll();
   if (temperDB.length === 0) {
     let temps = new Set();
