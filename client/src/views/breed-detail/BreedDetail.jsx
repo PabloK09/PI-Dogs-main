@@ -50,8 +50,16 @@ export default function BreedDetail() {
                 : false
                 }
                   <h4>Breed Characteristics</h4>
-                  <li className={styles.liItemDetail}><strong><GiWeight/> Weight:</strong> {breed.weight} kg</li>
-                  <li className={styles.liItemDetail}><strong><GiBodyHeight/> Height:</strong> {breed.height} cm</li>
+                  {
+                    breed.weight ?
+                    <li className={styles.liItemDetail}><strong><GiWeight/> Weight:</strong> {breed.weight} kg</li>
+                    : false
+                  }
+                  {
+                    breed.height ?
+                    <li className={styles.liItemDetail}><strong><GiBodyHeight/> Height:</strong> {breed.height} cm</li>
+                    : false
+                  }
                   {
                     breed.life_span ?
                     <li className={styles.liItemDetail}><strong><GiLifeBar/> Life Span:</strong> {breed.life_span} years</li>
