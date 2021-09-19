@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getBreedsName, searchBreedName, filterTemperaments } from "../../redux/actions";
+import { searchBreedName } from "../../redux/actions";
 import { useLocation, useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import styles from "./SearchBar.module.css";
