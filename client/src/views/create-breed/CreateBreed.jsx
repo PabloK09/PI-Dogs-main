@@ -6,7 +6,7 @@ import axios from "axios";
 import { POST_URL } from "../../utils/constants";
 import { getTemperament, getBreeds } from "../../redux/actions/index";
 import styles from "./CreateBreed.module.css";
-import SearchBarr from "../../components/searchbar/SearchBar";
+import SearchBarr from "../../components/searchbar/Searchbar";
 import { SiDatadog } from "react-icons/si";
 import { FaBone, FaWeightHanging } from "react-icons/fa";
 import { GiBodyHeight, GiLifeBar } from "react-icons/gi";

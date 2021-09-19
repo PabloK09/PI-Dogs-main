@@ -1,4 +1,4 @@
-import SearchBarr from "../../components/searchbar/SearchBar";
+import SearchBarr from "../../components/searchbar/Searchbar";
 import FilterSort from "../../components/filter-sort/Filtersort";
 import Breed from "../../components/breed/Breed";
 import styles from "../home/Home.module.css";

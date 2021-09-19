@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { getBreedId, clearBreed } from "../../redux/actions";
-import SearchBarr from "../../components/searchbar/SearchBar";
+import SearchBarr from "../../components/searchbar/Searchbar";
 import styles from "./BreedDetail.module.css";
 import gifDog from "../../assets/wallpapers/ezgif.com-video-to-gif__2_.gif";
 import {MdPets} from 'react-icons/md'

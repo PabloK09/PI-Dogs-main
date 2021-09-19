@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import SearchBarr from "../../components/searchbar/SearchBar";
+import SearchBarr from "../../components/searchbar/Searchbar";
 import Breed from "../../components/breed/Breed";
 import styles from "../home/Home.module.css";
 import gifDog from "../../assets/wallpapers/ezgif.com-video-to-gif__2_.gif";

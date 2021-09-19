@@ -1,5 +1,5 @@
 import React from "react";
-import SearchBarr from "../../components/searchbar/SearchBar";
+import SearchBarr from "../../components/searchbar/Searchbar";
 import styles from "../home/Home.module.css";
 import dogAbout from "../../assets/about/dogAbout.jpg";
 import iconExpress from "../../assets/iconos/pngwing.com (5).png";
