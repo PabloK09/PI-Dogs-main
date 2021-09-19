@@ -4,7 +4,7 @@ import { GET_BREEDS, GET_BREED_ID, GET_TEMPERAMENT, GET_BREED_NAME, FILTER_TEMPE
 
 export const getBreeds = () => {
     return (dispatch) => {
-        axios.get(BASE_URL)
+        axios.get("/dogs")
         .then((breeds)=> {
             dispatch({
                 type: GET_BREEDS,
