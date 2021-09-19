@@ -3,10 +3,9 @@ const breedController = require("../controllers/breeds")
 const router = Router();
 
 
-router.get("/", breedController.getAllv2);
-router.get("/:id",  breedController.getById);
-
-router.put("/:id",  breedController.update);
+router.get("/", breedController.getAllv3);
+router.get("/:id",  breedController.getByIdv2);
+router.put("/:id",  breedController.updatev2);
 router.delete("/:id",  breedController.destroy);
 
 

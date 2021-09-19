@@ -2,12 +2,14 @@ import SearchBarr from "../../components/searchbar/SearchBar";
 import FilterSort from "../../components/filter-sort/Filtersort";
 import Breed from "../../components/breed/Breed";
 import styles from "../home/Home.module.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import imageDog from "../../assets/wallpapers/404-oops.jpg";
 import gifDog from "../../assets/wallpapers/ezgif.com-video-to-gif__2_.gif";
 import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
 import {
+  getTemperament,
+  getBreeds,
   addBreedFavourites,
   removeBreedFavorite,
 } from "../../redux/actions/index";
@@ -84,14 +86,24 @@ export function Home() {
     }
   };
 
-  const breedsFav = useSelector((state) => state.breedsFavourites);
+  let breedsFav = useSelector((state) => state.breeds);
+  breedsFav = breedsFav.filter((breed) => breed.fav === true);
   function addFav(id) {
+    dispatch(getBreeds());
     if (!breedsFav.includes(id)) {
       dispatch(addBreedFavourites(id));
-    } else {
+      dispatch(getBreeds());
+    }
+    if (breedsFav.includes(id)) {
       dispatch(removeBreedFavorite(id));
+      dispatch(getBreeds());
     }
   }
+
+  useEffect(() => {
+    dispatch(getBreeds());
+    dispatch(getTemperament());
+  }, [dispatch]);
 
   return (
     <div className={styles.divFather}>
@@ -150,39 +162,37 @@ export function Home() {
                 })}
               </div>
               <div className={styles.divPagination}>
-                <ul className={styles.pageNumbers}>
-                  <li className={styles.comunLi}>
-                    {pages.length !== 1 ?
-                    <button
-                    className={styles.navBtn}
-                    onClick={handlePrevBtn}
-                    disabled={currentPage === pages[0] ? true : false}
-                    >
-                      <MdNavigateBefore className={styles.navIcon} />
-                    </button>
-                    :false
-                    }
-                  </li>
-
-
-                  {pages.length!== 1 ? renderPageNumbers : false}
-
-
-                  <li className={styles.comunLi}>
-                    {pages.length !== 1 ?
-                    <button
-                    className={styles.navBtn}
-                    onClick={handleNextBtn}
-                    disabled={
-                      currentPage === pages[pages.length - 1] ? true : false
-                    }
-                    >
-                      <MdNavigateNext className={styles.navIcon} />
-                    </button>
-                    : false
-                    }
-                  </li>
-                </ul>
+                {pages.length !== 1 ? (
+                  <>
+                    <ul className={styles.pageNumbers}>
+                      <li className={styles.comunLi}>
+                        <button
+                          className={styles.navBtn}
+                          onClick={handlePrevBtn}
+                          disabled={currentPage === pages[0] ? true : false}
+                        >
+                          <MdNavigateBefore className={styles.navIcon} />
+                        </button>
+                      </li>
+                      {renderPageNumbers}
+                      <li className={styles.comunLi}>
+                        <button
+                          className={styles.navBtn}
+                          onClick={handleNextBtn}
+                          disabled={
+                            currentPage === pages[pages.length - 1]
+                              ? true
+                              : false
+                          }
+                        >
+                          <MdNavigateNext className={styles.navIcon} />
+                        </button>
+                      </li>
+                    </ul>
+                  </>
+                ) : (
+                  false
+                )}
               </div>
             </>
           ) : !filteredBreeds.length ? (

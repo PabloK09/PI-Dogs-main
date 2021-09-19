@@ -17,7 +17,6 @@ const initialState = {
   breedId: undefined,
   temperament: [],
   breedsFilter: [],
-  breedsFavourites: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -148,17 +147,11 @@ function rootReducer(state = initialState, action) {
         breedsFilter: sortedBreedsW,
       };
 
-    case ADD_BREED_FAVORITE:
-      let arrFavs = [] 
+      case ADD_BREED_FAVORITE:
       let favorito = action.payload;
       favorito.fav = true;
-      if(!arrFavs.includes(favorito)){
-        arrFavs.push(favorito)
-      }
       return {
         ...state,
-        breedsFavourites: [...state.breedsFavourites, ...arrFavs],
-        
       };
 
     case REMOVE_BREED_FAVORITE:
@@ -166,7 +159,7 @@ function rootReducer(state = initialState, action) {
       favoritoR.fav = false;
       return {
         ...state,
-        breedsFavourites: state.breedsFavourites.filter(
+        breeds: state.breeds.filter(
           (el) => el.id !== action.payload.id
         ),
       };
@@ -177,7 +170,7 @@ function rootReducer(state = initialState, action) {
         if (state.breedsFilter.length) {
           copyData = [...state.breedsFilter];
           copyData = copyData.filter((breed) => {
-            return breed.created === undefined;
+            return breed.created === false;
           });
           return {
             ...state,
@@ -186,7 +179,7 @@ function rootReducer(state = initialState, action) {
         } else {
           copyData = [...state.breeds];
           copyData = copyData.filter((breed) => {
-            return breed.created === undefined;
+            return breed.created === false;
           });
           return {
             ...state,

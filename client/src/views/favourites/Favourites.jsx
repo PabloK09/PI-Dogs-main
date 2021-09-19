@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SearchBarr from "../../components/searchbar/SearchBar";
 import Breed from "../../components/breed/Breed";
@@ -8,19 +8,27 @@ import imageDog from "../../assets/wallpapers/very+happy+dog-fav.jpg";
 import {
   addBreedFavourites,
   removeBreedFavorite,
+  getBreeds,
 } from "../../redux/actions/index";
 
 export default function Favourites() {
   const dispatch = useDispatch();
 
-  const breedsFav = useSelector((state) => state.breedsFavourites);
+  let breedsFav = useSelector((state) => state.breeds);
   function addFav(id) {
     if (!breedsFav.includes(id)) {
       dispatch(addBreedFavourites(id));
-    } else {
+    }
+    if (breedsFav.includes(id)) {
       dispatch(removeBreedFavorite(id));
     }
   }
+
+  breedsFav = breedsFav.filter((breed) => breed.fav === true);
+
+  useEffect(() => {
+    dispatch(getBreeds());
+  }, [dispatch]);
 
   return (
     <div className={styles.divFather}>
@@ -28,15 +36,14 @@ export default function Favourites() {
       <div className={styles.containerChildH}>
         <div className={styles.containerChildL}>
           {!breedsFav.length ? (
-             <div
-             style={{
-               backgroundImage: `url(${imageDog})`,
-               backgroundPosition: "center",
-               backgroundRepeat: "no-repeat",
-             }}
-             className={styles.containerClassAF}
-           ></div>
-            
+            <div
+              style={{
+                backgroundImage: `url(${imageDog})`,
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+              }}
+              className={styles.containerClassAF}
+            ></div>
           ) : breedsFav.length ? (
             <>
               <div className={styles.containerClassAF}>
@@ -58,13 +65,13 @@ export default function Favourites() {
             </>
           ) : (
             <div
-            style={{
-              backgroundImage: `url(${gifDog})`,
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-            }}
-            className={styles.containerClassAF}
-          ></div>
+              style={{
+                backgroundImage: `url(${gifDog})`,
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+              }}
+              className={styles.containerClassAF}
+            ></div>
           )}
         </div>
       </div>

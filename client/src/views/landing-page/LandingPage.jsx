@@ -1,17 +1,10 @@
 import { Link } from "react-router-dom";
 import {SiDatadog } from 'react-icons/si'
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { getBreeds, getTemperament } from "../../redux/actions/index";
+import React from "react";
 import styles from "./LandingPage.module.css";
 
 export default function LandingPage() {
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getBreeds());
-    dispatch(getTemperament());
-  }, [dispatch]);
   return (
       <div className={styles.landingPage}>
         <div className={styles.containerLP}>

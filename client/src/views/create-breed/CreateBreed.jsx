@@ -26,7 +26,7 @@ export default function CreateBreed() {
     life_spanMin: [],
     life_spanMax: [],
     image: "",
-    temperament: [],
+    temperaments: [],
     temperamentPrev: [],
   });
 
@@ -39,10 +39,10 @@ export default function CreateBreed() {
 
   let filtro = [];
   let array = [];
-  if (breeds.temperament.length) {
-    for (let i = 0; i < breeds.temperament?.length; i++) {
+  if (breeds.temperaments.length) {
+    for (let i = 0; i < breeds.temperaments?.length; i++) {
       filtro = temperamentState?.filter(
-        (temp) => temp.id === breeds.temperament[i]
+        (temp) => temp.id === breeds.temperaments[i]
       );
       array.push(...filtro);
     }
@@ -53,7 +53,7 @@ export default function CreateBreed() {
       let state = {
         ...prevData,
       };
-      state.temperament = state.temperament.filter((temp) => temp !== e);
+      state.temperaments = state.temperaments.filter((temp) => temp !== e);
       return state;
     });
   }
@@ -121,8 +121,8 @@ export default function CreateBreed() {
         })
       );
       if (state.temperamentPrev) {
-        if (!state.temperament.includes(state.temperamentPrev)) {
-          state.temperament?.push(state.temperamentPrev);
+        if (!state.temperaments.includes(state.temperamentPrev)) {
+          state.temperaments?.push(state.temperamentPrev);
         }
       }
       return state;
@@ -355,7 +355,7 @@ export default function CreateBreed() {
                     ))}
                   </select>
                   <div className={styles.temps} key="containerTempKey">
-                    {breeds.temperament ? (
+                    {breeds.temperaments ? (
                       <>
                         {array.map((temp) => (
                           <div className={styles.tempsChild} key={temp.name}>
@@ -390,9 +390,9 @@ export default function CreateBreed() {
                     )}
                   </div>
                 </div>
-                {errors.temperament && breeds.temperament.length > 5 && (
+                {errors.temperaments && breeds.temperaments.length > 5 && (
                   <span className={styles.errorInput}>
-                    {errors.temperament}
+                    {errors.temperaments}
                   </span>
                 )}
               </div>
@@ -474,13 +474,13 @@ export default function CreateBreed() {
                   )}
                 </div>
                 <div>
-                  {breeds.temperament.length ? (
+                  {breeds.temperaments.length ? (
                     <strong>Temperaments</strong>
                   ) : (
                     false
                   )}
                   <div className={styles.divTempPreview}>
-                    {breeds.temperament.length ? (
+                    {breeds.temperaments.length ? (
                       array.map((temp) => (
                         <li className={styles.liTempPreview} key={temp.name}>
                           {temp.name}

@@ -8,7 +8,7 @@ const breedController = require("../controllers/breeds")
 
 // Configurar los routers
 
-router.post("/dog", breedController.created)
+router.post("/dog", breedController.createdv2)
 
 router.use("/dogs", breed);
 router.use("/temperament", temperament)

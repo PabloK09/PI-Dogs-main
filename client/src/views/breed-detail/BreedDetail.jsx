@@ -12,7 +12,6 @@ import {GiWeight, GiBodyHeight, GiLifeBar, GiSittingDog} from 'react-icons/gi'
 import {BiWorld} from 'react-icons/bi'
 import {FaDog, FaDrumstickBite} from 'react-icons/fa'
 
-
 export default function BreedDetail() {
   const breedId = useSelector((state) => state.breedId);
   const dispatch = useDispatch();
@@ -55,7 +54,7 @@ export default function BreedDetail() {
                   <li className={styles.liItemDetail}><strong><GiBodyHeight/> Height:</strong> {breed.height} cm</li>
                   {
                     breed.life_span ?
-                    <li className={styles.liItemDetail}><strong><GiLifeBar/> Life Span:</strong>{breed.life_span}</li>
+                    <li className={styles.liItemDetail}><strong><GiLifeBar/> Life Span:</strong> {breed.life_span} years</li>
                     : false
                   }{
                     breed.temperament ?

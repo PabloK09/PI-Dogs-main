@@ -5,7 +5,7 @@ const { Temperament, Breed } = require("./src/db.js");
 const { PORT } = process.env;
 const { BASE_URL } = require("./src/utils/constants");
 
-conn.sync().then(async () => {
+conn.sync({ force: true}).then(async () => {
   const temperDB = await Temperament.findAll();
   if (temperDB.length === 0) {
     let temps = new Set();
@@ -43,7 +43,12 @@ conn.sync().then(async () => {
         height: heightB.flat(),
         life_span: lifeSpanB.flat(),
         image: b.image.url,
+        temperaments: b.temperament,
+        favourite: b.favourite = false,
         created: b.created = false,
+        bred_for: b.bred_for,
+        breed_group: b.breed_group,
+        origin: b.origin,
       }
       })
     );

@@ -5,15 +5,15 @@ module.exports = (sequelize) => {
   // defino el modelo
   //sino funca tirar un return adelante del sequelize.define
   sequelize.define(
-    "breed",
+    "breedcreated",
     {
-      // id: {
-      //   type: DataTypes.UUID,
-      //   defaultValue: DataTypes.UUIDV4,
-      //   // type: DataTypes.UUID,
-      //   // defaultValue: DataTypes.UUIDV4,
-      //   primaryKey: true,
-      // },
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        // type: DataTypes.UUID,
+        // defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+      },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -33,7 +33,6 @@ module.exports = (sequelize) => {
           min: 9,
           max: 130,
         }
-        
       },  
       life_span: {
         type: DataTypes.RANGE(DataTypes.DECIMAL),
@@ -59,17 +58,5 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: false,
       },
-      temperaments: {
-        type: DataTypes.STRING,
-    },
-    bred_for: {
-      type: DataTypes.STRING,
-    },
-    breed_group: {
-      type: DataTypes.STRING,
-    },
-    origin: {
-      type: DataTypes.STRING,
-    },
     }
 )};

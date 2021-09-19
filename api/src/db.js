@@ -30,10 +30,10 @@ let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].s
 sequelize.models = Object.fromEntries(capsEntries);
 
 
-const { Breed, Temperament } = sequelize.models; 
+const { Temperament, Breedcreated } = sequelize.models; 
 
-Breed.belongsToMany(Temperament, {through: 'Breed_Temperament', as:'temperament'});
-Temperament.belongsToMany(Breed, {through: 'Breed_Temperament', as:'temperament'});
+Breedcreated.belongsToMany(Temperament, {through: 'Breed_Temperament', as:'temperament'});
+Temperament.belongsToMany(Breedcreated, {through: 'Breed_Temperament', as:'temperament'});
 
 module.exports = {
   ...sequelize.models, 

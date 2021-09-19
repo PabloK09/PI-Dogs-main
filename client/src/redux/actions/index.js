@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { BASE_URL, SEARH_ID, URL_TEMPERAMENT } from '../../utils/constants';
-import { GET_BREEDS, GET_BREED_ID, GET_TEMPERAMENT, GET_BREED_NAME, FILTER_TEMPERAMENTS, FILTER_ORDER_NAME, FILTER_ORDER_WEIGHT, FILTER_NAME, FILTER_DATA, ADD_BREED_FAVORITE, REMOVE_BREED_FAVORITE, ADD_CHECKED_FAV, REMOVE_CHECKED_FAV} from './types';
+import { GET_BREEDS, GET_BREED_ID, GET_TEMPERAMENT, GET_BREED_NAME, FILTER_TEMPERAMENTS, FILTER_ORDER_NAME, FILTER_ORDER_WEIGHT, FILTER_NAME, FILTER_DATA, ADD_BREED_FAVORITE, REMOVE_BREED_FAVORITE} from './types';
 
 export const getBreeds = () => {
     return (dispatch) => {
@@ -63,6 +63,20 @@ export const getTemperament =  () => {
     }
 }
 
+export const addBreedFavourites = (payload) => {
+    return (dispatch) => {
+        dispatch({type: ADD_BREED_FAVORITE, payload,})
+        axios.put(SEARH_ID + payload.id, {favourite: true})
+    }
+}
+
+export const removeBreedFavorite = (payload) => {
+    return (dispatch) =>{
+        dispatch({type: REMOVE_BREED_FAVORITE, payload})
+        axios.put(SEARH_ID + payload.id, {favourite: false})
+    }
+}
+
 export const getBreedId =  (idBreed) => {
     return (dispatch) => {
          axios.get(SEARH_ID + idBreed)
@@ -108,20 +122,4 @@ export const searchBreedName = (payload) => {
 
 export const orderByBreedData = (payload) => {
     return {type: FILTER_DATA, payload}
-}
-
-export const addBreedFavourites = (payload) => {
-    return {type: ADD_BREED_FAVORITE, payload}
-}
-
-export const removeBreedFavorite = (payload) => {
-    return {type: REMOVE_BREED_FAVORITE, payload}
-}
-
-export const addBreedChecked = (payload) => {
-    return {type: ADD_CHECKED_FAV, payload}
-}
-
-export const removeBreedChecked = (payload) => {
-    return {type: REMOVE_CHECKED_FAV, payload}
 }
