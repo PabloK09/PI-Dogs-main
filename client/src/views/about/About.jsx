@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import SearchBarr from "../../components/searchbar/Searchbar";
 import styles from "../home/Home.module.css";
 import dogAbout from "../../assets/about/dogAbout.jpg";
@@ -13,8 +13,20 @@ import {
   SiGithub,
 } from "react-icons/si";
 import { FaTools } from "react-icons/fa";
+import {MdContentCopy} from "react-icons/md"
 
 export default function About() {
+  const [showMail, setShowMail] = useState(false);
+  const [copySuccess, setCopySuccess] = useState('');
+  const textAreaRef = useRef(null);
+
+  function copyToClipboard(e) {
+    textAreaRef.current.select()
+    document.execCommand('copy');
+    e.target.focus();
+    setCopySuccess('Copied!');
+  };
+
   return (
     <div className={styles.divFather}>
       <SearchBarr key="SearchBar" />
@@ -42,9 +54,9 @@ export default function About() {
                   <p className={styles.pAbout}>
                     In the realization of the Front-End I used the library of
                     React JS library combined with Redux and the visual
-                    interface was made with pure CSS. In the Back-End I
-                    used Node JS and Express for the routes, while
-                    the database was created with PostgreSQL and Sequelize.
+                    interface was made with pure CSS. In the Back-End I used
+                    Node JS and Express for the routes, while the database was
+                    created with PostgreSQL and Sequelize.
                   </p>
                   <p className={styles.pAbout}>
                     To contact me I leave you my networks below, thank you very
@@ -65,9 +77,7 @@ export default function About() {
                     <div className={styles.effect}>
                       <button
                         className={styles.aLink}
-                        onClick={() =>
-                          alert("My e-mail address is pablokollm@gmail.com")
-                        }
+                        onClick={() => setShowMail(true)}
                       >
                         <SiGmail className={styles.iconA} />
                       </button>
@@ -84,6 +94,18 @@ export default function About() {
                       </a>
                     </div>
                   </div>
+                  {showMail ? (
+                    <div className={styles.aboutMail}> <textarea
+                    className={styles.aboutText}
+                    ref={textAreaRef}
+                    defaultValue='pablokollm@gmail.com'
+                    readOnly={true}  
+                  /><div className={styles.divCopy}>
+                  <button onClick={copyToClipboard} className={styles.aLink}><MdContentCopy className={styles.iconCopy} /></button>  <span className={styles.copied}>{copySuccess}</span> </div>
+                    </div> 
+                  ) : (
+                    <div></div>
+                  )}
                 </div>
                 <div className={styles.listTools}>
                   <h3>

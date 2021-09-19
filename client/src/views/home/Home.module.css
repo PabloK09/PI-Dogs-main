@@ -273,6 +273,73 @@ strong {
   display: flex;
 }
 
+.aboutMail {
+  display: flex;
+  padding: 0.5em;
+  border: 1px solid var(--black-color);
+  border-radius: 10px;
+  background: var(--black-color);
+  color: #fff;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  user-select: none;
+  text-decoration: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+.aboutText {
+  font-family: var(--font-family-Text);
+  font-size: 1.2rem;
+  border: 1px solid var(--black-color);
+  background: var(--black-color);
+  color: #fff;
+  resize: none;
+  width: 220px;
+  height: 30px;
+  user-select: none;
+  text-decoration: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.aboutText:focus {
+  outline: none;
+  user-select: none;
+  text-decoration: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.divCopy {
+  font-family: var(--font-family-Title);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  text-decoration: none;
+}
+
+.iconCopy {
+  color: #fff;
+  background-color: transparent;
+  border-color: transparent;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.copied {
+  font-family: var(--font-family-Text);
+  font-size: 0.9rem;
+}
+
 .effect {
   background-color: #212121;
   background-color: #fff;
@@ -286,7 +353,7 @@ strong {
   cursor: pointer;
 }
 
-.iconA{
+.iconA {
   pointer-events: none;
 }
 
