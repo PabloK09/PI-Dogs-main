@@ -276,7 +276,7 @@ strong {
 
 .aboutMail {
   display: flex;
-  padding: 0.5em;
+  padding: 7px;
   border: 1px solid var(--black-color);
   border-radius: 10px;
   background: var(--black-color);

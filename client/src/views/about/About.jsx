@@ -107,7 +107,7 @@ export default function About() {
                     <div></div>
                   )}
                 </div>
-                <div className={styles.listTools}>
+                {/* <div className={styles.listTools}>
                   <h3>
                     <FaTools /> Tools I know
                   </h3>
@@ -144,9 +144,9 @@ export default function About() {
                           className={styles.iconExpress}
                         />
                       </li>
-                    </div>
-                  </div>
-                </div>
+                    </div> */}
+                  {/* </div> */}
+                {/* </div> */}
               </div>
               <div className={styles.containerImg}>
                 <img
