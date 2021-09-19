@@ -2,17 +2,11 @@ import React, { useState, useRef } from "react";
 import SearchBarr from "../../components/searchbar/Searchbar";
 import styles from "../home/Home.module.css";
 import dogAbout from "../../assets/about/dogAbout.jpg";
-import iconExpress from "../../assets/iconos/pngwing.com (5).png";
-import { DiHtml5, DiCss3, DiJavascript, DiReact } from "react-icons/di";
 import {
-  SiRedux,
-  SiNodeDotJs,
-  SiPostgresql,
   SiLinkedin,
   SiGmail,
   SiGithub,
 } from "react-icons/si";
-import { FaTools } from "react-icons/fa";
 import {MdContentCopy} from "react-icons/md"
 
 export default function About() {
@@ -43,23 +37,37 @@ export default function About() {
                     My name is Pablo Koll and I'm a Full-Stack Web Developer.
                   </h3>
                   <p className={styles.pAbout}>
-                    This is the first project I have done using the tools and
-                    technologies that I learned in Henry's bootcamp. The
+                    This is the <strong>first project </strong>I have done using the tools and
+                    technologies that I learned in <strong><a
+                        className={styles.aLink}
+                        style={{color: "black"}}
+                        target="_blank"
+                        rel="noreferrer"
+                        href="https://www.soyhenry.com/"
+                        aria-hidden="true"
+                      >Henry's bootcamp</a></strong>. The
                     objective of the project was to make a dog breeds gallery
                     breeds of dogs implementing everything I learned. The API
                     that I used for the development was
-                    https://docs.thedogapi.com/ using only the endpoint of
+                    <strong> <a
+                        className={styles.aLink}
+                        style={{color: "black"}}
+                        target="_blank"
+                        rel="noreferrer"
+                        href="https://docs.thedogapi.com"
+                        aria-hidden="true"
+                      >https://docs.thedogapi.com </a></strong>using only the endpoint of
                     /breeds.
                   </p>
                   <p className={styles.pAbout}>
-                    In the realization of the Front-End I used the library of
+                    In the realization of the <strong> Front-End</strong>  I used the library of 
                     React JS library combined with Redux and the visual
-                    interface was made with pure CSS. In the Back-End I used
+                    interface was made with pure CSS. In the <strong> Back-End </strong>  I used
                     Node JS and Express for the routes, while the database was
                     created with PostgreSQL and Sequelize.
                   </p>
                   <p className={styles.pAbout}>
-                    To contact me I leave you my networks below, thank you very
+                    To <strong> contact </strong> me I leave you my networks below, thank you very
                     much for stopping by!
                   </p>
                   <div className={styles.socialButtons}>
