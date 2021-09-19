@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SearchBarr from "../../components/searchbar/Searchbar";
-import Breeed from "../../components/breed/Breed";
+import Breed from "../../components/breed/Breed";
 import styles from "../home/Home.module.css";
 import gifDog from "../../assets/wallpapers/ezgif.com-video-to-gif__2_.gif";
 import imageDog from "../../assets/wallpapers/very+happy+dog-fav.jpg";
@@ -49,7 +49,7 @@ export default function Favourites() {
               <div className={styles.containerClassAF}>
                 {breedsFav?.map((breed) => {
                   return (
-                    <Breeed
+                    <Breed
                       id={breed.id}
                       key={breed.id}
                       name={breed.name}
