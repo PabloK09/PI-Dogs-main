@@ -13,17 +13,21 @@ import {
   FaSortAlphaUpAlt,
   FaWeightHanging,
   FaFeather,
-  FaTrash
+  FaTrash,
 } from "react-icons/fa";
 
-export default function FilterSort({ setCurrentPage, setOrden, listaTemp, setListaTemp }) {
+export default function FilterSort({
+  setCurrentPage,
+  setOrden,
+  listaTemp,
+  setListaTemp,
+}) {
   const dispatch = useDispatch();
   const temperamentState = useSelector((state) => state.temperament);
 
-  const [select, setSelect] = useState("")
+  const [select, setSelect] = useState("");
 
-  useEffect(() => {
-  }, [dispatch, setListaTemp]);
+  useEffect(() => {}, [dispatch, setListaTemp]);
 
   function handleSortName(e) {
     e.preventDefault();
@@ -44,7 +48,7 @@ export default function FilterSort({ setCurrentPage, setOrden, listaTemp, setLis
     dispatch(orderByBreedData(e.target.value));
     setCurrentPage(1);
     setOrden(`Ordenado ${e.target.value}`);
-    if(e.target.value === "CLEAR"){
+    if (e.target.value === "CLEAR" || e.target.value === "All") {
       setListaTemp([]);
       setCurrentPage(1);
       setOrden(`Filtrado`);
@@ -53,10 +57,10 @@ export default function FilterSort({ setCurrentPage, setOrden, listaTemp, setLis
 
   function handleFilterTemp(e) {
     e.preventDefault();
-    if(!listaTemp.includes(e.target.value)){
+    if (!listaTemp.includes(e.target.value)) {
       dispatch(filterTemperaments(e.target.value));
       setListaTemp([...listaTemp, e.target.value]);
-      setSelect(false)
+      setSelect(false);
       setCurrentPage(1);
       setOrden(`Filtrado`);
     }
@@ -64,7 +68,7 @@ export default function FilterSort({ setCurrentPage, setOrden, listaTemp, setLis
       setListaTemp([]);
       setCurrentPage(1);
       setOrden(`Filtrado`);
-    } 
+    }
   }
 
   function handleOnClose(e) {
@@ -92,7 +96,7 @@ export default function FilterSort({ setCurrentPage, setOrden, listaTemp, setLis
 
   function handleSelectReset(e) {
     e.preventDefault();
-    setSelect(true)
+    setSelect(true);
   }
 
   return (
@@ -105,19 +109,34 @@ export default function FilterSort({ setCurrentPage, setOrden, listaTemp, setLis
             className={styles.tempSelected}
             defaultValue={"selectedFilter"}
           >
-            <option value="selectedFilter" disabled key="selectedFilter" 
-            selected={select}>
+            <option
+              value="selectedFilter"
+              disabled
+              key="selectedFilter"
+              selected={select}
+            >
               Filter Temperaments
             </option>
             {temperamentState?.map((temp) => (
-              <option  key={temp.id}>
-                {temp.name}
-              </option>
+              <option key={temp.id}>{temp.name}</option>
             ))}
           </select>
+          <div>
+        <select onChange={handleSortDataBreed} className={styles.tempSelected}>
+            <option  name="All" value="All">All Breeds</option>
+            <option name="API" value="API">
+              Existing
+            </option>
+            <option name="DB" value="DB">
+              Created
+            </option>
+          </select>
         </div>
+        </div>
+        
         <div className={styles.divBtn}>
-          <button
+         
+          {/* <button
             className={styles.orderBtn}
             name="API"
             value="API"
@@ -132,7 +151,7 @@ export default function FilterSort({ setCurrentPage, setOrden, listaTemp, setLis
             onClick={handleSortDataBreed}
           >
             DB
-          </button>
+          </button> */}
           <button
             name="AZ"
             value="AZ"
@@ -166,10 +185,10 @@ export default function FilterSort({ setCurrentPage, setOrden, listaTemp, setLis
             <FaWeightHanging className={styles.orderIcon} />
           </button>
           <button
-          name="CLEAR"
-          value="CLEAR"
-          onClick={handleSortDataBreed}
-          className={styles.orderBtn}
+            name="CLEAR"
+            value="CLEAR"
+            onClick={handleSortDataBreed}
+            className={styles.orderBtn}
           >
             <FaTrash className={styles.orderIcon} />
           </button>
@@ -180,31 +199,31 @@ export default function FilterSort({ setCurrentPage, setOrden, listaTemp, setLis
           ? listaTemp.map((temp) => (
               <div key={temp}>
                 {temp !== "All" ? (
-                  
                   <div>
                     <button
                       className={(styles.noselect, styles.temp)}
                       id={temp}
                       value={temp}
                       onClick={() =>
-                      handleOnClose(document.getElementById(`${temp}`).value)
+                        handleOnClose(document.getElementById(`${temp}`).value)
                       }
-                      >
-                      <span className={styles.text} key="A">{temp}</span>
+                    >
+                      <span className={styles.text} key="A">
+                        {temp}
+                      </span>
                       <span className={styles.icon} key="B">
                         <svg
-                        key="C"
+                          key="C"
                           xmlns="http://www.w3.org/2000/svg"
                           width="24"
                           height="24"
                           viewBox="0 0 24 24"
-                          >
+                        >
                           <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" />
                         </svg>
                       </span>
                     </button>
-                        </div>
-                  
+                  </div>
                 ) : (
                   false
                 )}

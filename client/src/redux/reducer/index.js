@@ -166,6 +166,13 @@ function rootReducer(state = initialState, action) {
 
     case FILTER_DATA:
       let copyData = [];
+      copyData = [...state.breedsFilter];
+      if (action.payload === "All") {
+        return {
+          ...state,
+          breedsFilter: [...state.breeds],
+        };
+      }
       if (action.payload === "API") {
         if (state.breedsFilter.length) {
           copyData = [...state.breedsFilter];

@@ -29,8 +29,17 @@
   align-content: space-between;
 }
 
+.filterTemp{
+  display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
 .tempSelected {
-  width: 100%;
+  /* width: 100%; */
   height: 50px;
   font-size: 1rem;
   font-family: var(--font-family-Title);
@@ -51,6 +60,7 @@
   display: grid;
   padding-left: 1em;
   border-radius: 0.8em;
+  margin-right: 0.8em;
 }
 
 .tempSelected::-ms-expand {
