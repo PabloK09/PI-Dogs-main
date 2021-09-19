@@ -90,9 +90,8 @@
 }
 
 .h2SearchBar{
-  font-family: var(--font-family-Title);
+  font-family: var(--font-family-Search);
   color: var(--black-color);
-  font-family: 'Gilroy-Heavy';
   font-size: 40px;
   /* color: #fff; */
   text-transform: uppercase;

@@ -27,6 +27,7 @@ label {
   --palette-brown4:#ce8e68;
   --palette-brown5: #ebd0bb;
   --palette-brown6: #e4ddd5;
+  --font-family-Search: 'Gilroy-Heavy', sans-serif;
   --font-family-Title: "Gilroy-Bold", sans-serif;
   --font-family-Text: 'Gilroy-Regular', sans-serif;
   --size: 40px;
