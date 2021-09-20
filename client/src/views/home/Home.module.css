@@ -410,3 +410,7 @@ strong {
   text-shadow: 4px 0px 3px rgba(33, 33, 33, 0.3);
   transition: all 0.2s linear 0.2s;
 }
+
+p {
+  text-align: justify;
+}
